@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Welcome to our OurSpace
+          Welcome to our OurSpace. An C2C platform for renting storage spaces.
           <br />
           Edit <code>src/App.js</code> and save to reload.
         </p>
