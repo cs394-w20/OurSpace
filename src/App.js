@@ -20,7 +20,7 @@ function App() {
     <div className="App">
       <input></input>
       <StorageCard></StorageCard>
-      {/* <StorageCard></StorageCard> */}
+      <StorageCard></StorageCard>
     </div>
 
 
@@ -30,7 +30,7 @@ function App() {
 };
 
 const StorageCard = ({storage_option}) => (
-  <div>
+  <div style={{width:"90%", margin:"Auto", paddingTop: '30px'}}>
     <Card>
     <Card.Image>
       <Image.Container size="4by3">
@@ -39,13 +39,26 @@ const StorageCard = ({storage_option}) => (
     </Card.Image>
 
     <Card.Content>
-      <Content>
-        <div style={{fontSize:'24px', textAlign:"left", width:"40%"}}>Mudd Garage</div>
-        <div style={{fontSize:'16px', textAlign:"left", width:"40%"}}><span style={{fontWeight:"bold"}}>$2</span> / night</div>
-        <div style={{fontSize:'16px', textAlign:"right", float:"right", width:"40%"}}>5 miles away</div>
+      <table style={{width:"100%"}}>
+        <tr>
+          <th>
+            <div style={{fontSize:'24px', textAlign:"left", width:"80%"}}>Mudd Garage <span style={{fontSize:"15px"}}>(&#9733;4.37)</span></div>
+            <div style={{fontSize:'16px', textAlign:"left", width:"20%", fontWeight:"normal"}}><span style={{fontWeight:"bold"}}>$2</span>/ night</div>
+          </th>
+          <th style={{fontSize:'16px', textAlign:"right", float:"right", fontWeight:"normal"}}>
+            <div style={{fontSize:'16px', textAlign:"right", float:"right", fontWeight:"normal"}}>5 miles away</div> <br></br>
 
-          <img src={parking}/>
-          <img style={{width:'24px'}}src={elevator}/>
+            <img src={parking}/>
+            <img style={{width:'24px'}}src={elevator}/>
+          </th>
+        </tr>
+      </table>
+
+      <Content>
+        
+        
+
+          
           {/* <img src={ramp}/> */}
         
 
