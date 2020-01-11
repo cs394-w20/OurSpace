@@ -20,6 +20,7 @@ function App() {
     <div className="App">
       <input></input>
       <StorageCard></StorageCard>
+      {/* <StorageCard></StorageCard> */}
     </div>
 
 
@@ -39,9 +40,9 @@ const StorageCard = ({storage_option}) => (
 
     <Card.Content>
       <Content>
-        Mudd Garage <br/>
-        $ 35 / night <br/>
-        5 miles away <br/>
+        <div style={{fontSize:'24px', textAlign:"left", width:"40%"}}>Mudd Garage</div>
+        <div style={{fontSize:'16px', textAlign:"left", width:"40%"}}><span style={{fontWeight:"bold"}}>$2</span> / night</div>
+        <div style={{fontSize:'16px', textAlign:"right", float:"right", width:"40%"}}>5 miles away</div>
 
           <img src={parking}/>
           <img style={{width:'24px'}}src={elevator}/>
