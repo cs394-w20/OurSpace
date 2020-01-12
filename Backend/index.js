@@ -113,7 +113,7 @@ MongoClient.connect(mongoURl, async (err, database) => {
     await listings.createIndex({'location.geodata':'2dsphere'})
 })
 
-app.post('/get_listings', (req, res) => {
+app.post('/get_listings', async (req, res) => {
     const returnedListings = await listings
     .find({
         "location.geodata": {
@@ -132,15 +132,11 @@ app.post('/get_listings', (req, res) => {
     return res.send({listings:returnedListings});
 });
 
-app.post('/post_listing', (req, res) => {
-    const newListing = new Listing(req.body.newListing);
-    newListing.save()
-    .then(newListing => {
-        res.status(200);
+app.post('/post_listing', async (req, res) => {
+    await listings.insertOne(req.body.newListing, (err, listing) => {
+        if (err) return res.status(404);
     })
-    .catch(err => {
-        res.status(400).send('Failed to save Listing');
-    });
+    return res.status(200);
 });
 
 app.post('/update_listing/:id', (req, res) => {
