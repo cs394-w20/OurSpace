@@ -53,16 +53,32 @@ const JSONTestData = JSON.stringify(TestData);
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" width="100%" height="100%">
       <input></input>
       <ListingList/>
     </div>
   );
 };
 
+const DetailView = ({listing}) => {
+  <div id="detailViewContainer" width="100%" height="100%">
+  </div>
+}
+
+function launchDetailView(listing) {
+  var detailViewContainer = getElementById("detailViewContainer");
+  detailViewContainer.style.z-index = 10;
+
+};
+
+function collapseDetailView() {
+  var detailView = getElementById("detailViewContainer");
+  detailView.style.z-index = -10;
+}
+
 const StorageCard = ({listing}) => {
   return (
-    <div style={{width:"90%", margin:"Auto", paddingTop: '20px'}}>
+    <div style={{width:"90%", margin:"Auto", paddingTop: '20px'}} onClick=launchDetailView(listing)>
       <Card style={{borderRadius:"8px"}}>
       <Card.Image>
         <Image.Container size="4by3">
