@@ -22,10 +22,28 @@ MongoClient.connect(mongoURL, async (err, database) => {
         validator: {
             $jsonSchema: {
                 bsonType: "object",
-                required: ["name", "location", "size", "time", "attributes", "image"],
+                required: ["name", "description", "price", "rating", "location", "size", "time", "attributes", "image"],
                 properties: {
                     name: {
                         bsonType: "string"
+                    },
+                    description: {
+                        bsonType: "string"
+                    },
+                    price: {
+                        bsonType: "double"
+                    },
+                    rating: {
+                        bsonType: "object",
+                        required: ["score", "numRatings"],
+                        properties: {
+                            score: {
+                                bsonType: "double"
+                            },
+                            numRatings: {
+                                bsonType: "int"
+                            }
+                        }
                     },
                     location: {
                         bsonType: "object",
