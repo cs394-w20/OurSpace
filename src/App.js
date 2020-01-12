@@ -9,12 +9,6 @@ import elevator from "./assets/elevator.svg";
 import { Card, Image, Column } from "rbx";
 
 class Listing {
-  var nameString;
-  var picture;
-  var location;
-  var size;
-  var time;
-  var misc;
   constructor(nameStringin, picturein, street, city, state, country, zip, width, length, height, timein, miscin) {
     this.nameString = nameStringin;
     this.picture = picturein;
@@ -23,20 +17,35 @@ class Listing {
     this.time = timein;
     this.misc = miscin;
   }
-
 }
 
-const TestData = [new Listing("Old Orchard Apt", "../Images/apt.jpg", "10104 Old Orchard Ct", "Skokie", "IL", "USA", 60076, 10, 15, 6, new Date(2020, 5, 10, 12, 0, 0, 0), null),
-new Listing("The Best Closet", "../Images/closet.jpg", "160 Steeples Blvd", "Indianapolis", "IN", "USA", 46222, 2, 2, 8, new Date(2020, 1, 24, 6, 30, 0, 0), null),
-  new Listing("Under The Sink", "../Images/underthesink.jpg", "1600 Monticello Ave", "Norfolk", "VA", "USA", 23510, 4, 2, 2, new Date(2020, 2, 6, 15, 0, 0, 0), null),
-  new Listing("Spare Bedroom", "../Images/sparebedroom.jpg", "737 Colfax St", "Evanston", "IL", "USA", 60201, 10, 10, 10, new Date(2021, 11, 19, 20, 30, 0, 0), null),
-  new Listing("Cellar", "../Images/cellar.jpg", "4065 Dunbarton Cir", "San Ramon", "CA", "USA", 94583, 20, 10, 5, new Date(2020, 1, 1, 0, 0, 0, 0), null),
-  new Listing("TOP QUALITY Cellar by BESTCELLARS", "../Images/dingycellar.jpg", "3187 Reeves Dr", "Melvindale", "MI", "USA", 48122, 50, 50, 5, new Date(2019, 4, 5, 16, 8, 0, 0), null),
-  new Listing("Storage Unit", "../Images/storageunit.jpg", "2850 N Pulaski Rd", "Chicago", "IL", "USA", 60641, 8, 8, 10, new Date(2020, 1, 4, 0, 0, 0, 0), null),
-  new Listing("Back Room", "../Images/storeroom.jpg", "5023 Conrad St", "Skokie", "IL", "USA", 60077, 10, 10, 8, new Date(2020, 1, 15, 8, 30, 0, 0), null),
-  new Listing("Miniature Storage", "../Images/mousehole.jpg", "2145 Sheridan Rd", "Evanston", "IL", "USA", 60208, 1, 2, 1, new Date(2020, 1, 14, 12, 0, 0, 0), null)];
+const TestData = [new Listing("Old Orchard Apt", "./assets/Images/apt.jpg", "10104 Old Orchard Ct", "Skokie", "IL", "USA", 60076, 10, 15, 6, new Date(2020, 5, 10, 12, 0, 0, 0), null),
+new Listing("The Best Closet", "./assets/Images/closet.jpg", "160 Steeples Blvd", "Indianapolis", "IN", "USA", 46222, 2, 2, 8, new Date(2020, 1, 24, 6, 30, 0, 0), null),
+  new Listing("Under The Sink", "./assets/Images/underthesink.jpg", "1600 Monticello Ave", "Norfolk", "VA", "USA", 23510, 4, 2, 2, new Date(2020, 2, 6, 15, 0, 0, 0), null),
+  new Listing("Spare Bedroom", "./assets/Images/sparebedroom.jpg", "737 Colfax St", "Evanston", "IL", "USA", 60201, 10, 10, 10, new Date(2021, 11, 19, 20, 30, 0, 0), null),
+  new Listing("Cellar", "./assets/Images/cellar.jpg", "4065 Dunbarton Cir", "San Ramon", "CA", "USA", 94583, 20, 10, 5, new Date(2020, 1, 1, 0, 0, 0, 0), null),
+  new Listing("TOP QUALITY Cellar by BESTCELLARS", "./assets/Images/dingycellar.jpg", "3187 Reeves Dr", "Melvindale", "MI", "USA", 48122, 50, 50, 5, new Date(2019, 4, 5, 16, 8, 0, 0), null),
+  new Listing("Storage Unit", "./assets/Images/storageunit.jpg", "2850 N Pulaski Rd", "Chicago", "IL", "USA", 60641, 8, 8, 10, new Date(2020, 1, 4, 0, 0, 0, 0), null),
+  new Listing("Back Room", "./assets/Images/storeroom.jpg", "5023 Conrad St", "Skokie", "IL", "USA", 60077, 10, 10, 8, new Date(2020, 1, 15, 8, 30, 0, 0), null),
+  new Listing("Miniature Storage", "./assets/Images/mousehole.jpg", "2145 Sheridan Rd", "Evanston", "IL", "USA", 60208, 1, 2, 1, new Date(2020, 1, 14, 12, 0, 0, 0), null)];
 
-const JSONTestData = Json.stringify(TestData);
+const JSONTestData = JSON.stringify(TestData);
+
+function sizeCalculator(sizeObject) {
+
+  var volume = sizeObject.length * sizeObject.width * sizeObject.height;
+  console.log(volume);
+
+  if(volume > 125) {
+    if(volume > 1000) {
+      return "Large";
+    }
+
+    return "Medium";
+  }
+
+  return "Small";
+}
 
 function App() {
   return (
@@ -47,7 +56,7 @@ function App() {
   );
 };
 
-const StorageCard = ({listId}) => {
+const StorageCard = ({listing}) => {
   return (
     <div style={{width:"90%", margin:"Auto", paddingTop: '20px'}}>
       <Card style={{borderRadius:"8px"}}>
@@ -62,7 +71,7 @@ const StorageCard = ({listId}) => {
           <tr>
             <th style={{width:"60%"}}>
               <div style={{fontSize:'14px', textAlign:"left", fontWeight:"normal"}}>
-                <span style={{textTransform:'uppercase', fontWeight:"500", border:"1px solid black", borderRadius:"4px", padding:'4px', paddingTop:'0px', paddingBottom:'0px'}}>Large</span>
+                <span style={{textTransform:'uppercase', fontWeight:"500", border:"1px solid black", borderRadius:"4px", padding:'4px', paddingTop:'0px', paddingBottom:'0px'}}>{sizeCalculator(listing.sizes)}</span>
                 <span style={{paddingLeft:"4px"}}>Entire Basement</span>
 
 
@@ -79,7 +88,7 @@ const StorageCard = ({listId}) => {
           </tr>
         </table>
 
-          <div style={{fontSize:'24px', textAlign:"left", width:"100%", lineHeight:'28px'}}>Mudd Garage
+          <div style={{fontSize:'24px', textAlign:"left", width:"100%", lineHeight:'28px'}}>{listing.nameString}
           <div style={{display:'inline-block', float:"right", marginTop:'5px'}}>
             
             <img style={{height:'22px'}} src={elevator}/>
@@ -111,12 +120,14 @@ const StorageCard = ({listId}) => {
 
 const ListingList = () => {
   var PH_databaseFetch = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  var columnIds = [...Array(PH_databaseFetch.length).keys()]
+  var Listings = JSON.parse(JSONTestData);
+  var columnIds = [...Array(Listings.length).keys()]
+
   return (
     <Column.Group multiline>
       {columnIds.map(i => (
         <Column key={i} size="one-quarter">
-          <StorageCard listId={PH_databaseFetch[i]}/>
+          <StorageCard listing={Listings[i]}/>
         </Column>
       ))}
     </Column.Group>
