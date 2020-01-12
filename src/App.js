@@ -50,11 +50,12 @@ const StorageCard = ({listId}) => {
 
 const ListingList = () => {
   var PH_databaseFetch = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  var columnIds = [...Array(PH_databaseFetch.length).keys()]
   return (
     <Column.Group multiline>
-      {PH_databaseFetch.map(i => (
+      {columnIds.map(i => (
         <Column key={i} size="one-quarter">
-          <StorageCard listId={i}/>
+          <StorageCard listId={PH_databaseFetch[i]}/>
         </Column>
       ))}
     </Column.Group>
