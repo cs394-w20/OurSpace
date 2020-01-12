@@ -122,7 +122,7 @@ const DetailView = () => {
 
 
 
-        <Modal.Card style={{ width: "100%", top: "-3%" }}>
+        <Modal.Card style={{ width: "100%", top: "-5%" }}>
           <Modal.Card.Body style={{ width: "100%", padding: "0px", margin: "0px" }}>
 
             {/* Top exit icon */}
@@ -158,7 +158,7 @@ const DetailView = () => {
 
 
             {/* Content */}
-            <Content style={{ width: "94%", margin: "auto" }}>
+            <Content style={{ width: "94%", margin: "auto", paddingTop: "1%", paddingBottom: "2%" }}>
               <Title>{currListing.nameString}</Title>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
