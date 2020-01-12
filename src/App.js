@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import "./App.css";
 import "rbx/index.css";
 
@@ -6,7 +6,7 @@ import parking from "./assets/local_parking-24px.svg";
 import elevator from "./assets/elevator.svg";
 // import ramp from "./assets/ramp.svg";
 
-import { Card, Image, Column } from "rbx";
+import { Card, Image, Column, Button, Media, Title, Modal, Delete, Content } from "rbx";
 
 class Listing {
 
@@ -34,6 +34,8 @@ new Listing("The Best Closet", "./assets/Images/closet.jpg", "160 Steeples Blvd"
 
 const JSONTestData = JSON.stringify(TestData);
 
+const ListingContext = React.createContext();
+
 function sizeCalculator(sizeObject) {
 
   var volume = sizeObject.length * sizeObject.width * sizeObject.height;
@@ -49,36 +51,70 @@ function sizeCalculator(sizeObject) {
 
   return "Small";
 }
-const JSONTestData = JSON.stringify(TestData);
 
 function App() {
+
+  const [currListing, updateCurrListing] = useState(null);
+  function updateListing(newListing) {
+    updateCurrListing(newListing);
+  }
+
   return (
-    <div className="App" width="100%" height="100%">
-      <input></input>
-      <ListingList/>
+    <ListingContext.Provider value={{currListing, updateListing}}>
+      <div className="App" width="100%" height="100%" opacity="0.99">
+        <input z-index="0"></input>
+        <DetailView/>
+        <ListingList/>
+      </div>
+    </ListingContext.Provider>
+  );
+};
+
+const DetailView = () => {
+  const { currListing, updateListing } = useContext(ListingContext);
+
+  return (
+    <div style={{width: "100%", height: "100%", margin: 0}}>
+      <Modal active={currListing != null} closeOnBlur={true} style={{width: "100%", height: "100%", margin: 0}}>
+        <Modal.Background />
+        <Modal.Card>
+          <Modal.Card.Body>
+            <Content>
+              <Button onClick={() => updateListing(null)}></Button>
+              <Title>{currListing ? currListing.nameString : ""}</Title>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                accumsan, metus ultrices eleifend gravida, nulla nunc varius
+                lectus, nec rutrum justo nibh eu lectus. Ut vulputate semper
+                dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis
+                neque.
+              </p>
+              <Title as="h2">Second level</Title>
+              <p>
+                Curabitur accumsan turpis pharetra{' '}
+                <strong>augue tincidunt</strong> blandit. Quisque condimentum
+                maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna
+                vel cursus venenatis. Suspendisse potenti. Etiam mattis sem
+                rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et
+                neque nisl.
+              </p>
+            </Content>
+          </Modal.Card.Body>
+        </Modal.Card>
+      </Modal>
     </div>
   );
 };
 
-const DetailView = ({listing}) => {
-  <div id="detailViewContainer" width="100%" height="100%">
-  </div>
-}
-
-function launchDetailView(listing) {
-  var detailViewContainer = getElementById("detailViewContainer");
-  detailViewContainer.style.z-index = 10;
-
-};
-
 function collapseDetailView() {
-  var detailView = getElementById("detailViewContainer");
-  detailView.style.z-index = -10;
+  
 }
 
 const StorageCard = ({listing}) => {
+  const { currListing, updateListing } = useContext(ListingContext);
+  
   return (
-    <div style={{width:"90%", margin:"Auto", paddingTop: '20px'}} onClick=launchDetailView(listing)>
+    <div style={{width:"90%", margin:"Auto", paddingTop: '20px'}} onClick={() => updateListing(listing)}>
       <Card style={{borderRadius:"8px"}}>
       <Card.Image>
         <Image.Container size="4by3">
@@ -139,18 +175,19 @@ const StorageCard = ({listing}) => {
 };
 
 const ListingList = () => {
-  var PH_databaseFetch = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   var Listings = JSON.parse(JSONTestData);
-  var columnIds = [...Array(Listings.length).keys()]
+  var columnIds = [...Array(Listings.length).keys()];
 
   return (
-    <Column.Group multiline>
-      {columnIds.map(i => (
-        <Column key={i} size="one-quarter">
-          <StorageCard listing={Listings[i]}/>
-        </Column>
-      ))}
-    </Column.Group>
+    <div z-index="0" position="relative">
+      <Column.Group multiline>
+        {columnIds.map(i => (
+          <Column key={i} size="one-quarter">
+            <StorageCard listing={Listings[i]}/>
+          </Column>
+        ))}
+      </Column.Group>
+    </div>
   );
 };
 
