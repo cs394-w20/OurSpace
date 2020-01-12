@@ -131,3 +131,37 @@ app.post('/get_listings', (req, res) => {
 
     return res.send({listings:returnedListings});
 });
+
+app.post('/post_listing', (req, res) => {
+    const newListing = new Listing(req.body.newListing);
+    newListing.save()
+    .then(newListing => {
+        res.status(200);
+    })
+    .catch(err => {
+        res.status(400).send('Failed to save Listing');
+    });
+});
+
+app.post('/update_listing/:id', (req, res) => {
+    Listing.findById(req.body.id, (err, listing) => {
+        if (!listing) {
+            res.status(404).send("Listing not found")
+        }
+        else { 
+            listing.name = req.body.name;
+            listing.location = req.body.location;
+            listing.size = req.body.size;
+            listing.time = req.body.size;
+            listing.attributes = req.body.attributes;
+        }
+        
+        todo.save()
+        .then(todo => {
+            res.json('Todo updated!');
+        })
+        .catch(err => {
+            res.status(400).send("Update not possible");
+        });
+    })   
+})
