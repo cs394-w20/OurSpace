@@ -8,6 +8,36 @@ import elevator from "./assets/elevator.svg";
 
 import { Card, Image, Column } from "rbx";
 
+class Listing {
+  var nameString;
+  var picture;
+  var location;
+  var size;
+  var time;
+  var misc;
+  constructor(nameStringin, picturein, street, city, state, country, zip, width, length, height, timein, miscin) {
+    this.nameString = nameStringin;
+    this.picture = picturein;
+    this.location = {"street": street, "city": city, "state": state, "country": country, "zip": zip};
+    this.sizes = {"width": width, "length": length, "height": height};
+    this.time = timein;
+    this.misc = miscin;
+  }
+
+}
+
+const TestData = [new Listing("Old Orchard Apt", "../Images/apt.jpg", "10104 Old Orchard Ct", "Skokie", "IL", "USA", 60076, 10, 15, 6, new Date(2020, 5, 10, 12, 0, 0, 0), null),
+new Listing("The Best Closet", "../Images/closet.jpg", "160 Steeples Blvd", "Indianapolis", "IN", "USA", 46222, 2, 2, 8, new Date(2020, 1, 24, 6, 30, 0, 0), null),
+  new Listing("Under The Sink", "../Images/underthesink.jpg", "1600 Monticello Ave", "Norfolk", "VA", "USA", 23510, 4, 2, 2, new Date(2020, 2, 6, 15, 0, 0, 0), null),
+  new Listing("Spare Bedroom", "../Images/sparebedroom.jpg", "737 Colfax St", "Evanston", "IL", "USA", 60201, 10, 10, 10, new Date(2021, 11, 19, 20, 30, 0, 0), null),
+  new Listing("Cellar", "../Images/cellar.jpg", "4065 Dunbarton Cir", "San Ramon", "CA", "USA", 94583, 20, 10, 5, new Date(2020, 1, 1, 0, 0, 0, 0), null),
+  new Listing("TOP QUALITY Cellar by BESTCELLARS", "../Images/dingycellar.jpg", "3187 Reeves Dr", "Melvindale", "MI", "USA", 48122, 50, 50, 5, new Date(2019, 4, 5, 16, 8, 0, 0), null),
+  new Listing("Storage Unit", "../Images/storageunit.jpg", "2850 N Pulaski Rd", "Chicago", "IL", "USA", 60641, 8, 8, 10, new Date(2020, 1, 4, 0, 0, 0, 0), null),
+  new Listing("Back Room", "../Images/storeroom.jpg", "5023 Conrad St", "Skokie", "IL", "USA", 60077, 10, 10, 8, new Date(2020, 1, 15, 8, 30, 0, 0), null),
+  new Listing("Miniature Storage", "../Images/mousehole.jpg", "2145 Sheridan Rd", "Evanston", "IL", "USA", 60208, 1, 2, 1, new Date(2020, 1, 14, 12, 0, 0, 0), null)];
+
+const JSONTestData = Json.stringify(TestData);
+
 function App() {
   return (
     <div className="App">
