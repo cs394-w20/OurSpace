@@ -9,11 +9,14 @@ import elevator from "./assets/elevator.svg";
 import { Card, Image, Column } from "rbx";
 
 class Listing {
-  constructor(nameStringin, picturein, street, city, state, country, zip, width, length, height, timein, miscin) {
+
+  constructor(nameStringin, picturein, street, city, state, country, zip, width, length, height, miscin, timein, lat, long, pricein,) {
     this.nameString = nameStringin;
     this.picture = picturein;
     this.location = {"street": street, "city": city, "state": state, "country": country, "zip": zip};
+    this.latlong = {"lat": lat, "long": long};
     this.sizes = {"width": width, "length": length, "height": height};
+    this.price = pricein;
     this.time = timein;
     this.misc = miscin;
   }
@@ -46,6 +49,7 @@ function sizeCalculator(sizeObject) {
 
   return "Small";
 }
+const JSONTestData = JSON.stringify(TestData);
 
 function App() {
   return (
