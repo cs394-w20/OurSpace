@@ -9,17 +9,14 @@ import elevator from "./assets/elevator.svg";
 import { Card, Image, Column } from "rbx";
 
 class Listing {
-  var nameString;
-  var picture;
-  var location;
-  var size;
-  var time;
-  var misc;
-  constructor(nameStringin, picturein, street, city, state, country, zip, width, length, height, timein, miscin) {
+
+  constructor(nameStringin, picturein, street, city, state, country, zip, width, length, height, miscin, timein, lat, long, pricein,) {
     this.nameString = nameStringin;
     this.picture = picturein;
     this.location = {"street": street, "city": city, "state": state, "country": country, "zip": zip};
+    this.latlong = {"lat": lat, "long": long};
     this.sizes = {"width": width, "length": length, "height": height};
+    this.price = pricein;
     this.time = timein;
     this.misc = miscin;
   }
@@ -36,7 +33,7 @@ new Listing("The Best Closet", "../Images/closet.jpg", "160 Steeples Blvd", "Ind
   new Listing("Back Room", "../Images/storeroom.jpg", "5023 Conrad St", "Skokie", "IL", "USA", 60077, 10, 10, 8, new Date(2020, 1, 15, 8, 30, 0, 0), null),
   new Listing("Miniature Storage", "../Images/mousehole.jpg", "2145 Sheridan Rd", "Evanston", "IL", "USA", 60208, 1, 2, 1, new Date(2020, 1, 14, 12, 0, 0, 0), null)];
 
-const JSONTestData = Json.stringify(TestData);
+const JSONTestData = JSON.stringify(TestData);
 
 function App() {
   return (
