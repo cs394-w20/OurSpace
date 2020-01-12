@@ -80,7 +80,6 @@ const ListingContext = React.createContext();
 function sizeCalculator(sizeObject) {
 
   var volume = sizeObject.length * sizeObject.width * sizeObject.height;
-  // console.log(volume);
 
   if (volume > 125) {
     if (volume > 1000) {
@@ -113,6 +112,8 @@ function App() {
 
 const DetailView = () => {
   const { currListing, updateListing } = useContext(ListingContext);
+
+  if (currListing == null) return null;
 
   return (
     <div style={{ width: "100%", height: "100%", margin: 0 }}>
@@ -158,7 +159,7 @@ const DetailView = () => {
 
             {/* Content */}
             <Content style={{ width: "94%", margin: "auto" }}>
-              <Title>{currListing ? currListing.nameString : ""}</Title>
+              <Title>{currListing.nameString}</Title>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
                 accumsan, metus ultrices eleifend gravida, nulla nunc varius
