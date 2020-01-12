@@ -8,17 +8,56 @@ import elevator from "./assets/elevator.svg";
 
 import { Card, Image, Column } from "rbx";
 
+class Location {
+  constructor(street, city, state, country, zip, geodata) {
+    this.street = street;
+    this.city = city;
+    this.state = state;
+    this.country = country;
+    this.zip = zip;
+    this.geodata = geodata;
+  }
+}
+
+class Geodata {
+  constructor(type, coordinates) {
+    this.type = type;
+    this.coordinates = coordinates;
+  }
+}
+
+class Coordinates {
+  constructor(latitude, longitude) {
+    this.latitide = latitude;
+    this.longitude = longitude;
+  }
+}
+
+class Size {
+  constructor(length, width, height) {
+    this.length = length;
+    this.width = width;
+    this.height = height;
+  }
+}
+
+class Attributes {
+  constructor(hasLock, hasElevator, hasRamp) {
+    this.hasLock = hasLock;
+    this.hasElevator = hasElevator;
+    this.hasRamp = hasRamp;
+  }
+}
+
 class Listing {
 
-  constructor(nameStringin, picturein, street, city, state, country, zip, width, length, height, miscin, timein, lat, long, pricein,) {
-    this.nameString = nameStringin;
-    this.picture = picturein;
-    this.location = {"street": street, "city": city, "state": state, "country": country, "zip": zip};
-    this.latlong = {"lat": lat, "long": long};
-    this.sizes = {"width": width, "length": length, "height": height};
-    this.price = pricein;
-    this.time = timein;
-    this.misc = miscin;
+  constructor(nameString, location, size, time, attributes, image) {
+    this.nameString = nameString;
+    this.location = location;
+    this.size = size;
+    this.time = time;
+    this.attributes = attributes;
+    this.image = image;
   }
 }
 
