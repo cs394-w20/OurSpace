@@ -14,7 +14,7 @@ const mongoURL = "mongodb+srv://" + process.env.MONGO_USERNAME + ":" + process.e
 let db;
 let listings;
 
-MongoClient.connect(mongoURl, async (err, database) => {
+MongoClient.connect(mongoURL, async (err, database) => {
     if (err) throw err;
     db = await database.db('OurSpace');
 
@@ -22,7 +22,7 @@ MongoClient.connect(mongoURl, async (err, database) => {
         validator: {
             $jsonSchema: {
                 bsonType: "object",
-                required: ["name", "location", "size", "time", "attributes"],
+                required: ["name", "location", "size", "time", "attributes", "image"],
                 properties: {
                     name: {
                         bsonType: "string"
@@ -55,7 +55,7 @@ MongoClient.connect(mongoURl, async (err, database) => {
                                         bsonType: "string"
                                     },
                                     coordinates: {
-                                        bsonType: object,
+                                        bsonType: "object",
                                         required: ["latitude", "longitude"],
                                         properties: {
                                             latitude: {
@@ -105,6 +105,9 @@ MongoClient.connect(mongoURl, async (err, database) => {
                                 bsonType: "bool"
                             }
                         }
+                    },
+                    image: {
+                        bsonType: "binData"
                     }
                 }
             }
@@ -134,37 +137,37 @@ app.post('/get_listings', async (req, res) => {
 
 app.post('/post_listing', async (req, res) => {
     await listings.insertOne(req.body.newListing, (err, listing) => {
-        if (err) return res.status(404);
+        if (err) return res.status(400);
     })
     return res.status(200);
 });
 
-app.post('/update_listing/:id', (req, res) => {
-    Listing.findById(req.body.id, (err, listing) => {
-        if (!listing) {
-            res.status(404).send("Listing not found")
-        }
-        else { 
-            listing.name = req.body.name;
-            listing.location = req.body.location;
-            listing.size = req.body.size;
-            listing.time = req.body.size;
-            listing.attributes = req.body.attributes;
-        }
+// app.post('/update_listing/:id', (req, res) => {
+//     Listing.findById(req.body.id, (err, listing) => {
+//         if (!listing) {
+//             res.status(404).send("Listing not found")
+//         }
+//         else { 
+//             listing.name = req.body.name;
+//             listing.location = req.body.location;
+//             listing.size = req.body.size;
+//             listing.time = req.body.size;
+//             listing.attributes = req.body.attributes;
+//         }
         
-        todo.save()
-        .then(todo => {
-            res.json('Todo updated!');
-        })
-        .catch(err => {
-            res.status(400).send("Update not possible");
-        });
-    })   
-})
+//         todo.save()
+//         .then(todo => {
+//             res.json('Todo updated!');
+//         })
+//         .catch(err => {
+//             res.status(400).send("Update not possible");
+//         });
+//     })   
+// })
 
-app.get('/delete_listing/:id'. (req, res) => {
-    listings.findByIdAndRemove({_id: req.body.id}, (err, listing) {
-        if(err) res.status(400).send("Listing not removed");
-        else res.status(200);
-    });
+app.get('/delete_listing', async (req, res) => {
+    await listings.deleteOne({_id: ObjectId(req.body.id)}, (err, listing) => {
+        if (err) return res.status(400)
+    })
+    return res.status(200);
 });
