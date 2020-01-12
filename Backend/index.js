@@ -165,3 +165,10 @@ app.post('/update_listing/:id', (req, res) => {
         });
     })   
 })
+
+app.get('/delete_listing/:id'. (req, res) => {
+    listings.findByIdAndRemove({_id: req.body.id}, (err, listing) {
+        if(err) res.status(400).send("Listing not removed");
+        else res.status(200);
+    });
+});
