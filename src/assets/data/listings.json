@@ -27,7 +27,7 @@
             "hasElevator": false,
             "hasRamp": false
         },
-        "image": "./assets/Images/apt.jpg",
+        "image": "./assets/images/apt.jpg",
         "price": 5
     },
     {
@@ -58,7 +58,7 @@
             "hasElevator": true,
             "hasRamp": false
         },
-        "image": "./assets/Images/closet.jpg",
+        "image": "./assets/images/closet.jpg",
         "price": 10.5
     },
     {
@@ -89,7 +89,7 @@
             "hasElevator": true,
             "hasRamp": false
         },
-        "image": "./assets/Images/underthesink.jpg",
+        "image": "./assets/images/underthesink.jpg",
         "price": 20.75
     },
     {
@@ -120,7 +120,7 @@
             "hasElevator": false,
             "hasRamp": false
         },
-        "image": "./assets/Images/sparebedroom.jpg",
+        "image": "./assets/images/sparebedroom.jpg",
         "price": 7.5
     },
     {
@@ -151,7 +151,7 @@
             "hasElevator": false,
             "hasRamp": false
         },
-        "image": "./assets/Images/cellar.jpg",
+        "image": "./assets/images/cellar.jpg",
         "price": 10
     },
     {
@@ -182,7 +182,7 @@
             "hasElevator": false,
             "hasRamp": false
         },
-        "image": "./assets/Images/dingycellar.jpg",
+        "image": "./assets/images/dingycellar.jpg",
         "price": 55.99
     },
     {
@@ -213,7 +213,7 @@
             "hasElevator": false,
             "hasRamp": false
         },
-        "image": "./assets/Images/storageunit.jpg",
+        "image": "./assets/images/storageunit.jpg",
         "price": 5
     },
     {
@@ -244,7 +244,7 @@
             "hasElevator": true,
             "hasRamp": false
         },
-        "image": "./assets/Images/storeroom.jpg",
+        "image": "./assets/images/storeroom.jpg",
         "price": 2
     },
     {
@@ -275,7 +275,7 @@
             "hasElevator": false,
             "hasRamp": false
         },
-        "image": "./assets/Images/mousehole.jpg",
+        "image": "./assets/images/mousehole.jpg",
         "price": 0.5
     }
 ]
