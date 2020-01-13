@@ -75,6 +75,8 @@ new Listing("Miniature Storage", new Location("2145 Sheridan Rd", "Evanston", "I
 
 const JSONTestData = JSON.stringify(TestData);
 
+console.log(JSONTestData);
+
 const ListingContext = React.createContext();
 
 function sizeCalculator(sizeObject) {
