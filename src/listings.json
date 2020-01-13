@@ -1,0 +1,281 @@
+[
+    {
+        "nameString": "Old Orchard Apt",
+        "location": {
+            "street": "10104 Old Orchard Ct",
+            "city": "Skokie",
+            "state": "IL",
+            "country": "USA",
+            "zip": 60076,
+            "geodata": {
+                "type": "point",
+                "coordinates": {
+                    "latitide": 42.063752,
+                    "longitude": -87.744318
+                }
+            }
+        },
+        "size": {
+            "length": 10,
+            "width": 15,
+            "height": 6
+        },
+        "time": "2020-06-10T17:00:00.000Z",
+        "attributes": {
+            "hasLock": false,
+            "hasParking": true,
+            "hasElevator": false,
+            "hasRamp": false
+        },
+        "image": "./assets/Images/apt.jpg",
+        "price": 5
+    },
+    {
+        "nameString": "The Best Closet",
+        "location": {
+            "street": "160 Steeples Blvd",
+            "city": "Indianapolis",
+            "state": "IN",
+            "country": "USA",
+            "zip": 46222,
+            "geodata": {
+                "type": "point",
+                "coordinates": {
+                    "latitide": 39.767587,
+                    "longitude": -86.212728
+                }
+            }
+        },
+        "size": {
+            "length": 2,
+            "width": 2,
+            "height": 8
+        },
+        "time": "2020-02-24T12:30:00.000Z",
+        "attributes": {
+            "hasLock": false,
+            "hasParking": false,
+            "hasElevator": true,
+            "hasRamp": false
+        },
+        "image": "./assets/Images/closet.jpg",
+        "price": 10.5
+    },
+    {
+        "nameString": "Under The Sink",
+        "location": {
+            "street": "1600 Monticello Ave",
+            "city": "Norfolk",
+            "state": "VA",
+            "country": "USA",
+            "zip": 23510,
+            "geodata": {
+                "type": "point",
+                "coordinates": {
+                    "latitide": 36.864039,
+                    "longitude": -76.285274
+                }
+            }
+        },
+        "size": {
+            "length": 4,
+            "width": 2,
+            "height": 2
+        },
+        "time": "2020-03-06T21:00:00.000Z",
+        "attributes": {
+            "hasLock": false,
+            "hasParking": true,
+            "hasElevator": true,
+            "hasRamp": false
+        },
+        "image": "./assets/Images/underthesink.jpg",
+        "price": 20.75
+    },
+    {
+        "nameString": "Spare Bedroom",
+        "location": {
+            "street": "737 Colfax St",
+            "city": "Evanston",
+            "state": "IL",
+            "country": "USA",
+            "zip": 60201,
+            "geodata": {
+                "type": "point",
+                "coordinates": {
+                    "latitide": 42.060989,
+                    "longitude": -87.68133
+                }
+            }
+        },
+        "size": {
+            "length": 10,
+            "width": 10,
+            "height": 10
+        },
+        "time": "2021-12-20T02:30:00.000Z",
+        "attributes": {
+            "hasLock": false,
+            "hasParking": true,
+            "hasElevator": false,
+            "hasRamp": false
+        },
+        "image": "./assets/Images/sparebedroom.jpg",
+        "price": 7.5
+    },
+    {
+        "nameString": "Cellar",
+        "location": {
+            "street": "4065 Dunbarton Cir",
+            "city": "San Ramon",
+            "state": "CA",
+            "country": "USA",
+            "zip": 94583,
+            "geodata": {
+                "type": "point",
+                "coordinates": {
+                    "latitide": 37.757932,
+                    "longitude": -121.952262
+                }
+            }
+        },
+        "size": {
+            "length": 20,
+            "width": 10,
+            "height": 5
+        },
+        "time": "2020-02-01T06:00:00.000Z",
+        "attributes": {
+            "hasLock": false,
+            "hasParking": false,
+            "hasElevator": false,
+            "hasRamp": false
+        },
+        "image": "./assets/Images/cellar.jpg",
+        "price": 10
+    },
+    {
+        "nameString": "TOP QUALITY Cellar by BESTCELLARS",
+        "location": {
+            "street": "3187 Reeves Dr",
+            "city": "Melvindale",
+            "state": "MI",
+            "country": "USA",
+            "zip": 48122,
+            "geodata": {
+                "type": "point",
+                "coordinates": {
+                    "latitide": 42.288179,
+                    "longitude": -83.173806
+                }
+            }
+        },
+        "size": {
+            "length": 50,
+            "width": 50,
+            "height": 5
+        },
+        "time": "2019-05-05T21:08:00.000Z",
+        "attributes": {
+            "hasLock": false,
+            "hasParking": false,
+            "hasElevator": false,
+            "hasRamp": false
+        },
+        "image": "./assets/Images/dingycellar.jpg",
+        "price": 55.99
+    },
+    {
+        "nameString": "Storage Unit",
+        "location": {
+            "street": "2850 N Pulaski Rd",
+            "city": "Chicago",
+            "state": "IL",
+            "country": "USA",
+            "zip": 60641,
+            "geodata": {
+                "type": "point",
+                "coordinates": {
+                    "latitide": 41.933241,
+                    "longitude": -87.727606
+                }
+            }
+        },
+        "size": {
+            "length": 8,
+            "width": 8,
+            "height": 10
+        },
+        "time": "2020-02-04T06:00:00.000Z",
+        "attributes": {
+            "hasLock": false,
+            "hasParking": false,
+            "hasElevator": false,
+            "hasRamp": false
+        },
+        "image": "./assets/Images/storageunit.jpg",
+        "price": 5
+    },
+    {
+        "nameString": "Back Room",
+        "location": {
+            "street": "5023 Conrad St",
+            "city": "Skokie",
+            "state": "IL",
+            "country": "USA",
+            "zip": 60077,
+            "geodata": {
+                "type": "point",
+                "coordinates": {
+                    "latitide": 42.037937,
+                    "longitude": -87.75299
+                }
+            }
+        },
+        "size": {
+            "length": 10,
+            "width": 10,
+            "height": 8
+        },
+        "time": "2020-02-15T14:30:00.000Z",
+        "attributes": {
+            "hasLock": false,
+            "hasParking": false,
+            "hasElevator": true,
+            "hasRamp": false
+        },
+        "image": "./assets/Images/storeroom.jpg",
+        "price": 2
+    },
+    {
+        "nameString": "Miniature Storage",
+        "location": {
+            "street": "2145 Sheridan Rd",
+            "city": "Evanston",
+            "state": "IL",
+            "country": "USA",
+            "zip": 60208,
+            "geodata": {
+                "type": "point",
+                "coordinates": {
+                    "latitide": 42.058053,
+                    "longitude": -87.676167
+                }
+            }
+        },
+        "size": {
+            "length": 1,
+            "width": 2,
+            "height": 1
+        },
+        "time": "2020-02-14T18:00:00.000Z",
+        "attributes": {
+            "hasLock": false,
+            "hasParking": false,
+            "hasElevator": false,
+            "hasRamp": false
+        },
+        "image": "./assets/Images/mousehole.jpg",
+        "price": 0.5
+    }
+]
