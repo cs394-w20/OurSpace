@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import "./App.css";
 import "rbx/index.css";
+import styles from "./assets/styles/DetailView.css"
 
 import parking from "./assets/icons/local_parking-24px.svg";
 import elevator from "./assets/icons/elevator.svg";
@@ -46,63 +47,65 @@ const App = () => {
 };
 
 const DetailView = () => {
-  const { currListing, updateListing } = useContext(ListingContext);
-
-  if (currListing == null) return null;
+  const { currListing, updateListing } = useContext(ListingContext);;
 
   return (
     <div style={{ width: "100%", height: "100%", margin: 0 }}>
-      <Modal active={true || currListing != null} style={{ width: "100%", height: "100%", margin: 0 }}>
-        <Modal.Background style={{ height: "100%", margin: "0px" }}></Modal.Background>
+      <Modal active={currListing != null} id="dtView">
+        {currListing != null ?
+        <React.Fragment>
+          <Modal.Background style={{ height: "100%", margin: "0px" }}></Modal.Background>
 
-        <Modal.Card style={{ width: "100%", height:"100%", top: "-5%" }}>
-          <Modal.Card.Body style={{ width: "100%", padding: "0px", margin: "0px" }}>
+          <Modal.Card style={{ width: "100%", height:"100%", top: "-5%" }}>
+            <Modal.Card.Body style={{ width: "100%", padding: "0px", margin: "0px" }}>
 
-            {/* Top exit icon */}
-            <div style={{ fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => updateListing(null)}>
-              &#10005;
-            </div>
-            <Image src="https://i.pinimg.com/originals/6a/7c/fc/6a7cfc513ee281ac19ed5b25f17a9a5a.jpg" style={{ width: "100%", padding: "0px" }} />
+              {/* Top exit icon */}
+              <div style={{ fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => {document.getElementById("dtView").classList.remove("show"); setTimeout(function(){updateListing(null)}, 200)}}>
+                &#10005;
+              </div>
+              <Image src="https://i.pinimg.com/originals/6a/7c/fc/6a7cfc513ee281ac19ed5b25f17a9a5a.jpg" style={{ width: "100%", padding: "0px" }} />
 
-            {/* bottom bar */}
-            <div style={{ height: "8%", backgroundColor: 'white', position: "fixed", bottom: "0", width: "100%", boxShadow: "0px -1px #888888" }}>
+              {/* bottom bar */}
+              <div style={{ height: "8%", backgroundColor: 'white', position: "fixed", bottom: "0", width: "100%", boxShadow: "0px -1px #888888" }}>
 
-              <table style={{ width: "100%" }}>
-                <th style={{ width: "58%" }}>
-                  <div style={{ fontSize: '14px', textAlign: "left", fontWeight: "normal", margin: "4% 6%" }}>
+                <table style={{ width: "100%" }}>
+                  <th style={{ width: "58%" }}>
+                    <div style={{ fontSize: '14px', textAlign: "left", fontWeight: "normal", margin: "4% 6%" }}>
 
-                    <span style={{ fontSize: "18px", fontWeight: "bold" }}>${currListing ? currListing.price : ""}</span> / NIGHT <br></br>
-                    <div style={{ display: 'inline-block' }}>
-                      <span style={{ color: 'green' }}>&#9733; 4.37</span>
-                      <span style={{ fontSize: "13px", paddingLeft: "2px" }}>(32)</span>
+                      <span style={{ fontSize: "18px", fontWeight: "bold" }}>${currListing ? currListing.price : ""}</span> / NIGHT <br></br>
+                      <div style={{ display: 'inline-block' }}>
+                        <span style={{ color: 'green' }}>&#9733; 4.37</span>
+                        <span style={{ fontSize: "13px", paddingLeft: "2px" }}>(32)</span>
+                      </div>
+
                     </div>
+                  </th>
+                  <th style={{ width: "42%", textAlign: "left", fontWeight: "normal", fontSize: "15px", padding: "6% 0" }}>
+                    <span style={{ backgroundColor: "	#4E2A84", padding: "10px", color: "white", fontWeight: "bold", borderRadius: "3px" }}>Check availability</span>
+                  </th>
+                </table>
 
-                  </div>
-                </th>
-                <th style={{ width: "42%", textAlign: "left", fontWeight: "normal", fontSize: "15px", padding: "6% 0" }}>
-                  <span style={{ backgroundColor: "	#4E2A84", padding: "10px", color: "white", fontWeight: "bold", borderRadius: "3px" }}>Check availability</span>
-                </th>
-              </table>
+              </div>
 
-            </div>
-
-            {/* Content */}
-            <Content style={{ width: "94%", margin: "auto", paddingTop: "1%", paddingBottom: "2%" }}>
-              <Title>{currListing.name}</Title>
-              <p>
-                {currListing.description}
-              </p>
-              <img style={currListing.attributes.hasElevator ? { height: '22px' } : { display: "none" }} src={elevator} />
-              <img style={currListing.attributes.hasParking ? { height: '22px' } : { display: "none" }} src={parking} />
-              <p>
-                Dimensions: {currListing.size.length} x {currListing.size.width} x {currListing.size.height} ft
-              </p>
-              <p>
-                Available until {(new Date(currListing.time)).toDateString()}
-              </p>
-            </Content>
-          </Modal.Card.Body>
-        </Modal.Card>
+              {/* Content */}
+              <Content style={{ width: "94%", margin: "auto", paddingTop: "1%", paddingBottom: "2%" }}>
+                <Title>{currListing.name}</Title>
+                <p>
+                  {currListing.description}
+                </p>
+                <img style={currListing.attributes.hasElevator ? { height: '22px' } : { display: "none" }} src={elevator} />
+                <img style={currListing.attributes.hasParking ? { height: '22px' } : { display: "none" }} src={parking} />
+                <p>
+                  Dimensions: {currListing.size.length} x {currListing.size.width} x {currListing.size.height} ft
+                </p>
+                <p>
+                  Available until {(new Date(currListing.time)).toDateString()}
+                </p>
+              </Content>
+            </Modal.Card.Body>
+          </Modal.Card>
+        </React.Fragment>
+        : null}
       </Modal>
     </div>
   );
@@ -113,7 +116,7 @@ const StorageCard = ({ listing }) => {
   const { currListing, updateListing } = useContext(ListingContext);
 
   return (
-    <div style={{ width: "90%", margin: "Auto", paddingTop: '20px' }} onClick={() => updateListing(listing)}>
+    <div style={{ width: "90%", margin: "Auto", paddingTop: '20px' }} onClick={() => {updateListing(listing); setTimeout(function(){ document.getElementById("dtView").classList.add("show") }, 0);}}>
       <Card style={{ borderRadius: "8px" }}>
         <Card.Image>
           <Image.Container size="4by3">
