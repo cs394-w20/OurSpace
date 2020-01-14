@@ -52,10 +52,10 @@ const DetailView = () => {
 
   return (
     <div style={{ width: "100%", height: "100%", margin: 0 }}>
-      <Modal active={currListing != null} style={{ width: "100%", height: "100%", margin: 0 }}>
+      <Modal active={true || currListing != null} style={{ width: "100%", height: "100%", margin: 0 }}>
         <Modal.Background style={{ height: "100%", margin: "0px" }}></Modal.Background>
 
-        <Modal.Card style={{ width: "100%", top: "-5%" }}>
+        <Modal.Card style={{ width: "100%", height:"100%", top: "-5%" }}>
           <Modal.Card.Body style={{ width: "100%", padding: "0px", margin: "0px" }}>
 
             {/* Top exit icon */}
@@ -90,40 +90,15 @@ const DetailView = () => {
             <Content style={{ width: "94%", margin: "auto", paddingTop: "1%", paddingBottom: "2%" }}>
               <Title>{currListing.name}</Title>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                accumsan, metus ultrices eleifend gravida, nulla nunc varius
-                lectus, nec rutrum justo nibh eu lectus. Ut vulputate semper
-                dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis
-                neque.
+                {currListing.description}
               </p>
-              <Title as="h2">Second level</Title>
+              <img style={currListing.attributes.hasElevator ? { height: '22px' } : { display: "none" }} src={elevator} />
+              <img style={currListing.attributes.hasParking ? { height: '22px' } : { display: "none" }} src={parking} />
               <p>
-                Curabitur accumsan turpis pharetra{' '}
-                <strong>augue tincidunt</strong> blandit. Quisque condimentum
-                maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna
-                vel cursus venenatis. Suspendisse potenti. Etiam mattis sem
-                rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et
-                neque nisl.
+                Dimensions: {currListing.size.length} x {currListing.size.width} x {currListing.size.height} ft
               </p>
-
-              <Title as="h2">Second level</Title>
               <p>
-                Curabitur accumsan turpis pharetra{' '}
-                <strong>augue tincidunt</strong> blandit. Quisque condimentum
-                maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna
-                vel cursus venenatis. Suspendisse potenti. Etiam mattis sem
-                rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et
-                neque nisl.
-              </p>
-
-              <Title as="h2">Second level</Title>
-              <p>
-                Curabitur accumsan turpis pharetra{' '}
-                <strong>augue tincidunt</strong> blandit. Quisque condimentum
-                maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna
-                vel cursus venenatis. Suspendisse potenti. Etiam mattis sem
-                rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et
-                neque nisl.
+                Available until {(new Date(currListing.time)).toDateString()}
               </p>
             </Content>
           </Modal.Card.Body>
@@ -151,7 +126,6 @@ const StorageCard = ({ listing }) => {
             <th style={{ width: "60%" }}>
               <div style={{ fontSize: '14px', textAlign: "left", fontWeight: "normal" }}>
                 <span style={{ textTransform: 'uppercase', fontWeight: "500", border: "1px solid black", borderRadius: "4px", padding: '4px', paddingTop: '0px', paddingBottom: '0px' }}>{sizeCalculator(listing.size)}</span>
-                <span style={{ paddingLeft: "4px" }}>Entire Basement</span>
               </div>
             </th>
             <th style={{ width: "40%", textAlign: "right", fontWeight: "normal", fontSize: "15px" }}>

@@ -1,7 +1,7 @@
 [
     {
         "name": "Old Orchard Apt",
-        "description": "",
+        "description": "No tenants right now, so I'm going to be renting this out for storage for the next few months",
         "location": {
             "street": "10104 Old Orchard Ct",
             "city": "Skokie",
@@ -37,7 +37,7 @@
     },
     {
         "name": "The Best Closet",
-        "description": "",
+        "description": "I got this spare closet im not using, so if u guys need a place to store like some spare shoes or something, hit me up",
         "location": {
             "street": "160 Steeples Blvd",
             "city": "Indianapolis",
@@ -73,7 +73,7 @@
     },
     {
         "name": "Under The Sink",
-        "description": "",
+        "description": "Kinda gets wet down there, but it should be fine for plastic stuff",
         "location": {
             "street": "1600 Monticello Ave",
             "city": "Norfolk",
@@ -109,7 +109,7 @@
     },
     {
         "name": "Spare Bedroom",
-        "description": "",
+        "description": "My son just moved out for college, so we have his spare room to store things in. Not too humid or dry, and stays at 70 F throughout the Summer.",
         "location": {
             "street": "737 Colfax St",
             "city": "Evanston",
@@ -145,7 +145,7 @@
     },
     {
         "name": "Cellar",
-        "description": "",
+        "description": "Gets dry in the summer, be warned",
         "location": {
             "street": "4065 Dunbarton Cir",
             "city": "San Ramon",
@@ -180,8 +180,8 @@
         }
     },
     {
-        "name": "TOP QUALITY Cellar by BESTCELLARS",
-        "description": "",
+        "name": "TOP QUALITY Cellar",
+        "description": "WELCOME to BESTCELLARS!! If you haven't stored with us before, worry no more! Premium prices for premium spaces!",
         "location": {
             "street": "3187 Reeves Dr",
             "city": "Melvindale",
@@ -217,7 +217,7 @@
     },
     {
         "name": "Storage Unit",
-        "description": "",
+        "description": "Got a lifetime ownership for one of these things, but I don't need it. Might as well make some money off it.",
         "location": {
             "street": "2850 N Pulaski Rd",
             "city": "Chicago",
@@ -253,7 +253,7 @@
     },
     {
         "name": "Back Room",
-        "description": "",
+        "description": "Quiet, small room that doesn't get a lot of activity. Perfect for fine china and other fragile materials!!!",
         "location": {
             "street": "5023 Conrad St",
             "city": "Skokie",
@@ -289,7 +289,7 @@
     },
     {
         "name": "Miniature Storage",
-        "description": "",
+        "description": "might work great for some cheese",
         "location": {
             "street": "2145 Sheridan Rd",
             "city": "Evanston",
