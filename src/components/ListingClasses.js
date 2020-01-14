@@ -40,16 +40,24 @@ class Attributes {
     }
 }
 
+class Rating {
+    constructor(score, numRatings) {
+        this.score = score;
+        this.numRatings = numRatings;
+    }
+}
+
 class Listing {
 
-    constructor(nameString, location, size, time, attributes, image, price) {
-        this.nameString = nameString;
+    constructor(name, location, size, time, attributes, image, price, rating) {
+        this.name = name;
         this.location = location;
         this.size = size;
         this.time = time;
         this.attributes = attributes;
         this.image = image;
         this.price = price;
+        this.rating = rating;
     }
 }
 

@@ -88,7 +88,7 @@ const DetailView = () => {
 
             {/* Content */}
             <Content style={{ width: "94%", margin: "auto", paddingTop: "1%", paddingBottom: "2%" }}>
-              <Title>{currListing.nameString}</Title>
+              <Title>{currListing.name}</Title>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
                 accumsan, metus ultrices eleifend gravida, nulla nunc varius
@@ -158,13 +158,13 @@ const StorageCard = ({ listing }) => {
 
 
               <div style={{ display: 'inline-block' }}>
-                <span style={{ color: 'red' }}>&#9733;</span>4.37
-                  <span style={{ fontSize: "13px", paddingLeft: "2px" }}>(32)</span>
+                <span style={{ color: 'red' }}>&#9733;</span>{listing.rating.score}
+                  <span style={{ fontSize: "13px", paddingLeft: "2px" }}>({listing.rating.numRatings})</span>
               </div>
             </th>
           </table>
 
-          <div style={{ fontSize: '24px', textAlign: "left", width: "100%", lineHeight: '30px' }}>{listing.nameString}
+          <div style={{ fontSize: '24px', textAlign: "left", width: "100%", lineHeight: '30px' }}>{listing.name}
             <div style={{ display: 'inline-block', float: "right", marginTop: '5px' }}>
 
               <img style={listing.attributes.hasElevator ? { height: '22px' } : { display: "none" }} src={elevator} />
