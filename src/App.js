@@ -66,7 +66,7 @@ const DetailView = () => {
               <Image src="https://i.pinimg.com/originals/6a/7c/fc/6a7cfc513ee281ac19ed5b25f17a9a5a.jpg" style={{ width: "100%", padding: "0px" }} />
 
               {/* bottom bar */}
-              <div style={{ height: "8%", backgroundColor: 'white', position: "fixed", bottom: "0", width: "100%", boxShadow: "0px -1px #888888" }}>
+              <div style={{ height: "9%", backgroundColor: 'white', position: "fixed", bottom: "0", width: "100%", boxShadow: "0px -1px #888888" }}>
 
                 <table style={{ width: "100%" }}>
                   <th style={{ width: "58%" }}>
@@ -93,8 +93,40 @@ const DetailView = () => {
                 <p>
                   {currListing.description}
                 </p>
-                <img style={currListing.attributes.hasElevator ? { height: '22px' } : { display: "none" }} src={elevator} />
+
+
+
+                {/* <img style={currListing.attributes.hasElevator ? { height: '22px' } : { display: "none" }} src={elevator} />
+                <p style={currListing.attributes.hasElevator ? { height: '22px' } : { display: "none" }}>Yes Elevator</p>
                 <img style={currListing.attributes.hasParking ? { height: '22px' } : { display: "none" }} src={parking} />
+                <p style={currListing.attributes.hasParking ? { height: '22px' } : { display: "none" }}>Yes Parking</p> */}
+
+                <p style={currListing.attributes.hasElevator || currListing.attributes.hasParking ? { height: '24px', fontWeight:"700", marginBottom:"5px" } : { display: "none" }}>Amenities</p>
+
+                <table style={{ width: "100%" }}>
+                  <tr style={currListing.attributes.hasElevator ? { height: '22px' } : { display: "none" }}>
+                    <th style={{ width: "10%" }}>
+                      <img src={elevator}/>
+                    </th>
+                    <th style={{ width: "90%", textAlign: "left", fontWeight: "normal", fontSize: "15px" }}>
+                      <p style={{fontWeight:"500"}}>Elevator</p>
+                    </th>
+                  </tr>
+
+                  <tr style={currListing.attributes.hasParking ? { height: '22px' } : { display: "none" }}>
+                    <th style={{ width: "10%" }}>
+                      <img src={parking}/>
+                    </th>
+                    <th style={{ width: "90%", textAlign: "left", fontWeight: "normal", fontSize: "15px" }}>
+                      <p style={{fontWeight:"500"}}>Free parking on premise</p>
+                    </th>
+                  </tr>
+                </table>
+                
+
+
+
+
                 <p>
                   Dimensions: {currListing.size.length} x {currListing.size.width} x {currListing.size.height} ft
                 </p>
