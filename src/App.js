@@ -31,7 +31,6 @@ function sizeCalculator(sizeObject) {
 
 const App = () => {
 
-  pushTestData();
   const [currListing, updateCurrListing] = useState(null);
   function updateListing(newListing) {
     updateCurrListing(newListing);
@@ -217,7 +216,7 @@ const ListingList = () => {
 				'Content-Type': 'application/json'
 			},
 			credentials: 'include',
-      body: JSON.stringify({latitude:42.055984, longitude:-87.675171, listingsPerPage:5, pageNumber:1})
+      body: JSON.stringify({latitude:42.055984, longitude:-87.675171, listingsPerPage:10, pageNumber:1})
     })
     .then(response => response.json())
     .then(response => {

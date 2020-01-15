@@ -157,11 +157,12 @@ app.post('/get_listings', async (req, res) => {
 
 app.post('/post_listing', async (req, res) => {
     console.log('received!');
-    console.log(req.body.newListing);
     await listings.insertOne(req.body.newListing, (err, listing) => {
         if (err) return res.status(400);
     })
-    return res.status(200);
+    return res
+            .status(200)
+            .send({status: 'success'});
 });
 
 // app.post('/update_listing/:id', (req, res) => {
