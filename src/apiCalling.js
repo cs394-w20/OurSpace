@@ -9,3 +9,5 @@ function pushTestData() {
 		.then(response => console.log(response.status))
 	}
 }
+
+export default pushTestData;
