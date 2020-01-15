@@ -8,6 +8,7 @@ import elevator from "./assets/icons/elevator.svg";
 // import ramp from "./assets/icons/ramp.svg";
 
 import TestData from "./assets/data/listings.json";
+import pushTestData from "./apiCalling.js";
 
 import { Card, Image, Column, Title, Modal, Content } from "rbx";
 
@@ -30,10 +31,12 @@ function sizeCalculator(sizeObject) {
 
 const App = () => {
 
+  pushTestData();
   const [currListing, updateCurrListing] = useState(null);
   function updateListing(newListing) {
     updateCurrListing(newListing);
   }
+
 
   return (
     <ListingContext.Provider value={{ currListing, updateListing }}>
