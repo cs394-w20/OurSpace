@@ -1,0 +1,290 @@
+[
+    {
+        "name": "Old Orchard Apt",
+        "description": "No tenants right now, so I'm going to be renting this out for storage for the next few months",
+        "location": {
+            "street": "10104 Old Orchard Ct",
+            "city": "Skokie",
+            "state": "IL",
+            "country": "USA",
+            "zip": 60076,
+            "geodata": {
+                "type": "Point",
+                "coordinates": {
+                    "latitide": 42.063752,
+                    "longitude": -87.744318
+                }
+            }
+        },
+        "size": {
+            "length": 10,
+            "width": 15,
+            "height": 6
+        },
+        "time": "2020-06-10T17:00:00.000Z",
+        "attributes": {
+            "hasLock": false,
+            "hasParking": true,
+            "hasElevator": false,
+            "hasRamp": false
+        },
+        "image": null,
+        "price": 5,
+        "rating": {
+            "score": 3.5,
+            "numRatings": 15
+        }
+    },
+    {
+        "name": "The Best Closet",
+        "description": "I got this spare closet im not using, so if u guys need a place to store like some spare shoes or something, hit me up",
+        "location": {
+            "street": "160 Steeples Blvd",
+            "city": "Indianapolis",
+            "state": "IN",
+            "country": "USA",
+            "zip": 46222,
+            "geodata": {
+                "type": "Point",
+                "coordinates": {
+                    "latitide": 39.767587,
+                    "longitude": -86.212728
+                }
+            }
+        },
+        "size": {
+            "length": 2,
+            "width": 2,
+            "height": 8
+        },
+        "time": "2020-02-24T12:30:00.000Z",
+        "attributes": {
+            "hasLock": false,
+            "hasParking": false,
+            "hasElevator": true,
+            "hasRamp": false
+        },
+        "image": null,
+        "price": 10.5,
+        "rating": {
+            "score": 4.5,
+            "numRatings": 3
+        }
+    },
+    {
+        "name": "Under The Sink",
+        "description": "Kinda gets wet down there, but it should be fine for plastic stuff",
+        "location": {
+            "street": "1600 Monticello Ave",
+            "city": "Norfolk",
+            "state": "VA",
+            "country": "USA",
+            "zip": 23510,
+            "geodata": {
+                "type": "Point",
+                "coordinates": {
+                    "latitide": 36.864039,
+                    "longitude": -76.285274
+                }
+            }
+        },
+        "size": {
+            "length": 4,
+            "width": 2,
+            "height": 2
+        },
+        "time": "2020-03-06T21:00:00.000Z",
+        "attributes": {
+            "hasLock": false,
+            "hasParking": true,
+            "hasElevator": true,
+            "hasRamp": false
+        },
+        "image": null,
+        "price": 20.75,
+        "rating": {
+            "score": 4.3,
+            "numRatings": 19
+        }
+    },
+    {
+        "name": "Spare Bedroom",
+        "description": "My son just moved out for college, so we have his spare room to store things in. Not too humid or dry, and stays at 70 F throughout the Summer.",
+        "location": {
+            "street": "737 Colfax St",
+            "city": "Evanston",
+            "state": "IL",
+            "country": "USA",
+            "zip": 60201,
+            "geodata": {
+                "type": "Point",
+                "coordinates": {
+                    "latitide": 42.060989,
+                    "longitude": -87.68133
+                }
+            }
+        },
+        "size": {
+            "length": 10,
+            "width": 10,
+            "height": 10
+        },
+        "time": "2021-12-20T02:30:00.000Z",
+        "attributes": {
+            "hasLock": false,
+            "hasParking": true,
+            "hasElevator": false,
+            "hasRamp": false
+        },
+        "image": null,
+        "price": 7.5,
+        "rating": {
+            "score": 2.5,
+            "numRatings": 1
+        }
+    },
+    {
+        "name": "TOP QUALITY Cellar",
+        "description": "WELCOME to BESTCELLARS!! If you haven't stored with us before, worry no more! Premium prices for premium spaces!",
+        "location": {
+            "street": "3187 Reeves Dr",
+            "city": "Melvindale",
+            "state": "MI",
+            "country": "USA",
+            "zip": 48122,
+            "geodata": {
+                "type": "Point",
+                "coordinates": {
+                    "latitide": 42.288179,
+                    "longitude": -83.173806
+                }
+            }
+        },
+        "size": {
+            "length": 50,
+            "width": 50,
+            "height": 5
+        },
+        "time": "2019-05-05T21:08:00.000Z",
+        "attributes": {
+            "hasLock": false,
+            "hasParking": false,
+            "hasElevator": false,
+            "hasRamp": false
+        },
+        "image": null,
+        "price": 55.99,
+        "rating": {
+            "score": 3.5,
+            "numRatings": 26
+        }
+    },
+    {
+        "name": "Storage Unit",
+        "description": "Got a lifetime ownership for one of these things, but I don't need it. Might as well make some money off it.",
+        "location": {
+            "street": "2850 N Pulaski Rd",
+            "city": "Chicago",
+            "state": "IL",
+            "country": "USA",
+            "zip": 60641,
+            "geodata": {
+                "type": "Point",
+                "coordinates": {
+                    "latitide": 41.933241,
+                    "longitude": -87.727606
+                }
+            }
+        },
+        "size": {
+            "length": 8,
+            "width": 8,
+            "height": 10
+        },
+        "time": "2020-02-04T06:00:00.000Z",
+        "attributes": {
+            "hasLock": false,
+            "hasParking": false,
+            "hasElevator": false,
+            "hasRamp": false
+        },
+        "image": null,
+        "price": 5,
+        "rating": {
+            "score": 0.0,
+            "numRatings": 0
+        }
+    },
+    {
+        "name": "Back Room",
+        "description": "Quiet, small room that doesn't get a lot of activity. Perfect for fine china and other fragile materials!!!",
+        "location": {
+            "street": "5023 Conrad St",
+            "city": "Skokie",
+            "state": "IL",
+            "country": "USA",
+            "zip": 60077,
+            "geodata": {
+                "type": "Point",
+                "coordinates": {
+                    "latitide": 42.037937,
+                    "longitude": -87.75299
+                }
+            }
+        },
+        "size": {
+            "length": 10,
+            "width": 10,
+            "height": 8
+        },
+        "time": "2020-02-15T14:30:00.000Z",
+        "attributes": {
+            "hasLock": false,
+            "hasParking": false,
+            "hasElevator": true,
+            "hasRamp": false
+        },
+        "image": null,
+        "price": 2,
+        "rating": {
+            "score": 5.0,
+            "numRatings": 1
+        }
+    },
+    {
+        "name": "Miniature Storage",
+        "description": "might work great for some cheese",
+        "location": {
+            "street": "2145 Sheridan Rd",
+            "city": "Evanston",
+            "state": "IL",
+            "country": "USA",
+            "zip": 60208,
+            "geodata": {
+                "type": "Point",
+                "coordinates": {
+                    "latitide": 42.058053,
+                    "longitude": -87.676167
+                }
+            }
+        },
+        "size": {
+            "length": 1,
+            "width": 2,
+            "height": 1
+        },
+        "time": "2020-02-14T18:00:00.000Z",
+        "attributes": {
+            "hasLock": false,
+            "hasParking": false,
+            "hasElevator": false,
+            "hasRamp": false
+        },
+        "image": null,
+        "price": 0.5,
+        "rating": {
+            "score": 4.4,
+            "numRatings": 16
+        }
+    }
+]
