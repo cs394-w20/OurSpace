@@ -1,10 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 app.listen(4000);
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}))
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -154,6 +156,8 @@ app.post('/get_listings', async (req, res) => {
 });
 
 app.post('/post_listing', async (req, res) => {
+    console.log('received!');
+    console.log(req.body.newListing);
     await listings.insertOne(req.body.newListing, (err, listing) => {
         if (err) return res.status(400);
     })

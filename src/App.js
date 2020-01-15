@@ -207,9 +207,16 @@ const StorageCard = ({ listing }) => {
 
 const ListingList = () => {
 
+  const [listings, setListings] = useState([]);
+
   function getListingsData () {
-    fetch('/get_listings', {
+    fetch('http://localhost:4000/get_listings', {
       method: 'POST',
+      headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			credentials: 'include',
       body: JSON.stringify({latitude:42.055984, longitude:-87.675171, listingsPerPage:5, pageNumber:1})
     })
     .then(response => response.json())
@@ -218,7 +225,6 @@ const ListingList = () => {
     })
   }
 
-  const [listings, setListings] = ([]);
   var columnIds = [...Array(listings.length).keys()];
 
   if (listings.length === 0){
