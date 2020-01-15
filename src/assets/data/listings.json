@@ -28,7 +28,7 @@
             "hasElevator": false,
             "hasRamp": false
         },
-        "image": "./assets/images/apt.jpg",
+        "image": null,
         "price": 5,
         "rating": {
             "score": 3.5,
@@ -64,7 +64,7 @@
             "hasElevator": true,
             "hasRamp": false
         },
-        "image": "./assets/images/closet.jpg",
+        "image": null,
         "price": 10.5,
         "rating": {
             "score": 4.5,
@@ -100,7 +100,7 @@
             "hasElevator": true,
             "hasRamp": false
         },
-        "image": "./assets/images/underthesink.jpg",
+        "image": null,
         "price": 20.75,
         "rating": {
             "score": 4.3,
@@ -136,7 +136,7 @@
             "hasElevator": false,
             "hasRamp": false
         },
-        "image": "./assets/images/sparebedroom.jpg",
+        "image": null,
         "price": 7.5,
         "rating": {
             "score": 2.5,
@@ -172,7 +172,7 @@
             "hasElevator": false,
             "hasRamp": false
         },
-        "image": "./assets/images/cellar.jpg",
+        "image": null,
         "price": 10,
         "rating": {
             "score": 3.3,
@@ -208,7 +208,7 @@
             "hasElevator": false,
             "hasRamp": false
         },
-        "image": "./assets/images/dingycellar.jpg",
+        "image": null,
         "price": 55.99,
         "rating": {
             "score": 3.5,
@@ -244,7 +244,7 @@
             "hasElevator": false,
             "hasRamp": false
         },
-        "image": "./assets/images/storageunit.jpg",
+        "image": null,
         "price": 5,
         "rating": {
             "score": 0.0,
@@ -280,7 +280,7 @@
             "hasElevator": true,
             "hasRamp": false
         },
-        "image": "./assets/images/storeroom.jpg",
+        "image": null,
         "price": 2,
         "rating": {
             "score": 5.0,
@@ -316,7 +316,7 @@
             "hasElevator": false,
             "hasRamp": false
         },
-        "image": "./assets/images/mousehole.jpg",
+        "image": null,
         "price": 0.5,
         "rating": {
             "score": 4.4,

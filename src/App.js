@@ -203,9 +203,24 @@ const StorageCard = ({ listing }) => {
 };
 
 const ListingList = () => {
-  var listings = TestData;
+
+  function getListingsData () {
+    fetch('/get_listings', {
+      method: 'POST',
+      body: JSON.stringify({latitude:42.055984, longitude:-87.675171, listingsPerPage:5, pageNumber:1})
+    })
+    .then(response => response.json())
+    .then(response => {
+      setListings(response.listings);
+    })
+  }
+
+  const [listings, setListings] = ([]);
   var columnIds = [...Array(listings.length).keys()];
 
+  if (listings.length === 0){
+    getListingsData();
+  }
   return (
     <div>
       <Column.Group multiline>
