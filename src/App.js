@@ -8,6 +8,7 @@ import elevator from "./assets/icons/elevator.svg";
 // import ramp from "./assets/icons/ramp.svg";
 
 import TestData from "./assets/data/listings.json";
+import pushTestData from "./apiCalling.js";
 
 import { Card, Image, Column, Title, Modal, Content } from "rbx";
 
@@ -34,6 +35,7 @@ const App = () => {
   function updateListing(newListing) {
     updateCurrListing(newListing);
   }
+
 
   return (
     <ListingContext.Provider value={{ currListing, updateListing }}>
@@ -203,9 +205,30 @@ const StorageCard = ({ listing }) => {
 };
 
 const ListingList = () => {
-  var listings = TestData;
+
+  const [listings, setListings] = useState([]);
+
+  function getListingsData () {
+    fetch('http://localhost:4000/get_listings', {
+      method: 'POST',
+      headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			credentials: 'include',
+      body: JSON.stringify({latitude:42.055984, longitude:-87.675171, listingsPerPage:10, pageNumber:1})
+    })
+    .then(response => response.json())
+    .then(response => {
+      setListings(response.listings);
+    })
+  }
+
   var columnIds = [...Array(listings.length).keys()];
 
+  if (listings.length === 0){
+    getListingsData();
+  }
   return (
     <div>
       <Column.Group multiline>
