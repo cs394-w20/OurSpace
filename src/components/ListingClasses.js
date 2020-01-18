@@ -18,7 +18,7 @@ class Geodata {
 
 class Coordinates {
     constructor(latitude, longitude) {
-        this.latitide = latitude;
+        this.latitude = latitude;
         this.longitude = longitude;
     }
 }

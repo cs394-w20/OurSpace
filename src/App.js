@@ -29,6 +29,32 @@ function sizeCalculator(sizeObject) {
   return "Small";
 }
 
+
+function deg2rad(deg) {
+	//thanks to stackexchange for most of the body of this function
+  return deg * (Math.PI/180)
+}
+
+function distanceCalculator(coordinates) {
+	//thanks to stackexchange for most of the body of this function
+	var R = 3958.8; // Radius of the earth in miles
+	var userLatitude = 42.057923;
+	var userLongitude = -87.675918;
+    var dLat = deg2rad(coordinates.latitide-userLatitude);  // deg2rad below
+    var dLon = deg2rad(coordinates.longitude-userLongitude); 
+    var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(coordinates.latitide)) * Math.cos(deg2rad(userLatitude)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in miles
+  d = Math.floor(d);
+  var out = d.toString() + " miles"; //modify text here
+  return out;
+}
+
+
 const App = () => {
 
   const [currListing, updateCurrListing] = useState(null);
@@ -192,7 +218,7 @@ const StorageCard = ({ listing }) => {
               </div>
               </th>
               <th style={{ width: "40%", textAlign: "right", fontWeight: "normal", fontSize: "15px" }}>
-                <div style={{ fontSize: '16px', textAlign: "right", float: "right", fontWeight: "normal" }}>5 miles away</div>
+                <div style={{ fontSize: '16px', textAlign: "right", float: "right", fontWeight: "normal" }}>{distanceCalculator(listing.location.geodata.coordinates)}</div>
                 <br></br>
               </th>
             </tr>
