@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./App.css";
 import "rbx/index.css";
 import styles from "./assets/styles/DetailView.css"
@@ -6,9 +6,6 @@ import styles from "./assets/styles/DetailView.css"
 import parking from "./assets/icons/local_parking-24px.svg";
 import elevator from "./assets/icons/elevator.svg";
 // import ramp from "./assets/icons/ramp.svg";
-
-import TestData from "./assets/data/listings.json";
-import pushTestData from "./apiCalling.js";
 
 import { Card, Image, Column, Title, Modal, Content } from "rbx";
 
@@ -32,13 +29,40 @@ function sizeCalculator(sizeObject) {
 const App = () => {
 
   const [currListing, updateCurrListing] = useState(null);
+  const [listingList, updateList] = useState([]);
+
+  useEffect(() => {
+    function getListingsData () {
+      fetch('http://localhost:4000/get_listings', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({latitude:42.055984, longitude:-87.675171, listingsPerPage:10, pageNumber:1})
+      })
+      .then(response => response.json())
+      .then(response => {
+        updateList(response.listings);
+      });
+    }
+    getListingsData();
+  }, []);
+
   function updateListing(newListing) {
     updateCurrListing(newListing);
+  }
+  function updateAll(newList) {
+    /* 
+        BACKEND: ADD CODE HERE TO SET UP PUSHING NEW LISTINGS TO REMOTE DB
+    */
+    updateList(newList);
   }
 
 
   return (
-    <ListingContext.Provider value={{ currListing, updateListing }}>
+    <ListingContext.Provider value={{ currListing, updateListing, listingList, updateList }}>
       <div className="App" width="100%" height="100%" opacity="0.99">
         <input z-index="0"></input>
         <DetailView />
@@ -49,7 +73,7 @@ const App = () => {
 };
 
 const DetailView = () => {
-  const { currListing, updateListing } = useContext(ListingContext);;
+  const { currListing, updateListing } = useContext(ListingContext);
 
   return (
     <div style={{ width: "100%", height: "100%", margin: 0 }}>
@@ -96,13 +120,6 @@ const DetailView = () => {
                   {currListing.description}
                 </p>
 
-
-
-                {/* <img style={currListing.attributes.hasElevator ? { height: '22px' } : { display: "none" }} src={elevator} />
-                <p style={currListing.attributes.hasElevator ? { height: '22px' } : { display: "none" }}>Yes Elevator</p>
-                <img style={currListing.attributes.hasParking ? { height: '22px' } : { display: "none" }} src={parking} />
-                <p style={currListing.attributes.hasParking ? { height: '22px' } : { display: "none" }}>Yes Parking</p> */}
-
                 <p style={currListing.attributes.hasElevator || currListing.attributes.hasParking ? { height: '24px', fontWeight:"700", marginBottom:"5px" } : { display: "none" }}>Amenities</p>
 
                 <table style={{ width: "100%" }}>
@@ -126,9 +143,6 @@ const DetailView = () => {
                 </table>
                 
 
-
-
-
                 <p>
                   Dimensions: {currListing.size.length} x {currListing.size.width} x {currListing.size.height} ft
                 </p>
@@ -147,7 +161,7 @@ const DetailView = () => {
 
 const StorageCard = ({ listing }) => {
 
-  const { currListing, updateListing } = useContext(ListingContext);
+  const { updateListing } = useContext(ListingContext);
 
   return (
     <div style={{ width: "90%", margin: "Auto", paddingTop: '20px' }} onClick={() => {updateListing(listing); setTimeout(function(){ document.getElementById("dtView").classList.add("show") }, 0);}}>
@@ -206,35 +220,16 @@ const StorageCard = ({ listing }) => {
 
 const ListingList = () => {
 
-  const [listings, setListings] = useState([]);
+  const { listingList, updateAll } = useContext(ListingContext);
 
-  function getListingsData () {
-    fetch('http://localhost:4000/get_listings', {
-      method: 'POST',
-      headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			},
-			credentials: 'include',
-      body: JSON.stringify({latitude:42.055984, longitude:-87.675171, listingsPerPage:10, pageNumber:1})
-    })
-    .then(response => response.json())
-    .then(response => {
-      setListings(response.listings);
-    })
-  }
+  var columnIds = [...Array(listingList.length).keys()];
 
-  var columnIds = [...Array(listings.length).keys()];
-
-  if (listings.length === 0){
-    getListingsData();
-  }
   return (
     <div>
       <Column.Group multiline>
         {columnIds.map(i => (
           <Column key={i} size="one-quarter">
-            <StorageCard listing={listings[i]} />
+            <StorageCard listing={listingList[i]} />
           </Column>
         ))}
       </Column.Group>
