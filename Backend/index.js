@@ -133,6 +133,29 @@ MongoClient.connect(mongoURL, async (err, database) => {
             }
         }
     })
+
+    users = await db.collection('Users', {
+        validator: {
+            $jsonSchema: {
+                bsonType: "object",
+                required: ["username", "password", "firstName", "lastName", "profileImage"],
+                properties: {
+                    username: {
+                        bsonType: "string"
+                    },
+                    password: {
+                        bsonType: "string"
+                    },
+                    firstName: {
+                        bsonType: "string"
+                    },
+                    lastName: {
+                        bsonType: "string"
+                    },
+                    profileImage: {
+                        bsonTyoe: "binData"
+                    }
+    })
     await listings.createIndex({'location.geodata':'2dsphere'})
 })
 
@@ -194,3 +217,17 @@ app.get('/delete_listing', async (req, res) => {
     })
     return res.status(200);
 });
+
+app.get('/get_user', async (req, res) => {
+    await users.find()
+        .then(user => res.json(users))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
+app.post('/add_user', async (req, res) => {
+    const newUser = new User(req.body.username, req.body.password, req.body.firstName, req.body.lastName, req.body.profileImage);
+
+    newUser.save()
+        .then(() => res.json('User added!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
