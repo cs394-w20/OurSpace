@@ -1,3 +1,7 @@
+html{
+  height: 100%;
+}
+
 #dtView{
   width: 100%;
   height: 100%;
@@ -8,6 +12,20 @@
 }
 
 #dtView.show{
+  top: 0;
+  opacity: 1;
+}
+
+#ctView{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  top: -100%;
+  opacity: 0;
+  transition: top 0.15s, opacity 0.15s;
+}
+
+#ctView.show{
   top: 0;
   opacity: 1;
 }
