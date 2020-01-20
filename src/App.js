@@ -388,7 +388,7 @@ const ContactView = () => {
                 <br/>
                 <div style={{width: "100%", textAlign:"center", marginTop:"10%"}}>
                   <span style={{ backgroundColor: "	#4E2A84", padding: "10px", color: "white", fontWeight: "bold", borderRadius: "3px"}}
-                        onClick={() => {alert('Next steps')}}
+                        onClick={() => {alert('Reservation Created')}}
                   >Make Reservation</span>
                 </div>
 
