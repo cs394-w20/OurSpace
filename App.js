@@ -1,9 +1,7 @@
-import React, { useState, useContext, useEffect, Component } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./App.css";
 import "rbx/index.css";
 import "./assets/styles/DetailView.css"
-import ReactLightCalendar from '@lls/react-light-calendar'
-import "./assets/styles/calendar.css";
 
 import parking from "./assets/icons/local_parking-24px.svg";
 import elevator from "./assets/icons/elevator.svg";
@@ -28,71 +26,6 @@ function sizeCalculator(sizeObject) {
   return "Small";
 }
 
-const DAY_LABELS = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-const MONTH_LABELS = [
-  "January",
-  "Febuary",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
-];
-
-var calcStartDate;
-var numOfDays = 3;
-
-// function calculatePrice(numOfDays) {
-//   return <div>Hello World!</div>;
-// }
-
-
-class Calendar extends Component {
-  constructor(props) {
-    super(props);
-    // Get initial startDate and endDate
-    this.state = {
-      startDate: props.startDate,
-      endDate: props.endDate
-    };
-  }
-
-  onChange = (startDate, endDate) => {
-    this.setState({ startDate, endDate });
-    numOfDays = (endDate-startDate)/86400000;
-    // alert(numOfDays);
-    // calculatePrice(numOfDays);
-  }
-
-  render = () => {
-    const { startDate, endDate } = this.state;
-    // calcStartDate = startDate;
-
-    return (
-      <ReactLightCalendar
-        dayLabels={DAY_LABELS}
-        monthLabels={MONTH_LABELS}
-        onChange={this.onChange}
-        startDate={startDate}
-        endDate={endDate}
-        {...this.props} // Add parent's additionnal props
-      />
-    );
-  };
-}
 
 function deg2rad(deg) {
 	//thanks to stackexchange for most of the body of this function
@@ -114,8 +47,7 @@ function distanceCalculator(coordinates) {
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
   var d = R * c; // Distance in miles
   d = Math.floor(d);
-
-  var out = d.toString() + " miles away"; //modify text here
+  var out = d.toString() + " miles"; //modify text here
   return out;
 }
 
@@ -199,22 +131,16 @@ const DetailView = () => {
                       </div>
                     </th>
                     <th style={{ width: "42%", textAlign: "left", fontWeight: "normal", fontSize: "15px", padding: "6% 0" }}>
-                      <span style={{ backgroundColor: "	#4E2A84", padding: "10px", color: "white", fontWeight: "bold", borderRadius: "3px"}}
-                            onClick={() => { toggleContactView(true); setTimeout(function () { document.getElementById("ctView").classList.add("show") }, 100); }}
-                            >
-                        Check availability
-                      </span>
+                      <span style={{ backgroundColor: "	#4E2A84", padding: "10px", color: "white", fontWeight: "bold", borderRadius: "3px" }} onClick={() => { toggleContactView(true); setTimeout(function () { document.getElementById("ctView").classList.add("show") }, 100); }}>Check availability</span>
                     </th>
                   </table>
 
                 </div>
 
                 {/* Content */}
-                <Content style={{ width: "94%", margin: "auto", paddingTop: "1%"}}>
-                  <Title style={{marginBottom: "0"}}>{currListing.name}</Title>
-                  <div style={{ fontSize: '14px', textAlign: "right", float: "right", fontWeight: "normal", marginTop:"-3px"}}>{distanceCalculator(currListing.location.geodata.coordinates)}</div>
-                  <br/>
-                  <p style={{marginTop:"2%"}}>
+                <Content style={{ width: "94%", margin: "auto", paddingTop: "1%", paddingBottom: "2%" }}>
+                  <Title>{currListing.name}</Title>
+                  <p>
                     {currListing.description}
                   </p>
 
@@ -362,7 +288,7 @@ const ContactView = () => {
 
             <Modal.Card style={{ width: "100%", height: "100%", bottom: "-2%", borderRadius: "10px" }}>
               <Modal.Card.Body>
-                <div style={{width:"100%", fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("ctView").classList.remove("show"); setTimeout(function () { toggleContactView(false) }, 150); }}>
+                <div style={{ fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("ctView").classList.remove("show"); setTimeout(function () { toggleContactView(false) }, 150); }}>
                   &#10005;
                 </div>
                 <br/>
@@ -372,24 +298,15 @@ const ContactView = () => {
                     <span style={{fontSize: '26px', fontWeight:"700"}}>Hi, I'm Charles</span>
                     <p>Joined in 2020</p>
                   </div>
-                  <div style={{width:"40%", marginBottom:"5%"}}>
-                    <Image src="https://media-exp2.licdn.com/dms/image/C4D03AQGlMxrEKues9g/profile-displayphoto-shrink_200_200/0?e=1584576000&v=beta&t=6wCiJIZ6fLzoIMPdo7s33G4bmcWEfpKzQhRfKbm6MvY" style={{ width: "100%", padding: "0px", borderRadius: "50%"}} />
+                  <div style={{width:"40%"}}>
+                  <Image src="https://media-exp2.licdn.com/dms/image/C4D03AQGlMxrEKues9g/profile-displayphoto-shrink_200_200/0?e=1584576000&v=beta&t=6wCiJIZ6fLzoIMPdo7s33G4bmcWEfpKzQhRfKbm6MvY" style={{ width: "100%", padding: "0px", borderRadius: "50%"}} />
                   </div>
                 </div>
                 
-
-                {/* date => date < new Date().getTime() */}
+                Until: {new Date(currListing.time).toDateString()}
+                <br/><br/><br/><br/>
+                <p>Calender goes HERE</p>
                 
-                {/* <p>Here is when the room is available</p> */}
-
-                <Calendar disableDates={date => date < new Date().getTime() || date > new Date('2020.02.17').getTime()} timezone="Pacific/Niue" /> {/* UTC or Pacific/Niue or Pacific/Guadalcanal*/}
-                <br/>
-                <div style={{width: "100%", textAlign:"center", marginTop:"10%"}}>
-                  <span style={{ backgroundColor: "	#4E2A84", padding: "10px", color: "white", fontWeight: "bold", borderRadius: "3px"}}
-                        onClick={() => {alert('Reservation Created')}}
-                  >Make Reservation</span>
-                </div>
-
               </Modal.Card.Body>
             </Modal.Card>
           </React.Fragment>
@@ -398,7 +315,5 @@ const ContactView = () => {
     </div>
   );
 }
-
-
 
 export default App;
