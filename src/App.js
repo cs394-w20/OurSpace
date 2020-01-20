@@ -1,7 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, Component } from "react";
 import "./App.css";
 import "rbx/index.css";
 import "./assets/styles/DetailView.css"
+import ReactLightCalendar from '@lls/react-light-calendar'
+import "./assets/styles/calendar.css";
 
 import parking from "./assets/icons/local_parking-24px.svg";
 import elevator from "./assets/icons/elevator.svg";
@@ -25,6 +27,100 @@ function sizeCalculator(sizeObject) {
 
   return "Small";
 }
+
+
+
+const DAY_LABELS = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+const MONTH_LABELS = [
+  "January",
+  "Febuary",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];
+
+var calcStartDate;
+var numOfDays = 3;
+
+// function calculatePrice(numOfDays) {
+//   return <div>Hello World!</div>;
+// }
+
+
+class Calendar extends Component {
+  constructor(props) {
+    super(props);
+    // Get initial startDate and endDate
+    this.state = {
+      startDate: props.startDate,
+      endDate: props.endDate
+    };
+  }
+
+  onChange = (startDate, endDate) => {
+    this.setState({ startDate, endDate });
+    numOfDays = (endDate-startDate)/86400000;
+    // alert(numOfDays);
+    // calculatePrice(numOfDays);
+  }
+
+  render = () => {
+    const { startDate, endDate } = this.state;
+    // calcStartDate = startDate;
+
+    return (
+      <ReactLightCalendar
+        dayLabels={DAY_LABELS}
+        monthLabels={MONTH_LABELS}
+        onChange={this.onChange}
+        startDate={startDate}
+        endDate={endDate}
+        {...this.props} // Add parent's additionnal props
+      />
+    );
+  };
+}
+
+
+function deg2rad(deg) {
+	//thanks to stackexchange for most of the body of this function
+  return deg * (Math.PI/180)
+}
+
+function distanceCalculator(coordinates) {
+	//thanks to stackexchange for most of the body of this function
+	var R = 3958.8; // Radius of the earth in miles
+	var userLatitude = 42.057923;
+	var userLongitude = -87.675918;
+    var dLat = deg2rad(coordinates.latitide-userLatitude);  // deg2rad below
+    var dLon = deg2rad(coordinates.longitude-userLongitude); 
+    var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(coordinates.latitide)) * Math.cos(deg2rad(userLatitude)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in miles
+  d = Math.floor(d);
+  var out = d.toString() + " miles away"; //modify text here
+  return out;
+}
+
 
 const App = () => {
 
@@ -105,18 +201,36 @@ const DetailView = () => {
                       </div>
                     </th>
                     <th style={{ width: "42%", textAlign: "left", fontWeight: "normal", fontSize: "15px", padding: "6% 0" }}>
-                      <span style={{ backgroundColor: "	#4E2A84", padding: "10px", color: "white", fontWeight: "bold", borderRadius: "3px" }} onClick={() => { toggleContactView(true); setTimeout(function () { document.getElementById("ctView").classList.add("show") }, 100); }}>Check availability</span>
+                      <span style={{ backgroundColor: "	#4E2A84", padding: "10px", color: "white", fontWeight: "bold", borderRadius: "3px"}}
+                            onClick={() => { toggleContactView(true); setTimeout(function () { document.getElementById("ctView").classList.add("show") }, 100); }}
+                            >
+                        Check availability
+                      </span>
                     </th>
                   </table>
 
                 </div>
 
                 {/* Content */}
-                <Content style={{ width: "94%", margin: "auto", paddingTop: "1%", paddingBottom: "2%" }}>
-                  <Title>{currListing.name}</Title>
-                  <p>
+                <Content style={{ width: "94%", margin: "auto", paddingTop: "1%"}}>
+                  <Title style={{marginBottom: "0"}}>{currListing.name}</Title>
+                  <div style={{ fontSize: '14px', textAlign: "right", float: "right", fontWeight: "normal", marginTop:"-3px"}}>{distanceCalculator(currListing.location.geodata.coordinates)}</div>
+                  <br/>
+                  <p style={{marginTop:"2%"}}>
                     {currListing.description}
                   </p>
+
+                  {/* <table style={{ width: "100%" }}>
+                    <th style={{ width: "70%" }}>
+                        <p>hosted by Charles</p>
+                    </th>
+                    <th style={{ width: "30%", textAlign: "right", fontWeight: "normal", fontSize: "15px" }}>
+                        <Image src="https://media-exp2.licdn.com/dms/image/C4D03AQGlMxrEKues9g/profile-displayphoto-shrink_200_200/0?e=1584576000&v=beta&t=6wCiJIZ6fLzoIMPdo7s33G4bmcWEfpKzQhRfKbm6MvY" style={{ width: "100%", padding: "0px", borderRadius: "50%"}} />
+                    </th>
+                  </table> */}
+                  
+
+                  
 
                   <p style={currListing.attributes.hasElevator || currListing.attributes.hasParking ? { height: '24px', fontWeight: "700", marginBottom: "5px" } : { display: "none" }}>Amenities</p>
 
@@ -204,7 +318,7 @@ const StorageCard = ({ listing }) => {
               </div>
               </th>
               <th style={{ width: "40%", textAlign: "right", fontWeight: "normal", fontSize: "15px" }}>
-                <div style={{ fontSize: '16px', textAlign: "right", float: "right", fontWeight: "normal" }}>5 miles away</div>
+                <div style={{ fontSize: '16px', textAlign: "right", float: "right", fontWeight: "normal" }}>{distanceCalculator(listing.location.geodata.coordinates)}</div>
                 <br></br>
               </th>
             </tr>
@@ -246,16 +360,38 @@ const ContactView = () => {
       <Modal active={contactViewOpen} id="ctView">
         {currListing != null ?
           <React.Fragment>
-            <Modal.Background style={{ height: "100%", margin: "0%" }}></Modal.Background>
+            <Modal.Background style={{ height: "100%", margin: "0%", backgroundColor:"rgba(255, 255, 255, .4)"}}></Modal.Background>
 
-            <Modal.Card style={{ width: "100%", height: "100%", top: "-5%" }}>
+            <Modal.Card style={{ width: "100%", height: "100%", bottom: "-2%", borderRadius: "10px" }}>
               <Modal.Card.Body>
-                <div style={{ fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("ctView").classList.remove("show"); setTimeout(function () { toggleContactView(false) }, 150); }}>
+                <div style={{width:"100%", fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("ctView").classList.remove("show"); setTimeout(function () { toggleContactView(false) }, 150); }}>
                   &#10005;
                 </div>
                 <br/>
-                Poster: John Doe
-                Until: {new Date(currListing.time).toDateString()}
+
+                <div style={{display:"flex", width: "100%"}}>
+                  <div style={{width:"60%"}}>
+                    <span style={{fontSize: '26px', fontWeight:"700"}}>Hi, I'm Charles</span>
+                    <p>Joined in 2020</p>
+                  </div>
+                  <div style={{width:"40%", marginBottom:"5%"}}>
+                    <Image src="https://media-exp2.licdn.com/dms/image/C4D03AQGlMxrEKues9g/profile-displayphoto-shrink_200_200/0?e=1584576000&v=beta&t=6wCiJIZ6fLzoIMPdo7s33G4bmcWEfpKzQhRfKbm6MvY" style={{ width: "100%", padding: "0px", borderRadius: "50%"}} />
+                  </div>
+                </div>
+                
+
+                {/* date => date < new Date().getTime() */}
+                
+                {/* <p>Here is when the room is available</p> */}
+
+                <Calendar disableDates={date => date < new Date().getTime() || date > new Date('2020.02.17').getTime()} timezone="Pacific/Niue" /> {/* UTC or Pacific/Niue or Pacific/Guadalcanal*/}
+                <br/>
+                <div style={{width: "100%", textAlign:"center", marginTop:"10%"}}>
+                  <span style={{ backgroundColor: "	#4E2A84", padding: "10px", color: "white", fontWeight: "bold", borderRadius: "3px"}}
+                        onClick={() => {alert('Next steps')}}
+                  >Make Reservation</span>
+                </div>
+
               </Modal.Card.Body>
             </Modal.Card>
           </React.Fragment>
@@ -264,5 +400,7 @@ const ContactView = () => {
     </div>
   );
 }
+
+
 
 export default App;
