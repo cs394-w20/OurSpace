@@ -28,8 +28,6 @@ function sizeCalculator(sizeObject) {
   return "Small";
 }
 
-
-
 const DAY_LABELS = [
   "Sunday",
   "Monday",
@@ -96,7 +94,6 @@ class Calendar extends Component {
   };
 }
 
-
 function deg2rad(deg) {
 	//thanks to stackexchange for most of the body of this function
   return deg * (Math.PI/180)
@@ -117,6 +114,7 @@ function distanceCalculator(coordinates) {
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
   var d = R * c; // Distance in miles
   d = Math.floor(d);
+
   var out = d.toString() + " miles away"; //modify text here
   return out;
 }
