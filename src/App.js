@@ -178,7 +178,7 @@ const DetailView = () => {
               <Modal.Card.Body style={{ width: "100%", padding: "0px", margin: "0px" }}>
 
                 {/* Top exit icon */}
-                <div style={{ fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("dtView").classList.remove("show"); setTimeout(function () { updateCurrListing(null) }, 150) }}>
+                <div id="dtExit" style={{ fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("dtView").classList.remove("show"); setTimeout(function () { updateCurrListing(null) }, 150) }}>
                   &#10005;
                 </div>
                 <Image src="https://i.pinimg.com/originals/6a/7c/fc/6a7cfc513ee281ac19ed5b25f17a9a5a.jpg" style={{ width: "100%", padding: "0px" }} />
@@ -362,7 +362,7 @@ const ContactView = () => {
 
             <Modal.Card style={{ width: "100%", height: "100%", bottom: "-2%", borderRadius: "10px" }}>
               <Modal.Card.Body>
-                <div style={{width:"100%", fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("ctView").classList.remove("show"); setTimeout(function () { toggleContactView(false) }, 150); }}>
+                <div id="ctExit" style={{width:"100%", fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("ctView").classList.remove("show"); setTimeout(function () { toggleContactView(false) }, 150); }}>
                   &#10005;
                 </div>
                 <br/>
@@ -386,7 +386,7 @@ const ContactView = () => {
                 <br/>
                 <div style={{width: "100%", textAlign:"center", marginTop:"10%"}}>
                   <span style={{ backgroundColor: "	#4E2A84", padding: "10px", color: "white", fontWeight: "bold", borderRadius: "3px"}}
-                        onClick={() => {alert('Reservation Created')}}
+                        onClick={() => {document.getElementById("ctExit").click(); document.getElementById("dtExit").click(); alert('Reservation Created');}}
                   >Make Reservation</span>
                 </div>
 
