@@ -5,6 +5,8 @@ import "./assets/styles/DetailView.css"
 import ReactLightCalendar from '@lls/react-light-calendar'
 import "./assets/styles/calendar.css";
 
+import "./firebase.js"
+
 import parking from "./assets/icons/local_parking-24px.svg";
 import elevator from "./assets/icons/elevator.svg";
 // import ramp from "./assets/icons/ramp.svg";
@@ -151,6 +153,8 @@ const App = () => {
     */
     updateList([newListing].concat(listingList))
   }
+
+  if(listingList.length == 0) return (<div>This app is hosted but has no data!</div>);
 
 
   return (

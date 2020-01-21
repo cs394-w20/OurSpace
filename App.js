@@ -9,6 +9,9 @@ import elevator from "./assets/icons/elevator.svg";
 
 import { Card, Image, Column, Title, Modal, Content } from "rbx";
 
+var userLatitude = true;
+var userLongitude = true;
+
 const ListingContext = React.createContext();
 
 function sizeCalculator(sizeObject) {
@@ -28,23 +31,21 @@ function sizeCalculator(sizeObject) {
 
 
 function deg2rad(deg) {
-	//thanks to stackexchange for most of the body of this function
-  return deg * (Math.PI/180)
+  //thanks to stackexchange for most of the body of this function
+  return deg * (Math.PI / 180)
 }
 
 function distanceCalculator(coordinates) {
-	//thanks to stackexchange for most of the body of this function
-	var R = 3958.8; // Radius of the earth in miles
-	var userLatitude = 42.057923;
-	var userLongitude = -87.675918;
-    var dLat = deg2rad(coordinates.latitide-userLatitude);  // deg2rad below
-    var dLon = deg2rad(coordinates.longitude-userLongitude); 
-    var a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(coordinates.latitide)) * Math.cos(deg2rad(userLatitude)) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2)
-    ; 
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  //thanks to stackexchange for most of the body of this function
+  var R = 3958.8; // Radius of the earth in miles
+  var dLat = deg2rad(coordinates.latitide - userLatitude);  // deg2rad below
+  var dLon = deg2rad(coordinates.longitude - userLongitude);
+  var a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(coordinates.latitide)) * Math.cos(deg2rad(userLatitude)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    ;
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   var d = R * c; // Distance in miles
   d = Math.floor(d);
   var out = d.toString() + " miles"; //modify text here
@@ -58,6 +59,19 @@ const App = () => {
   const [listingList, updateList] = useState([]);
   const [contactViewOpen, toggleContactView] = useState(false);
 
+  if(navigator.geolocation) {
+    function defaultPos(error) {
+      userLatitude = 42.055984;
+      userLongitude = -87.675171;
+    }
+    function setPos(pos) {
+      userLatitude = pos.coords.latitude;
+      userLongitude = pos.coords.longitude;
+    }
+    navigator.geolocation.getCurrentPosition(setPos, defaultPos);
+
+  }
+
   useEffect(() => {
     function getListingsData() {
       fetch('http://localhost:4000/get_listings', {
@@ -67,7 +81,7 @@ const App = () => {
           'Content-Type': 'application/json'
         },
         credentials: 'include',
-        body: JSON.stringify({ latitude: 42.055984, longitude: -87.675171, listingsPerPage: 10, pageNumber: 1 })
+        body: JSON.stringify({ latitude: userLatitude, longitude: userLongitude, listingsPerPage: 10, pageNumber: 1 })
       })
         .then(response => response.json())
         .then(response => {
@@ -81,9 +95,10 @@ const App = () => {
     /* 
         BACKEND: ADD CODE HERE TO SET UP PUSHING NEW LISTINGS TO REMOTE DB
     */
-    updateList([newListing].concat(listingList))
+    updateList([newListing].concat(listingList));
   }
 
+  if (listingList.length == 0) return (<div>This app is hosted successfully, but found no data!</div>);
 
   return (
     <ListingContext.Provider value={{ currListing, updateCurrListing, listingList, updateAll, contactViewOpen, toggleContactView }}>
@@ -152,9 +167,9 @@ const DetailView = () => {
                         <Image src="https://media-exp2.licdn.com/dms/image/C4D03AQGlMxrEKues9g/profile-displayphoto-shrink_200_200/0?e=1584576000&v=beta&t=6wCiJIZ6fLzoIMPdo7s33G4bmcWEfpKzQhRfKbm6MvY" style={{ width: "100%", padding: "0px", borderRadius: "50%"}} />
                     </th>
                   </table> */}
-                  
 
-                  
+
+
 
                   <p style={currListing.attributes.hasElevator || currListing.attributes.hasParking ? { height: '24px', fontWeight: "700", marginBottom: "5px" } : { display: "none" }}>Amenities</p>
 
@@ -284,29 +299,29 @@ const ContactView = () => {
       <Modal active={contactViewOpen} id="ctView">
         {currListing != null ?
           <React.Fragment>
-            <Modal.Background style={{ height: "100%", margin: "0%", backgroundColor:"rgba(255, 255, 255, .4)"}}></Modal.Background>
+            <Modal.Background style={{ height: "100%", margin: "0%", backgroundColor: "rgba(255, 255, 255, .4)" }}></Modal.Background>
 
             <Modal.Card style={{ width: "100%", height: "100%", bottom: "-2%", borderRadius: "10px" }}>
               <Modal.Card.Body>
                 <div style={{ fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("ctView").classList.remove("show"); setTimeout(function () { toggleContactView(false) }, 150); }}>
                   &#10005;
                 </div>
-                <br/>
+                <br />
 
-                <div style={{display:"flex", width: "100%"}}>
-                  <div style={{width:"60%"}}>
-                    <span style={{fontSize: '26px', fontWeight:"700"}}>Hi, I'm Charles</span>
+                <div style={{ display: "flex", width: "100%" }}>
+                  <div style={{ width: "60%" }}>
+                    <span style={{ fontSize: '26px', fontWeight: "700" }}>Hi, I'm Charles</span>
                     <p>Joined in 2020</p>
                   </div>
-                  <div style={{width:"40%"}}>
-                  <Image src="https://media-exp2.licdn.com/dms/image/C4D03AQGlMxrEKues9g/profile-displayphoto-shrink_200_200/0?e=1584576000&v=beta&t=6wCiJIZ6fLzoIMPdo7s33G4bmcWEfpKzQhRfKbm6MvY" style={{ width: "100%", padding: "0px", borderRadius: "50%"}} />
+                  <div style={{ width: "40%" }}>
+                    <Image src="https://media-exp2.licdn.com/dms/image/C4D03AQGlMxrEKues9g/profile-displayphoto-shrink_200_200/0?e=1584576000&v=beta&t=6wCiJIZ6fLzoIMPdo7s33G4bmcWEfpKzQhRfKbm6MvY" style={{ width: "100%", padding: "0px", borderRadius: "50%" }} />
                   </div>
                 </div>
-                
+
                 Until: {new Date(currListing.time).toDateString()}
-                <br/><br/><br/><br/>
+                <br /><br /><br /><br />
                 <p>Calender goes HERE</p>
-                
+
               </Modal.Card.Body>
             </Modal.Card>
           </React.Fragment>
