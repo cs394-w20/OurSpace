@@ -11,7 +11,7 @@ import parking from "./assets/icons/local_parking-24px.svg";
 import elevator from "./assets/icons/elevator.svg";
 // import ramp from "./assets/icons/ramp.svg";
 
-import { Card, Image, Column, Title, Modal, Content } from "rbx";
+import { Card, Image, Column, Title, Modal, Content, PageLoader } from "rbx";
 
 const ListingContext = React.createContext();
 
@@ -97,27 +97,26 @@ class Calendar extends Component {
 }
 
 function deg2rad(deg) {
-	//thanks to stackexchange for most of the body of this function
-  return deg * (Math.PI/180)
+  //thanks to stackexchange for most of the body of this function
+  return deg * (Math.PI / 180)
 }
 
 function distanceCalculator(coordinates) {
-	//thanks to stackexchange for most of the body of this function
-	var R = 3958.8; // Radius of the earth in miles
-	var userLatitude = 42.057923;
-	var userLongitude = -87.675918;
-    var dLat = deg2rad(coordinates.latitide-userLatitude);  // deg2rad below
-    var dLon = deg2rad(coordinates.longitude-userLongitude); 
-    var a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(coordinates.latitide)) * Math.cos(deg2rad(userLatitude)) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2)
-    ; 
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  //thanks to stackexchange for most of the body of this function
+  var userLatitude = 42.055984;
+  var userLongitude = -87.675171;
+  var R = 3958.8; // Radius of the earth in miles
+  var dLat = deg2rad(coordinates.latitide - userLatitude);  // deg2rad below
+  var dLon = deg2rad(coordinates.longitude - userLongitude);
+  var a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(coordinates.latitide)) * Math.cos(deg2rad(userLatitude)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    ;
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   var d = R * c; // Distance in miles
   d = Math.floor(d);
-
-  var out = d.toString() + " miles away"; //modify text here
+  var out = d.toString() + " miles"; //modify text here
   return out;
 }
 
@@ -154,7 +153,7 @@ const App = () => {
     updateList([newListing].concat(listingList))
   }
 
-  if(listingList.length == 0) return (<div>This app is hosted but has no data!</div>);
+  if(listingList.length === 0) return (<PageLoader active={true} color="light"></PageLoader>);
 
 
   return (
