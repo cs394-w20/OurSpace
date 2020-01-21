@@ -92,8 +92,12 @@ MongoClient.connect(mongoURL, async (err, database) => {
                     },
                     size: {
                         bsonType: "object",
-                        required: ["width", "length", "height"],
+                        required: ["volume", "width", "length", "height"],
                         properties: {
+                            volume: {
+                                bsonType: "int",
+                                minimum: 0
+                            },
                             width: {
                                 bsonType: "int",
                                 minimum: 0
@@ -133,6 +137,7 @@ MongoClient.connect(mongoURL, async (err, database) => {
             }
         }
     })
+    await listings.createIndex({'location.geodata':'2dsphere'})
 
     users = await db.collection('Users', {
         validator: {
@@ -153,10 +158,12 @@ MongoClient.connect(mongoURL, async (err, database) => {
                         bsonType: "string"
                     },
                     profileImage: {
-                        bsonTyoe: "binData"
+                        bsonType: "binData"
                     }
+                }
+            }
+        }
     })
-    await listings.createIndex({'location.geodata':'2dsphere'})
 })
 
 app.post('/get_listings', async (req, res) => {
@@ -167,9 +174,13 @@ app.post('/get_listings', async (req, res) => {
                 $geometry: {
                     type: "Point",
                     coordinates: [req.body.latitude, req.body.longitude]
-                }
+                },
+                $maxDistance: req.body.maxDistance,
+                $minDistance: req.body.minDistance
             }
-        }
+        },
+        "size.volume":{$gt: req.body.minSize, $lt: req.body.maxSize},
+        "price":{$gt: req.body.minPrice, $lt: req.body.maxPrice}
     })
     .limit(req.body.listingsPerPage)
     .skip(req.body.listingsPerPage * (req.body.pageNumber - 1))
@@ -180,36 +191,18 @@ app.post('/get_listings', async (req, res) => {
 
 app.post('/post_listing', async (req, res) => {
     console.log('received!');
-    await listings.insertOne(req.body.newListing, (err, listing) => {
+    let newListing = req.body.newListing;
+
+    //adding the volume field
+    newListing.size.volume = newListing.size.width * newListing.size.height * newListing.size.length;
+
+    await listings.insertOne(newListing, (err, listing) => {
         if (err) return res.status(400);
     })
     return res
             .status(200)
             .send({status: 'success'});
 });
-
-// app.post('/update_listing/:id', (req, res) => {
-//     Listing.findById(req.body.id, (err, listing) => {
-//         if (!listing) {
-//             res.status(404).send("Listing not found")
-//         }
-//         else { 
-//             listing.name = req.body.name;
-//             listing.location = req.body.location;
-//             listing.size = req.body.size;
-//             listing.time = req.body.size;
-//             listing.attributes = req.body.attributes;
-//         }
-        
-//         todo.save()
-//         .then(todo => {
-//             res.json('Todo updated!');
-//         })
-//         .catch(err => {
-//             res.status(400).send("Update not possible");
-//         });
-//     })   
-// })
 
 app.get('/delete_listing', async (req, res) => {
     await listings.deleteOne({_id: ObjectId(req.body.id)}, (err, listing) => {
