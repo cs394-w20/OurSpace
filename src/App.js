@@ -12,6 +12,7 @@ import elevator from "./assets/icons/elevator.svg";
 import { Card, Image, Column, Title, Modal, Content } from "rbx";
 
 const ListingContext = React.createContext();
+const FilterContext = React.createContext();
 
 function sizeCalculator(sizeObject) {
 
@@ -123,6 +124,7 @@ function distanceCalculator(coordinates) {
 const App = () => {
 
   const [currListing, updateCurrListing] = useState(null);
+  const [filterBool, updateFilterBoolState] = useState(false);
   const [listingList, updateList] = useState([]);
   const [contactViewOpen, toggleContactView] = useState(false);
 
@@ -146,7 +148,7 @@ const App = () => {
   }, []);
 
   const updateAll = (newListing) => {
-    /* 
+  	/*
         BACKEND: ADD CODE HERE TO SET UP PUSHING NEW LISTINGS TO REMOTE DB
     */
     updateList([newListing].concat(listingList))
@@ -154,13 +156,44 @@ const App = () => {
 
 
   return (
-    <ListingContext.Provider value={{ currListing, updateCurrListing, listingList, updateAll, contactViewOpen, toggleContactView }}>
-      <div className="App" width="100%" height="100%">
+    <ListingContext.Provider value={{ currListing, updateListing, listingList, updateList }}>
+      <div className="App" width="100%" height="100%" opacity="0.99">
+        <button z-index="0" onClick={() => {updateFilterBool(true); setTimeout(function(){ document.getElementById("filterView").classList.add("show") }, 0);}}>Set Filter</button>
+        <FilterContext.Provider value={{ filterBool, updateFilterBool }}>
+          <FilterView />
+        </FilterContext.Provider>
+        <DetailView />
         <ListingList />
         <DetailView />
         <ContactView />
       </div>
     </ListingContext.Provider>
+  );
+};
+
+const FilterView = () => {
+	const { filterBool, updateFilterBool } = useContext(FilterContext);
+
+  return (
+    <div style={{ width: "100%", height: "100%", margin: 0 }}>
+      <Modal active={filterBool != false} id="filterView">
+        <React.Fragment>
+          <Modal.Background style={{ height: "100%", margin: "0px" }}></Modal.Background>
+
+          <Modal.Card style={{ width: "100%", height:"100%", top: "-5%" }}>
+            <Modal.Card.Body style={{ width: "100%", padding: "0px", margin: "0px" }}>
+            <div style={{ fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => {document.getElementById("filterView").classList.remove("show"); setTimeout(function(){updateFilterBool(false)}, 200)}}>
+                &#10005;
+              </div>
+              <Content style={{ width: "94%", margin: "auto", paddingTop: "1%", paddingBottom: "2%" }}>
+                <Title>Filter</Title>
+              </Content>
+            </Modal.Card.Body>
+          </Modal.Card>
+
+        </React.Fragment>
+      </Modal>
+    </div>
   );
 };
 
