@@ -4,16 +4,15 @@ import "rbx/index.css";
 import "./assets/styles/DetailView.css"
 import ReactLightCalendar from '@lls/react-light-calendar'
 import "./assets/styles/calendar.css";
-
-import "./firebase.js"
+import {computeFilterList, FilterForm} from "./components/Filter.js";
 
 import parking from "./assets/icons/local_parking-24px.svg";
 import elevator from "./assets/icons/elevator.svg";
 // import ramp from "./assets/icons/ramp.svg";
 
-import { Card, Image, Column, Title, Modal, Content, PageLoader } from "rbx";
+import { Card, Image, Column, Title, Modal, Content, Button } from "rbx";
 
-const ListingContext = React.createContext();
+import { ListingContext, FilterContext } from "./components/Contexts.js"
 
 function sizeCalculator(sizeObject) {
 
@@ -97,26 +96,27 @@ class Calendar extends Component {
 }
 
 function deg2rad(deg) {
-  //thanks to stackexchange for most of the body of this function
-  return deg * (Math.PI / 180)
+	//thanks to stackexchange for most of the body of this function
+  return deg * (Math.PI/180)
 }
 
 function distanceCalculator(coordinates) {
-  //thanks to stackexchange for most of the body of this function
-  var userLatitude = 42.055984;
-  var userLongitude = -87.675171;
-  var R = 3958.8; // Radius of the earth in miles
-  var dLat = deg2rad(coordinates.latitide - userLatitude);  // deg2rad below
-  var dLon = deg2rad(coordinates.longitude - userLongitude);
-  var a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(deg2rad(coordinates.latitide)) * Math.cos(deg2rad(userLatitude)) *
-    Math.sin(dLon / 2) * Math.sin(dLon / 2)
-    ;
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+	//thanks to stackexchange for most of the body of this function
+	var R = 3958.8; // Radius of the earth in miles
+	var userLatitude = 42.057923;
+	var userLongitude = -87.675918;
+    var dLat = deg2rad(coordinates.latitide-userLatitude);  // deg2rad below
+    var dLon = deg2rad(coordinates.longitude-userLongitude); 
+    var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(coordinates.latitide)) * Math.cos(deg2rad(userLatitude)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
   var d = R * c; // Distance in miles
   d = Math.floor(d);
-  var out = d.toString() + " miles"; //modify text here
+
+  var out = d.toString() + " miles away"; //modify text here
   return out;
 }
 
@@ -124,6 +124,9 @@ function distanceCalculator(coordinates) {
 const App = () => {
 
   const [currListing, updateCurrListing] = useState(null);
+  const [filteredList, updateFList] = useState([]);
+  const [currFilter, updateFilter] = useState({ size: null, price: null, rating: null, ramp: null, elevator: null, parking: null, lock: null, keywords: null, availability: null, distance: null});
+  const [filterViewOpen, toggleFilterViewOpen] = useState(false);
   const [listingList, updateList] = useState([]);
   const [contactViewOpen, toggleContactView] = useState(false);
 
@@ -147,23 +150,54 @@ const App = () => {
   }, []);
 
   const updateAll = (newListing) => {
-    /* 
+  	/*
         BACKEND: ADD CODE HERE TO SET UP PUSHING NEW LISTINGS TO REMOTE DB
     */
     updateList([newListing].concat(listingList))
   }
 
-  if(listingList.length === 0) return (<PageLoader active={true} color="light"></PageLoader>);
-
 
   return (
     <ListingContext.Provider value={{ currListing, updateCurrListing, listingList, updateAll, contactViewOpen, toggleContactView }}>
-      <div className="App" width="100%" height="100%">
+      <div className="App" width="100%" height="100%" opacity="0.99">
+        <Button z-index="0" onClick={() => toggleFilterViewOpen(true)}>Set Filter</Button>
+        <FilterContext.Provider value={{listingList, updateList, filteredList, updateFList, currFilter, updateFilter, filterViewOpen, toggleFilterViewOpen}}>
+          {filterViewOpen && (<FilterView/>)}
+        </FilterContext.Provider>
+        <DetailView />
         <ListingList />
         <DetailView />
         <ContactView />
       </div>
     </ListingContext.Provider>
+  );
+};
+
+const FilterView = () => {
+  
+  const {filterViewOpen, toggleFilterViewOpen} = useContext(FilterContext);
+
+  return (
+    <div style={{ width: "100%", height: "100%", margin: 0 }}>
+      <Modal id="filterView" active={filterViewOpen}>
+        <React.Fragment>
+          <Modal.Background style={{ height: "100%", margin: "0px" }}></Modal.Background>
+
+          <Modal.Card style={{ width: "100%", height:"100%", top: "-5%" }}>
+            <Modal.Card.Body style={{ width: "100%", padding: "0px", margin: "0px" }}>
+            <div style={{ fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => {document.getElementById("filterView").classList.remove("show"); setTimeout(function(){toggleFilterViewOpen(false)}, 200)}}>
+                &#10005;
+              </div>
+              <Content style={{ width: "94%", margin: "auto", paddingTop: "1%", paddingBottom: "2%" }}>
+                <Title>Filter</Title>
+                <FilterForm context={FilterContext}/>
+              </Content>
+            </Modal.Card.Body>
+          </Modal.Card>
+
+        </React.Fragment>
+      </Modal>
+    </div>
   );
 };
 
