@@ -16,7 +16,7 @@ const FilterView = () => {
 
           <Modal.Card style={{ width: "100%", height: "100%" }}>
             <Modal.Card.Body style={{ width: "100%", padding: "0px", margin: "0px" }}>
-              <div style={{ fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("filterView").classList.remove("show"); setTimeout(function () { toggleFilterViewOpen(false) }, 200) }}>
+              <div style={{ fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("filterView").classList.remove("show"); setTimeout(function () { toggleFilterViewOpen(false) }, 200); }}>
                 &#10005;
               </div>
               <Content style={{ width: "94%", margin: "auto", paddingTop: "1%", paddingBottom: "2%" }}>
@@ -45,7 +45,7 @@ const FilterView = () => {
                     <Button active={(currFilter.elevator)} onClick={() => updateFilter({ ...currFilter, "elevator": !currFilter.elevator })}>Elevator</Button>
                     <Button active={(currFilter.lock)} onClick={() => updateFilter({ ...currFilter, "lock": !currFilter.lock })}>Lock</Button>
                   </label> <br />
-                  <Button onClick={() => { toggleFilterViewOpen(); console.log("TODO: ADD CALLBACK FOR FILTER FORM SUBMISSION") }}>
+                  <Button onClick={() => { document.getElementById("filterView").classList.remove("show"); setTimeout(function () { toggleFilterViewOpen(false) }, 200); console.log("TODO: ADD CALLBACK FOR FILTER FORM SUBMISSION") }}>
                     Submit
                   </Button>
                 </div>

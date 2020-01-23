@@ -12,7 +12,7 @@ import ContactView from "./components/ContactView.js"
 
 import { ListingContext, FilterContext } from "./components/Contexts.js";
 
-import { Button } from "rbx";
+import { Button, PageLoader } from "rbx";
 
 const App = () => {
 
@@ -48,6 +48,8 @@ const App = () => {
     */
     updateList([newListing].concat(listingList))
   }
+
+  if(listingList.length === 0) return (<PageLoader active={true} color="light"></PageLoader>)
 
 
   return (
