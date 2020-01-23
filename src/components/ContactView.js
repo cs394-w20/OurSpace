@@ -66,7 +66,7 @@ const ContactView = () => {
                                         <p>Joined in 2020</p>
                                     </div>
                                     <div style={{ width: "40%", marginBottom: "5%" }}>
-                                        <Image src="https://media-exp2.licdn.com/dms/image/C4D03AQGlMxrEKues9g/profile-displayphoto-shrink_200_200/0?e=1584576000&v=beta&t=6wCiJIZ6fLzoIMPdo7s33G4bmcWEfpKzQhRfKbm6MvY" style={{ width: "100%", padding: "0px", borderRadius: "50%" }} />
+                                        <Image alt="Picture of the listing's owner" src="https://media-exp2.licdn.com/dms/image/C4D03AQGlMxrEKues9g/profile-displayphoto-shrink_200_200/0?e=1584576000&v=beta&t=6wCiJIZ6fLzoIMPdo7s33G4bmcWEfpKzQhRfKbm6MvY" style={{ width: "100%", padding: "0px", borderRadius: "50%" }} />
                                     </div>
                                 </div>
 
