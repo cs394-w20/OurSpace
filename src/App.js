@@ -4,12 +4,13 @@ import "rbx/index.css";
 import "./assets/styles/DetailView.css"
 import ReactLightCalendar from '@lls/react-light-calendar'
 import "./assets/styles/calendar.css";
+import {computeFilterList, FilterForm} from "./components/Filter.js";
 
 import parking from "./assets/icons/local_parking-24px.svg";
 import elevator from "./assets/icons/elevator.svg";
 // import ramp from "./assets/icons/ramp.svg";
 
-import { Card, Image, Column, Title, Modal, Content } from "rbx";
+import { Card, Image, Column, Title, Modal, Content, Button } from "rbx";
 
 const ListingContext = React.createContext();
 const FilterContext = React.createContext();
@@ -124,7 +125,9 @@ function distanceCalculator(coordinates) {
 const App = () => {
 
   const [currListing, updateCurrListing] = useState(null);
-  const [filterBool, updateFilterBoolState] = useState(false);
+  const [filteredList, updateFList] = useState([]);
+  const [currFilter, updateFilter] = useState({ size: null, price: null, rating: null, ramp: null, elevator: null, parking: null, lock: null, keywords: null, availability: null, distance: null});
+  const [filterViewOpen, toggleFilterViewOpen] = useState(false);
   const [listingList, updateList] = useState([]);
   const [contactViewOpen, toggleContactView] = useState(false);
 
@@ -156,12 +159,11 @@ const App = () => {
 
 
   return (
-    <ListingContext.Provider value={{ currListing, updateListing, listingList, updateList }}>
+    <ListingContext.Provider value={{ currListing, updateCurrListing, filteredList, updateFList, currFilter, updateFilter, updateAll, contactViewOpen, toggleContactView }}>
       <div className="App" width="100%" height="100%" opacity="0.99">
-        <button z-index="0" onClick={() => {updateFilterBool(true); setTimeout(function(){ document.getElementById("filterView").classList.add("show") }, 0);}}>Set Filter</button>
-        <FilterContext.Provider value={{ filterBool, updateFilterBool }}>
-          <FilterView />
-        </FilterContext.Provider>
+        <Button z-index="0" onClick={() => toggleFilterViewOpen(true)}>Set Filter</Button>
+        {filterViewOpen && (<FilterView state={{listingList, updateList, filteredList, updateFList, currFilter, updateFilter, filterViewOpen, toggleFilterViewOpen}}/>)}
+        
         <DetailView />
         <ListingList />
         <DetailView />
@@ -171,22 +173,23 @@ const App = () => {
   );
 };
 
-const FilterView = () => {
-	const { filterBool, updateFilterBool } = useContext(FilterContext);
+const FilterView = ({state}) => {
+	console.log(state);
 
   return (
     <div style={{ width: "100%", height: "100%", margin: 0 }}>
-      <Modal active={filterBool != false} id="filterView">
+      <Modal id="filterView" active={state.filterViewOpen}>
         <React.Fragment>
           <Modal.Background style={{ height: "100%", margin: "0px" }}></Modal.Background>
 
           <Modal.Card style={{ width: "100%", height:"100%", top: "-5%" }}>
             <Modal.Card.Body style={{ width: "100%", padding: "0px", margin: "0px" }}>
-            <div style={{ fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => {document.getElementById("filterView").classList.remove("show"); setTimeout(function(){updateFilterBool(false)}, 200)}}>
+            <div style={{ fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => {document.getElementById("filterView").classList.remove("show"); setTimeout(function(){state.toggleFilterViewOpen(false)}, 200)}}>
                 &#10005;
               </div>
               <Content style={{ width: "94%", margin: "auto", paddingTop: "1%", paddingBottom: "2%" }}>
                 <Title>Filter</Title>
+                <FilterForm upstreamState={state} />
               </Content>
             </Modal.Card.Body>
           </Modal.Card>
@@ -196,7 +199,6 @@ const FilterView = () => {
     </div>
   );
 };
-
 const DetailView = () => {
   const { currListing, updateCurrListing, toggleContactView } = useContext(ListingContext);
 
