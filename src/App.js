@@ -6,11 +6,13 @@ import ReactLightCalendar from '@lls/react-light-calendar'
 import "./assets/styles/calendar.css";
 import {computeFilterList, FilterForm} from "./components/Filter.js";
 
+import "./firebase.js"
+
 import parking from "./assets/icons/local_parking-24px.svg";
 import elevator from "./assets/icons/elevator.svg";
 // import ramp from "./assets/icons/ramp.svg";
 
-import { Card, Image, Column, Title, Modal, Content, Button } from "rbx";
+import { Card, Image, Column, Title, Modal, Content, PageLoader } from "rbx";
 
 const ListingContext = React.createContext();
 const FilterContext = React.createContext();
@@ -97,27 +99,26 @@ class Calendar extends Component {
 }
 
 function deg2rad(deg) {
-	//thanks to stackexchange for most of the body of this function
-  return deg * (Math.PI/180)
+  //thanks to stackexchange for most of the body of this function
+  return deg * (Math.PI / 180)
 }
 
 function distanceCalculator(coordinates) {
-	//thanks to stackexchange for most of the body of this function
-	var R = 3958.8; // Radius of the earth in miles
-	var userLatitude = 42.057923;
-	var userLongitude = -87.675918;
-    var dLat = deg2rad(coordinates.latitide-userLatitude);  // deg2rad below
-    var dLon = deg2rad(coordinates.longitude-userLongitude); 
-    var a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(coordinates.latitide)) * Math.cos(deg2rad(userLatitude)) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2)
-    ; 
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  //thanks to stackexchange for most of the body of this function
+  var userLatitude = 42.055984;
+  var userLongitude = -87.675171;
+  var R = 3958.8; // Radius of the earth in miles
+  var dLat = deg2rad(coordinates.latitide - userLatitude);  // deg2rad below
+  var dLon = deg2rad(coordinates.longitude - userLongitude);
+  var a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(coordinates.latitide)) * Math.cos(deg2rad(userLatitude)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    ;
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   var d = R * c; // Distance in miles
   d = Math.floor(d);
-
-  var out = d.toString() + " miles away"; //modify text here
+  var out = d.toString() + " miles"; //modify text here
   return out;
 }
 
@@ -156,6 +157,8 @@ const App = () => {
     */
     updateList([newListing].concat(listingList))
   }
+
+  if(listingList.length === 0) return (<PageLoader active={true} color="light"></PageLoader>);
 
 
   return (
@@ -213,7 +216,7 @@ const DetailView = () => {
               <Modal.Card.Body style={{ width: "100%", padding: "0px", margin: "0px" }}>
 
                 {/* Top exit icon */}
-                <div style={{ fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("dtView").classList.remove("show"); setTimeout(function () { updateCurrListing(null) }, 150) }}>
+                <div id="dtExit" style={{ fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("dtView").classList.remove("show"); setTimeout(function () { updateCurrListing(null) }, 150) }}>
                   &#10005;
                 </div>
                 <Image src="https://i.pinimg.com/originals/6a/7c/fc/6a7cfc513ee281ac19ed5b25f17a9a5a.jpg" style={{ width: "100%", padding: "0px" }} />
@@ -397,7 +400,7 @@ const ContactView = () => {
 
             <Modal.Card style={{ width: "100%", height: "100%", bottom: "-2%", borderRadius: "10px" }}>
               <Modal.Card.Body>
-                <div style={{width:"100%", fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("ctView").classList.remove("show"); setTimeout(function () { toggleContactView(false) }, 150); }}>
+                <div id="ctExit" style={{width:"100%", fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("ctView").classList.remove("show"); setTimeout(function () { toggleContactView(false) }, 150); }}>
                   &#10005;
                 </div>
                 <br/>
@@ -421,7 +424,7 @@ const ContactView = () => {
                 <br/>
                 <div style={{width: "100%", textAlign:"center", marginTop:"10%"}}>
                   <span style={{ backgroundColor: "	#4E2A84", padding: "10px", color: "white", fontWeight: "bold", borderRadius: "3px"}}
-                        onClick={() => {alert('Reservation Created')}}
+                        onClick={() => {document.getElementById("ctExit").click(); document.getElementById("dtExit").click(); alert('Reservation Created');}}
                   >Make Reservation</span>
                 </div>
 
