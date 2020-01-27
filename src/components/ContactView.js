@@ -51,9 +51,9 @@ const ContactView = () => {
             <Modal id="ctView" active={contactViewOpen}>
                 {currListing != null ?
                     <React.Fragment>
-                        <Modal.Background style={{ height: "100%", margin: "0%", backgroundColor: "rgba(255, 255, 255, .4)" }}></Modal.Background>
+                        <Modal.Background style={{ height: "100%", margin: "0%", backgroundColor: "rgba(0, 0, 0, .2)" }}></Modal.Background>
 
-                        <Modal.Card style={{ width: "100%", height: "100%", bottom: "-2%", borderRadius: "10px" }}>
+                        <Modal.Card style={{ width: "100%", height: "100%", bottom: "-3.5%", borderRadius: "10px" }}>
                             <Modal.Card.Body>
                                 <div id="ctExit" style={{ width: "100%", fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("ctView").classList.remove("show"); setTimeout(function () { toggleContactView(false) }, 150); }}>
                                     &#10005;

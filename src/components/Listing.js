@@ -14,7 +14,7 @@ const StorageCard = ({ listing }) => {
     const { updateCurrListing } = useContext(ListingContext);
 
     return (
-        <div style={{ width: "90%", margin: "Auto", paddingTop: '20px' }} onClick={() => { updateCurrListing(listing); setTimeout(function () { document.getElementById("dtView").classList.add("show") }, 0); }}>
+        <div style={{ width: "80%", margin: "Auto", paddingTop: '20px' }} onClick={() => { updateCurrListing(listing); setTimeout(function () { document.getElementById("dtView").classList.add("show") }, 0); }}>
             <Card style={{ borderRadius: "8px" }}>
                 <Card.Image>
                     <Image.Container size="4by3">
