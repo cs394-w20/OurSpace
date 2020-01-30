@@ -9,7 +9,7 @@ const app = express();
 app.listen(4000);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cors());
 app.use(cookieParser());
 
 const dotenv = require("dotenv");
@@ -269,8 +269,6 @@ app.post("/get_listings", async (req, res) => {
   if (req.body.filterLock == true) {
     query["attributes.hasLock"] = true;
   }
-
-  console.log(query)
 
   const returnedListings = await listings
     .find(query)
