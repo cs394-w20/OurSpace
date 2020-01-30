@@ -270,6 +270,8 @@ app.post("/get_listings", async (req, res) => {
     query["attributes.hasLock"] = true;
   }
 
+  console.log(query)
+
   const returnedListings = await listings
     .find(query)
     .limit(req.body.listingsPerPage)
