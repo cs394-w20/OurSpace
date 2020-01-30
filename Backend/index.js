@@ -233,6 +233,10 @@ MongoClient.connect(mongoURL, async (err, database) => {
   });
 });
 
+app.post('/test_test', async (req, res) => {
+  console.log('RECEIVED!!!')
+})
+
 //UNFINISHED -- need to finish all the filters
 app.post("/get_listings", auth, async (req, res) => {
   const query = {
