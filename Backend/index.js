@@ -238,7 +238,7 @@ app.post('/test_test', async (req, res) => {
 })
 
 //UNFINISHED -- need to finish all the filters
-app.post("/get_listings", auth, async (req, res) => {
+app.post("/get_listings", async (req, res) => {
   const query = {
     // LOCATION FILTER
     "location.geodata": {
