@@ -28,7 +28,7 @@ let listings;
 
 
 app.use('/uploads', express.static('uploads'));
-app.use('/image', ImageRouter);
+// app.use('/image', ImageRouter);
 
 MongoClient.connect(mongoURL, async (err, database) => {
   if (err) throw err;
