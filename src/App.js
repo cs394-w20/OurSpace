@@ -14,16 +14,6 @@ import { Card, Image, Column, Title, Modal, Content } from "rbx";
 
 const ListingContext = React.createContext();
 
-fetch('http://3.15.24.81:4000/login', {
-  method: 'POST',
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  },
-  credentials: 'include',
-  body: ({})
-})
-
 function sizeCalculator(sizeObject) {
 
   var volume = sizeObject.length * sizeObject.width * sizeObject.height;
@@ -40,6 +30,18 @@ function sizeCalculator(sizeObject) {
 }
 
 const App = () => {
+
+  fetch('http://3.15.24.81:4000/test_test', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      type: 'hello'
+    })
+  })
 
   const [currListing, updateCurrListing] = useState(null);
   function updateListing(newListing) {
