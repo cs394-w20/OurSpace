@@ -32,7 +32,7 @@ const App = () => {
 
   useEffect(() => {
     function getListingsData() {
-      fetch('http://localhost:4000/get_listings', {
+      fetch('http://3.15.24.81:4000/get_listings', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -55,7 +55,7 @@ const App = () => {
     */
     updateList([newListing].concat(listingList))
   }
-
+  
   if(listingList.length === 0) return (<PageLoader active={true} color="light"></PageLoader>)
 
 
