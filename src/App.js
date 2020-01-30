@@ -22,7 +22,7 @@ const App = () => {
   const [currListing, updateCurrListing] = useState(null);
   const [listingList, updateList] = useState([]);
   
-  const [currFilter, updateFilter] = useState({ minDistance: 0, maxDistance: Infinity, minSize: 0, maxSize: Infinity, minPrice: 0, maxPrice: Infinity, minRating: 0, maxRating: Infinity, parking: false, ramp: false, elevator: false, lock: false });
+  const [currFilter, updateFilter] = useState({ minDistance: 0, maxDistance: 2147483646, minSize: 0, maxSize: 2147483646, minPrice: 0, maxPrice: 2147483646, minRating: 0, maxRating: 2147483646, filterParking: false, filterRamp: false, filterElevator: false, filterLock: false });
   
   const [contactViewOpen, toggleContactView] = useState(false);
   const [filterViewOpen, toggleFilterViewOpen] = useState(false);

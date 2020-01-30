@@ -9,20 +9,9 @@ import elevator from "../assets/icons/elevator.svg";
 import ramp from "../assets/icons/handicapped.png";
 import lock from "../assets/icons/lock.png";
 
-const spliceFilter = (filter, field) => {
-  switch (field) {
-    case 0:
-      return { ...filter, parking: !filter.parking };
-    case 1:
-      return { ...filter, ramp: !filter.ramp };
-    case 2:
-      return { ...filter, elevator: !filter.elevator };
-    case 3:
-      return { ...filter, lock: !filter.lock };
-  }
-}
-
 const FilterView = () => {
+
+  const defaultFilter = { minDistance: 0, maxDistance: 2147483646, minSize: 0, maxSize: 2147483646, minPrice: 0, maxPrice: 2147483646, minRating: 0, maxRating: 2147483646, filterParking: false, filterRamp: false, filterElevator: false, filterLock: false };
 
   const { currFilter, updateFilter, filterViewOpen, toggleFilterViewOpen } = useContext(FilterContext);
 
@@ -60,16 +49,16 @@ const FilterView = () => {
                   <br /> <br />
 
                   <Button.Group hasAddons>
-                    <Button rounded color={maybeFilter.parking ? "info" : "white"} style={{ width: "25%" }} onClick={() => { setMaybeFilter({ ...maybeFilter, parking: !maybeFilter.parking }); }}>
+                    <Button rounded color={maybeFilter.filterParking ? "info" : "white"} style={{ width: "25%" }} onClick={() => { setMaybeFilter({ ...maybeFilter, filterParking: !maybeFilter.filterParking }); }}>
                       <img src={parking} style={{ width: "65%" }}></img>
                     </Button>
-                    <Button rounded color={maybeFilter.ramp ? "info" : "white"} style={{ width: "25%" }} onClick={() => { setMaybeFilter({ ...maybeFilter, ramp: !maybeFilter.ramp }); }}>
+                    <Button rounded color={maybeFilter.filterRamp ? "info" : "white"} style={{ width: "25%" }} onClick={() => { setMaybeFilter({ ...maybeFilter, filterRamp: !maybeFilter.filterRamp }); }}>
                       <img src={ramp} style={{ width: "65%" }}></img>
                     </Button>
-                    <Button rounded color={maybeFilter.elevator ? "info" : "white"} style={{ width: "25%" }} onClick={() => { setMaybeFilter({ ...maybeFilter, elevator: !maybeFilter.elevator }); }}>
+                    <Button rounded color={maybeFilter.filterElevator ? "info" : "white"} style={{ width: "25%" }} onClick={() => { setMaybeFilter({ ...maybeFilter, filterElevator: !maybeFilter.filterElevator }); }}>
                       <img src={elevator} style={{ width: "45%" }}></img>
                     </Button>
-                    <Button rounded color={maybeFilter.lock ? "info" : "white"} style={{ width: "25%" }} onClick={() => { setMaybeFilter({ ...maybeFilter, lock: !maybeFilter.lock }); }}>
+                    <Button rounded color={maybeFilter.filterLock ? "info" : "white"} style={{ width: "25%" }} onClick={() => { setMaybeFilter({ ...maybeFilter, filerLock: !maybeFilter.filterLock }); }}>
                       <img src={lock} style={{ width: "65%" }}></img>
                     </Button>
                   </Button.Group>
