@@ -159,16 +159,7 @@ MongoClient.connect(mongoURL, async (err, database) => {
             }
           },
           image: {
-            bsonType: "object",
-            required: ["data", "contentType"],
-            properties: {
-              data: {
-                bsonType: "binData"
-              },
-              contentType: {
-                bsonType: "string"
-              }
-            }
+            bsonType: "binData"
           }
         }
       }
