@@ -26,10 +26,6 @@ const mongoURL =
 let db;
 let listings;
 
-
-app.use('/uploads', express.static('uploads'));
-// app.use('/image', ImageRouter);
-
 MongoClient.connect(mongoURL, async (err, database) => {
   if (err) throw err;
   db = await database.db("OurSpace");
@@ -166,12 +162,12 @@ MongoClient.connect(mongoURL, async (err, database) => {
             bsonType: "object",
             required: ["data", "contentType"],
             properties: {
-                data: {
-                    bsonType: "binData"
-                },
-                contentType: {
-                    bsonType: "string"
-                }
+              data: {
+                bsonType: "binData"
+              },
+              contentType: {
+                bsonType: "string"
+              }
             }
           }
         }
@@ -233,9 +229,9 @@ MongoClient.connect(mongoURL, async (err, database) => {
   });
 });
 
-app.post('/test_test', async (req, res) => {
-  console.log('RECEIVED!!!')
-})
+app.post("/test_test", async (req, res) => {
+  console.log("RECEIVED!!!");
+});
 
 //UNFINISHED -- need to finish all the filters
 app.post("/get_listings", async (req, res) => {
