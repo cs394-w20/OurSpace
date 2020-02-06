@@ -32,13 +32,12 @@ const App = () => {
 
   useEffect(() => {
     function getListingsData() {
-      fetch('https://3.15.24.81:4000/get_listings', {
+      fetch('http://3.15.24.81:4000/get_listings', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        credentials: 'include',
         body: JSON.stringify({ latitude: 42.055984, longitude: -87.675171, listingsPerPage: listPerPage, pageNumber: pageNum, ...currFilter })
       })
         .then(response => response.json())
