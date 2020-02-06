@@ -12,8 +12,13 @@ app.use(bodyParser.json());
 
 const whiteList = ['http://localhost:3000', 'https://ourspace-75c0b.firebaseapp.com']
 const corsOptions = {
-  origin: true,
-  credentials: true
+  origin: function (origin, callback) {
+    if (whiteList.indexOf(origin) !== -1) {
+      callback (null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
 }
 app.use(cors(corsOptions));
 app.use(cookieParser());
