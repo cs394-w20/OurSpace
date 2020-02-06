@@ -10,7 +10,7 @@ app.listen(4000);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const whiteList = ['http://localhost:3000', 'https://ourspace-75c0b.firebaseapp.com']
+const whiteList = ['http://localhost:3000', 'https://ourspace-75c0b.firebaseapp.com/']
 const corsOptions = {
   origin: function (origin, callback) {
     if (whiteList.indexOf(origin) !== -1) {
@@ -20,7 +20,6 @@ const corsOptions = {
     }
   },
 }
-app.use(cors(corsOptions));
 app.use(cookieParser());
 
 const dotenv = require("dotenv");
