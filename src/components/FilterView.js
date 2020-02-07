@@ -32,20 +32,20 @@ const FilterView = () => {
                 <Title>Filter</Title>
                 <div style={{ width: "100%" }}>
 
-                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="How near? (mi)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, minDistance: e.target.value }); }}></Input>
-                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="How far? (mi)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, maxDistance: e.target.value }); }}></Input>
+                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="How near? (mi)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, minDistance: parseInt(e.target.value) }); }}></Input>
+                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="How far? (mi)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, maxDistance: parseInt(e.target.value) }); }}></Input>
                   <br /> <br />
 
-                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Min. Size (ft)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, minSize: e.target.value }); }}></Input>
-                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Max. Size (ft)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, maxSize: e.target.value }); }}></Input>
+                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Min. Size (ft)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, minSize: parseInt(e.target.value) }); }}></Input>
+                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Max. Size (ft)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, maxSize: parseInt(e.target.value) }); }}></Input>
                   <br /> <br />
 
-                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Min. Price (usd)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, minPrice: e.target.value }); }}></Input>
-                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Max. Price (usd)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, maxPrice: e.target.value }); }}></Input>
+                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Min. Price (usd)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, minPrice: parseInt(e.target.value) }); }}></Input>
+                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Max. Price (usd)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, maxPrice: parseInt(e.target.value) }); }}></Input>
                   <br /> <br />
 
-                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Min. Rating (&#9733;)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, minRating: e.target.value }); }}></Input>
-                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Max. Rating (&#9733;)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, maxRating: e.target.value }); }}></Input>
+                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Min. Rating (&#9733;)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, minRating: parseInt(e.target.value) }); }}></Input>
+                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Max. Rating (&#9733;)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, maxRating: parseInt(e.target.value) }); }}></Input>
                   <br /> <br />
 
                   <Button.Group hasAddons>
