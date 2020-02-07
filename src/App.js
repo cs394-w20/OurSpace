@@ -32,7 +32,8 @@ const App = () => {
 
   useEffect(() => {
     function getListingsData() {
-      fetch('http://3.15.24.81:4000/get_listings', {
+      console.log(currFilter)
+      fetch('https://rocky-savannah-43190.herokuapp.com/get_listings', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -46,7 +47,7 @@ const App = () => {
         });
     }
     getListingsData();
-  }, [currFilter]);
+  }, []);
 
   const updateAll = (newListing) => {
   	/*
