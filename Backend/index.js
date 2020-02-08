@@ -6,10 +6,15 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const auth = require("./auth.js");
 const app = express();
-app.listen(4000);
+app.listen(process.env.PORT || 4000);
+console.log(process.env.PORT)
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
+
+app.use(cors({
+  origin: "*",
+  credentials: true
+}));
 app.use(cookieParser());
 
 const dotenv = require("dotenv");
@@ -222,10 +227,12 @@ MongoClient.connect(mongoURL, async (err, database) => {
 
 app.post("/test_test", async (req, res) => {
   console.log("RECEIVED!!!");
+  res.send("received")
 });
 
 //UNFINISHED -- need to finish all the filters
 app.post("/get_listings", async (req, res) => {
+  console.log('received listing request')
   const query = {
     // LOCATION FILTER
     "location.geodata": {
@@ -266,7 +273,7 @@ app.post("/get_listings", async (req, res) => {
   return res.send({ listings: returnedListings });
 });
 
-//UNIFINISHED -- instead of having frontend send in an entire json object, just have them individually send everything you want
+//UNIFINISHED -- instead of having frontend send in an entire json object, just have them individually send everything you want.
 app.post("/post_listing", auth, async (req, res) => {
   let newListing = req.body.newListing;
 
