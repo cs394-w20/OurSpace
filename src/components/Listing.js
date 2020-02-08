@@ -77,7 +77,7 @@ const ListingList = () => {
         <div>
             <Column.Group multiline>
                 {columnIds.map(i => (
-                    <Column key={i} size="one-quarter">
+                    <Column key={i} size="one-quarter" style={{paddingRight:"0px"}}>
                         <StorageCard listing={listingList[i]} />
                     </Column>
                 ))}

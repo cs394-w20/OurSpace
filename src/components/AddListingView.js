@@ -169,5 +169,4 @@ function buildListingObject(wipListingObject) {
   var outListingObject = {name: wipListingObject.name, host: "Charles Son", description: wipListingObject.description, location: {street: wipListingObject.street, city: wipListingObject.city, state: wipListingObject.state, country: wipListingObject.country, zip: wipListingObject.zip, geodata: {type: "Point", coordinates: {latitude: wipListingObject.latitude, longitude: wipListingObject.longitude}}}, size: {length: wipListingObject.length, width: wipListingObject.width, height: wipListingObject.height}, time: untilDate, attributes: {hasLock: wipListingObject.hasLock, hasParking: wipListingObject.hasParking, hasElevator: wipListingObject.hasElevator, hasRamp: wipListingObject.hasRamp}, image: wipListingObject.image, price: wipListingObject.price, rating: {score: null, numRatings: 0}};
   return outListingObject;
 }
-
 export default AddListingView;

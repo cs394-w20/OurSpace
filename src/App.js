@@ -4,9 +4,11 @@ import "./App.css";
 import "rbx/index.css";
 import "./assets/styles/views.css"
 import "./assets/styles/calendar.css";
+import "./assets/styles/loading.css";
 
 import filter from "./assets/icons/filter.png";
 import add from "./assets/icons/add.png";
+import logoimage from "./assets/icons/logo.png"
 
 import { Button, PageLoader, Column, Icon } from "rbx";
 import FileBase64 from 'react-file-base64';
@@ -27,7 +29,6 @@ const App = () => {
   const [currFilter, updateFilter] = useState({ minDistance: 0, maxDistance: 2147483646, minSize: 0, maxSize: 2147483646, minPrice: 0, maxPrice: 2147483646, minRating: 0, maxRating: 2147483646, filterParking: false, filterRamp: false, filterElevator: false, filterLock: false });  
   const [contactViewOpen, toggleContactView] = useState(false);
   const [filterViewOpen, toggleFilterViewOpen] = useState(false);
-
 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -63,12 +64,22 @@ const App = () => {
     updateList([newListing].concat(listingList))
   }
   
-  if(listingList.length === 0) return (<PageLoader active={true} color="light"></PageLoader>)
+  // if(listingList.length === 0) return (<PageLoader active={true} color="light"></PageLoader>)
+  // if(listingList.length === 0) return (
+  //   <React.Fragment>
+    
+  //   {/* <PageLoader active={true} color="light"></PageLoader> */}
+  //   <LogoPage></LogoPage>
+  //   </React.Fragment>
+  //   )
 
 
   return (
+    <React.Fragment>
+      <LogoPage></LogoPage>
     <ListingContext.Provider value={{ currListing, updateCurrListing, listingList, updateAll, contactViewOpen, toggleContactView }}>
       <div className="App" width="100%" height="100%" opacity="0.99">
+        <div style={{height:"130px"}}></div> {/* Padding Don't Delete */}
         <ListingList />
         <BookingContext.Provider value={{ startDate, setStartDate, endDate, setEndDate }}>
           <DetailView />
@@ -78,32 +89,42 @@ const App = () => {
           <AddListingView/>
           <FilterContext.Provider value={{ currFilter, updateFilter, filterViewOpen, toggleFilterViewOpen }}>
             <FilterView/>
-            <BottomBar></BottomBar>
+            {/* <BottomBar></BottomBar> */}
+            <TopSearch></TopSearch>
           </FilterContext.Provider>
         </AddListingContext.Provider>
       </div>
     </ListingContext.Provider>
+    </React.Fragment>
   );
 };
 
-const BottomBar = () => {
+
+const LogoPage = () => {
+  return (
+    <React.Fragment>
+      <div id="foo" style={{position:"absolute", zIndex:"2"}} onLoad={() => {
+          setTimeout(function () {document.getElementById('foo').style.display='none'}, 1300)}}>
+        <div style={{width:"388px", height:"260px", backgroundColor:"#041635", marginBottom:"-10px"}}></div>
+        <img src={logoimage} style={{width:"388px"}}></img>
+        <div class="loading">Loading&#8230;</div>
+        <div style={{width:"388px", height:"315px", backgroundColor:"#041635", marginTop:"-10px"}}></div>
+      </div>
+    </React.Fragment>
+  )
+}
+
+const TopSearch = () => {
   const { toggleFilterViewOpen } = useContext(FilterContext);
   const { toggleAddListingViewOpen } = useContext(AddListingContext)
 
   return (
-    <div style={{height: "4vh", width: "100%", border:"10px", backgroundColor:"grey", position: "fixed", top: "96vh"}}>
-      <Column.Group size="one-half">
-        <Button style={{width:"50%", top:"1vh"}} onClick={() => {
-          toggleFilterViewOpen(true); setTimeout(function () { document.getElementById("filterView").classList.add("show") }, 0);
-        }}>
-          <img src={filter} style={{width:"2.5vh"}}/>
-        </Button>
-        <Button style={{width:"50%", top:"1vh"}} onClick={() => {
-          toggleAddListingViewOpen(true); setTimeout(function () { document.getElementById("addListingView").classList.add("show") }, 0);
-        }}>
-          <img src={add} style={{width:"2.5vh"}}/>
-        </Button>
-      </Column.Group>
+    <div style={{height: "10px", width: "100%", border:"10px", position: "fixed", top: "5vh"}}>
+      <input placeholder="Anywhere" style={{width:"80%", height: "50px", border:"1px solid #888888", marginTop:"-10px", borderRadius:"5px"}}></input>
+      <Button style={{width:"80px", height:"40px", borderRadius:"20px", marginTop:"10px"}} onClick={() => {
+        toggleFilterViewOpen(true); setTimeout(function () { document.getElementById("filterView").classList.add("show") }, 0);
+      }}> Filters
+      </Button>
     </div>
   )
 }

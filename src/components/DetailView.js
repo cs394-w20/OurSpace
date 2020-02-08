@@ -19,7 +19,7 @@ const DetailView = () => {
               <Modal.Background style={{ height: "100%", margin: "0px" }}></Modal.Background>
   
               <Modal.Card style={{ width: "100%", height: "100%", top: "-5%" }}>
-                <Modal.Card.Body style={{ width: "100%", padding: "0px", margin: "0px" }}>
+                <Modal.Card.Body style={{ width: "100%", padding: "0px", margin: "0px", height:"100%" }}>
   
                   {/* Top exit icon */}
                   <div id="dtExit" style={{ fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("dtView").classList.remove("show"); setTimeout(function () { updateCurrListing(null) }, 150) }}>
@@ -28,7 +28,7 @@ const DetailView = () => {
                   <Image alt="Picture of the storage spaace" src={currListing.image} style={{ width: "100%", padding: "0px" }} />
   
                   {/* bottom bar */}
-                  <div style={{ height: "9%", backgroundColor: 'white', position: "fixed", bottom: "0", width: "100%", boxShadow: "0px -1px #888888" }}>
+                  <div style={{height: "70px", backgroundColor: 'white', position: "fixed", bottom: "16px", width: "100%", boxShadow: "0px -1px #888888" }}>
   
                     <table style={{ width: "100%" }}>
                       <th style={{ width: "58%" }}>
