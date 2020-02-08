@@ -15,7 +15,7 @@ import DetailView from "./components/DetailView.js";
 import FilterView from "./components/FilterView.js";
 import ContactView from "./components/ContactView.js"
 
-import { ListingContext, FilterContext } from "./components/Contexts.js";
+import { ListingContext, FilterContext, BookingContext } from "./components/Contexts.js";
 
 const App = () => {
 
@@ -26,6 +26,9 @@ const App = () => {
   
   const [contactViewOpen, toggleContactView] = useState(false);
   const [filterViewOpen, toggleFilterViewOpen] = useState(false);
+
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   const [listPerPage, setListPerPage] = useState(10);
   const [pageNum, setPageNum] = useState(1);
@@ -63,7 +66,9 @@ const App = () => {
     <ListingContext.Provider value={{ currListing, updateCurrListing, listingList, updateAll, contactViewOpen, toggleContactView }}>
       <div className="App" width="100%" height="100%" opacity="0.99">
         <ListingList />
-        <DetailView />
+        <BookingContext.Provider value={{ startDate, setStartDate, endDate, setEndDate }}>
+          <DetailView />
+        </BookingContext.Provider>
         <ContactView />
         <FilterContext.Provider value={{ currFilter, updateFilter, filterViewOpen, toggleFilterViewOpen }}>
           <FilterView/>
