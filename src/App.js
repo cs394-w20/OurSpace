@@ -9,6 +9,7 @@ import filter from "./assets/icons/filter.png";
 import add from "./assets/icons/add.png";
 
 import { Button, PageLoader, Column, Icon } from "rbx";
+import FileBase64 from 'react-file-base64';
 
 import ListingList from "./components/Listing.js"
 import DetailView from "./components/DetailView.js";
@@ -49,7 +50,7 @@ const App = () => {
         });
     }
     getListingsData();
-  }, []);
+  }, [currFilter]);
 
   const updateAll = (newListing) => {
   	/*
