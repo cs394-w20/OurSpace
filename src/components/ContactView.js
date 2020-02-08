@@ -51,6 +51,7 @@ const ContactView = () => {
     // FRONTEND: Eventually fetch seller data from currListing.sellar or something
 
     const { currListing, contactViewOpen, toggleContactView } = useContext(ListingContext);
+    const { contextStartDate, setContextStartDate, contextEndDate, setContextEndDate } = useContext(BookingContext);
 
     return (
         <div>
@@ -83,6 +84,7 @@ const ContactView = () => {
 
                                 <Calendar disableDates={date => date < new Date().getTime() || date > new Date('2020.02.17').getTime()} timezone="Pacific/Niue" /> {/* UTC or Pacific/Niue or Pacific/Guadalcanal*/}
                                 <br />
+                                <p>calcPrice(contextStartDate, contextEndDate, currListing.price)</p>
                                 <div style={{ width: "100%", textAlign: "center", marginTop: "10%" }}>
                                     <span style={{ backgroundColor: "	#4E2A84", padding: "10px", color: "white", fontWeight: "bold", borderRadius: "3px" }}
                                         onClick={() => { document.getElementById("ctExit").click(); document.getElementById("dtExit").click(); alert('Reservation Created'); }}
@@ -97,5 +99,10 @@ const ContactView = () => {
         </div>
     );
 };
+
+function calcPrice(startDate, endDate, price) {
+    var numOfDays = (endDate - startDate) / 86400000;
+    return (numOfDays * price);
+}
 
 export default ContactView;
