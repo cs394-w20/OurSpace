@@ -1,4 +1,4 @@
-import React, { useContext, Component } from "react";
+import React, { useContext, useState } from "react";
 
 import { DAY_LABELS, MONTH_LABELS } from "./helpers.js";
 
@@ -9,38 +9,62 @@ import { BookingContext } from "./Contexts.js"
 import { Image, Modal } from "rbx";
 import ReactLightCalendar from '@lls/react-light-calendar';
 
-class Calendar extends Component {
+// class Calendar extends Component {
 
-    static contextType = BookingContext;
+//     constructor(props) {
+//         super(props);
+//         // Get initial startDate and endDate
+//         this.state = {
+//             startDate: props.startDate,
+//             parentStart: props.parentStart,
+//             endDate: props.endDate,
+//             parentEnd: props.parentEnd
+//         };
+//     }
 
-    const { contextStartDate, setContextStartDate, contextEndDate, setContextEndDate } = this.context;
 
-    constructor(props) {
-        super(props);
-        // Get initial startDate and endDate
-        this.state = {
-            startDate: props.startDate,
-            parentStart: props.parentStart,
-            endDate: props.endDate,
-            parentEnd: props.parentEnd
-        };
-    }
+//     onChange = (startDate, endDate) => {
+//         this.setState({ startDate, endDate });
 
+//         setContextStartDate(startDate);
+//         setContextEndDate(endDate);
+//         var numOfDays = (endDate - startDate) / 86400000;
+//         // calculatePrice(numOfDays);
+//     }
+
+
+
+//     render = () => {
+//         const { startDate, endDate } = this.state;
+//         // calcStartDate = startDate;
+
+//         return (
+//             <ReactLightCalendar
+//                 dayLabels={DAY_LABELS}
+//                 monthLabels={MONTH_LABELS}
+//                 onChange={this.onChange}
+//                 startDate={startDate}
+//                 endDate={endDate}
+//                 {...this.props} // Add parent's additionnal props
+//             />
+//         );
+//     };
+// }
+
+const Calendar = ({ disableDates, timezone }) => {
+    const { setContextStartDate, setContextEndDate } = useContext(BookingContext);
+    const [startDate, setStartDate] = useState(null)
+    const [endDate, setEndDate] = useState(null)
 
     onChange = (startDate, endDate) => {
-        this.setState({ startDate, endDate });
-
         setContextStartDate(startDate);
+        setStartDate(startDate)
         setContextEndDate(endDate);
+        setEndDate(endDate)
         var numOfDays = (endDate - startDate) / 86400000;
-        // calculatePrice(numOfDays);
     }
 
-
-
     render = () => {
-        const { startDate, endDate } = this.state;
-        // calcStartDate = startDate;
 
         return (
             <ReactLightCalendar
@@ -49,10 +73,12 @@ class Calendar extends Component {
                 onChange={this.onChange}
                 startDate={startDate}
                 endDate={endDate}
-                {...this.props} // Add parent's additionnal props
+                disableDates={disableDates}
+                timezone={timezone}
             />
         );
     };
+
 }
 
 const ContactView = () => {
