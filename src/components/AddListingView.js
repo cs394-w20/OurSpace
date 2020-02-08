@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { AddListingContext } from "./Contexts.js"
 
 import { Title, Modal, Content, Button, Input } from "rbx";
+import FileBase64 from 'react-file-base64';
 
 import parking from "../assets/icons/local_parking-24px.svg";
 import elevator from "../assets/icons/elevator.svg";
@@ -168,5 +169,4 @@ function buildListingObject(wipListingObject) {
   var outListingObject = {name: wipListingObject.name, host: "Charles Son", description: wipListingObject.description, location: {street: wipListingObject.street, city: wipListingObject.city, state: wipListingObject.state, country: wipListingObject.country, zip: wipListingObject.zip, geodata: {type: "Point", coordinates: {latitude: wipListingObject.latitude, longitude: wipListingObject.longitude}}}, size: {length: wipListingObject.length, width: wipListingObject.width, height: wipListingObject.height}, time: untilDate, attributes: {hasLock: wipListingObject.hasLock, hasParking: wipListingObject.hasParking, hasElevator: wipListingObject.hasElevator, hasRamp: wipListingObject.hasRamp}, image: wipAddListing.image, price: wipListingObject.price, rating: {score: null, numRatings: 0}};
   return outListingObject;
 }
-
 export default AddListingView;
