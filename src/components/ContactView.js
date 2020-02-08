@@ -10,24 +10,33 @@ import { Image, Modal } from "rbx";
 import ReactLightCalendar from '@lls/react-light-calendar';
 
 class Calendar extends Component {
+
+    static contextType = BookingContext;
+
+    const { contextStartDate, setContextStartDate, contextEndDate, setContextEndDate } = this.context;
+
     constructor(props) {
         super(props);
         // Get initial startDate and endDate
         this.state = {
             startDate: props.startDate,
-            endDate: props.endDate
+            parentStart: props.parentStart,
+            endDate: props.endDate,
+            parentEnd: props.parentEnd
         };
     }
 
 
     onChange = (startDate, endDate) => {
-        const { contextStartDate, setContextStartDate, contextEndDate, setContextEndDate } = useContext(BookingContext);
         this.setState({ startDate, endDate });
+
         setContextStartDate(startDate);
         setContextEndDate(endDate);
         var numOfDays = (endDate - startDate) / 86400000;
         // calculatePrice(numOfDays);
     }
+
+
 
     render = () => {
         const { startDate, endDate } = this.state;

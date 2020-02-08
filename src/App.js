@@ -68,8 +68,8 @@ const App = () => {
         <ListingList />
         <BookingContext.Provider value={{ startDate, setStartDate, endDate, setEndDate }}>
           <DetailView />
+          <ContactView />
         </BookingContext.Provider>
-        <ContactView />
         <FilterContext.Provider value={{ currFilter, updateFilter, filterViewOpen, toggleFilterViewOpen }}>
           <FilterView/>
           <BottomBar></BottomBar>
