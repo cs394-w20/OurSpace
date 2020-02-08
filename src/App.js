@@ -23,8 +23,7 @@ const App = () => {
   const [currListing, updateCurrListing] = useState(null);
   const [listingList, updateList] = useState([]);
   
-  const [currFilter, updateFilter] = useState({ name: null, description: null, street: null, city: null, state: null, country: null, zip: null, geodataType: "Point", latitude: null, longitude: null, length: null, width: null, height: null, fromDay: null, fromTime: null, untilDay: null, untilTime: null, hasLock: false, hasParking: false, hasElevator: false, hasRamp: false, image: null, price: null, score: null, numRatings: null});
-  
+  const [currFilter, updateFilter] = useState({ minDistance: 0, maxDistance: 2147483646, minSize: 0, maxSize: 2147483646, minPrice: 0, maxPrice: 2147483646, minRating: 0, maxRating: 2147483646, filterParking: false, filterRamp: false, filterElevator: false, filterLock: false });  
   const [contactViewOpen, toggleContactView] = useState(false);
   const [filterViewOpen, toggleFilterViewOpen] = useState(false);
 
@@ -36,13 +35,12 @@ const App = () => {
 
   useEffect(() => {
     function getListingsData() {
-      fetch('http://3.15.24.81:4000/get_listings', {
+      fetch('https://rocky-savannah-43190.herokuapp.com/get_listings', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        credentials: 'include',
         body: JSON.stringify({ latitude: 42.055984, longitude: -87.675171, listingsPerPage: listPerPage, pageNumber: pageNum, ...currFilter })
       })
         .then(response => response.json())
@@ -71,12 +69,11 @@ const App = () => {
         <ContactView />
         <AddListingContext.Provider value={{ currWipAddListing, updateCurrWipAddListing, addListingViewOpen, toggleAddListingViewOpen, updateAll }}>
           <AddListingView/>
-          <BottomBar></BottomBar>
+          <FilterContext.Provider value={{ currFilter, updateFilter, filterViewOpen, toggleFilterViewOpen }}>
+            <FilterView/>
+            <BottomBar></BottomBar>
+          </FilterContext.Provider>
         </AddListingContext.Provider>
-        <FilterContext.Provider value={{ currFilter, updateFilter, filterViewOpen, toggleFilterViewOpen }}>
-          <FilterView/>
-          <BottomBar></BottomBar>
-        </FilterContext.Provider>
       </div>
     </ListingContext.Provider>
   );
@@ -84,6 +81,7 @@ const App = () => {
 
 const BottomBar = () => {
   const { toggleFilterViewOpen } = useContext(FilterContext);
+  const { toggleAddListingViewOpen } = useContext(AddListingContext)
 
   return (
     <div style={{height: "4vh", width: "100%", border:"10px", backgroundColor:"grey", position: "fixed", top: "96vh"}}>
@@ -93,7 +91,9 @@ const BottomBar = () => {
         }}>
           <img src={filter} style={{width:"2.5vh"}}/>
         </Button>
-        <Button style={{width:"50%", top:"1vh"}}>
+        <Button style={{width:"50%", top:"1vh"}} onClick={() => {
+          toggleAddListingViewOpen(true); setTimeout(function () { document.getElementById("addListingView").classList.add("show") }, 0);
+        }}>
           <img src={add} style={{width:"2.5vh"}}/>
         </Button>
       </Column.Group>

@@ -32,7 +32,7 @@ const AddListingView = () => {
                 &#10005;
               </div>
               <Content style={{ width: "94%", margin: "auto", paddingTop: "1%", paddingBottom: "2%" }}>
-                <Title>Filter</Title>
+                <Title>Add a Listing!</Title>
                 <div style={{ width: "100%" }}>
 
                   <Input rounded style={{ width: "94%", marginRight: "2%" }} placeholder="Give me a name" onChange={(e) => { setWipAddListing({ ...wipAddListing, name: e.target.value }); }}></Input>
