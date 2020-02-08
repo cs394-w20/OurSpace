@@ -11,6 +11,7 @@ import add from "./assets/icons/add.png";
 import logoimage from "./assets/icons/logo.png"
 
 import { Button, PageLoader, Column, Icon } from "rbx";
+import FileBase64 from 'react-file-base64';
 
 import ListingList from "./components/Listing.js"
 import DetailView from "./components/DetailView.js";
@@ -18,7 +19,7 @@ import FilterView from "./components/FilterView.js";
 import AddListingView from "./components/AddListingView.js";
 import ContactView from "./components/ContactView.js"
 
-import { ListingContext, FilterContext, AddListingContext } from "./components/Contexts.js";
+import { ListingContext, FilterContext, AddListingContext, BookingContext } from "./components/Contexts.js";
 
 const App = () => {
 
@@ -29,6 +30,9 @@ const App = () => {
   const [contactViewOpen, toggleContactView] = useState(false);
   const [filterViewOpen, toggleFilterViewOpen] = useState(false);
 
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  
   const [currWipAddListing, updateCurrWipAddListing] = useState({ name: null, description: null, street: null, city: null, state: null, country: null, zip: null, geodataType: "Point", latitude: null, longitude: null, length: null, width: null, height: null, from: null, until: null, hasLock: false, hasParking: false, hasElevator: false, hasRamp: false, image: null, price: null, score: null, numRatings: null});
   const [addListingViewOpen, toggleAddListingViewOpen] = useState(false);
 
@@ -51,7 +55,7 @@ const App = () => {
         });
     }
     getListingsData();
-  }, []);
+  }, [currFilter]);
 
   const updateAll = (newListing) => {
   	/*
@@ -77,7 +81,9 @@ const App = () => {
       <div className="App" width="100%" height="100%" opacity="0.99">
         <div style={{height:"130px"}}></div> {/* Padding Don't Delete */}
         <ListingList />
-        <DetailView />
+        <BookingContext.Provider value={{ startDate, setStartDate, endDate, setEndDate }}>
+          <DetailView />
+        </BookingContext.Provider>
         <ContactView />
         <AddListingContext.Provider value={{ currWipAddListing, updateCurrWipAddListing, addListingViewOpen, toggleAddListingViewOpen, updateAll }}>
           <AddListingView/>
@@ -87,7 +93,6 @@ const App = () => {
             <TopSearch></TopSearch>
           </FilterContext.Provider>
         </AddListingContext.Provider>
-        
       </div>
     </ListingContext.Provider>
     </React.Fragment>

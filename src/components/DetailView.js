@@ -25,7 +25,7 @@ const DetailView = () => {
                   <div id="dtExit" style={{ fontSize: '24px', color: 'white', position: "fixed", top: "1%", left: "3%" }} onClick={() => { document.getElementById("dtView").classList.remove("show"); setTimeout(function () { updateCurrListing(null) }, 150) }}>
                     &#10005;
                   </div>
-                  <Image alt="Picture of the storage spaace" src="https://i.pinimg.com/originals/6a/7c/fc/6a7cfc513ee281ac19ed5b25f17a9a5a.jpg" style={{ width: "100%", padding: "0px" }} />
+                  <Image alt="Picture of the storage spaace" src={currListing.image} style={{ width: "100%", padding: "0px" }} />
   
                   {/* bottom bar */}
                   <div style={{height: "70px", backgroundColor: 'white', position: "fixed", bottom: "16px", width: "100%", boxShadow: "0px -1px #888888" }}>

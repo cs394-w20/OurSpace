@@ -4,6 +4,8 @@ import { DAY_LABELS, MONTH_LABELS } from "./helpers.js";
 
 import { ListingContext } from "./Contexts.js";
 
+import { BookingContext } from "./Contexts.js"
+
 import { Image, Modal } from "rbx";
 import ReactLightCalendar from '@lls/react-light-calendar';
 
@@ -17,8 +19,12 @@ class Calendar extends Component {
         };
     }
 
+
     onChange = (startDate, endDate) => {
+        const { contextStartDate, setContextStartDate, contextEndDate, setContextEndDate } = useContext(BookingContext);
         this.setState({ startDate, endDate });
+        setContextStartDate(startDate);
+        setContextEndDate(endDate);
         var numOfDays = (endDate - startDate) / 86400000;
         // calculatePrice(numOfDays);
     }

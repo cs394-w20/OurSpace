@@ -18,7 +18,7 @@ const StorageCard = ({ listing }) => {
             <Card style={{ borderRadius: "8px" }}>
                 <Card.Image>
                     <Image.Container size="4by3">
-                        <Image alt="Picture of the storage space" src="https://i.pinimg.com/originals/6a/7c/fc/6a7cfc513ee281ac19ed5b25f17a9a5a.jpg" style={{ borderRadius: "8px" }} />
+                        <Image alt="Picture of the storage space" src={listing.image} style={{ borderRadius: "8px" }} />
                     </Image.Container>
                 </Card.Image>
 
