@@ -7,7 +7,7 @@ import "./assets/styles/calendar.css";
 import "./assets/styles/loading.css";
 
 import filter from "./assets/icons/filter.png";
-import add from "./assets/icons/add.png";
+import add from "./assets/icons/OurSpace.png";
 import logoimage from "./assets/icons/logo.png"
 
 import { Button, PageLoader, Column, Icon } from "rbx";
@@ -90,6 +90,7 @@ const App = () => {
           <FilterContext.Provider value={{ currFilter, updateFilter, filterViewOpen, toggleFilterViewOpen }}>
             <FilterView/>
             {/* <BottomBar></BottomBar> */}
+            <AddListingButton></AddListingButton>
             <TopSearch></TopSearch>
           </FilterContext.Provider>
         </AddListingContext.Provider>
@@ -125,6 +126,19 @@ const TopSearch = () => {
         toggleFilterViewOpen(true); setTimeout(function () { document.getElementById("filterView").classList.add("show") }, 0);
       }}> Filters
       </Button>
+    </div>
+  )
+}
+
+const AddListingButton = () => {
+  const { toggleFilterViewOpen } = useContext(FilterContext);
+  const { toggleAddListingViewOpen } = useContext(AddListingContext)
+
+  return (
+    <div style={{position:"fixed" , top:"750px", left:"300px", opacity:"0.8"}}>
+        <img src={add} style={{width:"80%"}}onClick={() => {
+        toggleAddListingViewOpen(true); setTimeout(function () { document.getElementById("addListingView").classList.add("show") }, 0);
+      }}/>
     </div>
   )
 }
