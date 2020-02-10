@@ -63,15 +63,6 @@ const App = () => {
     */
     updateList([newListing].concat(listingList))
   }
-  
-  // if(listingList.length === 0) return (<PageLoader active={true} color="light"></PageLoader>)
-  // if(listingList.length === 0) return (
-  //   <React.Fragment>
-    
-  //   {/* <PageLoader active={true} color="light"></PageLoader> */}
-  //   <LogoPage></LogoPage>
-  //   </React.Fragment>
-  //   )
 
 
   return (

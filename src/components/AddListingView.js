@@ -17,7 +17,7 @@ const AddListingView = () => {
 
   const defaultWipListing = { name: null, description: null, street: null, city: null, state: null, country: null, zip: null, geodataType: "Point", latitude: null, longitude: null, length: null, width: null, height: null, fromDay: null, fromTime: null, untilDay: null, untilTime: null, hasLock: false, hasParking: false, hasElevator: false, hasRamp: false, image: null, price: null, score: null, numRatings: null};
   const [binaryImage, setBinaryImage] = useState("");
-  const { currWipAddListing, updateCurrWipAddListing, addListingViewOpen, toggleAddListingViewOpen, submitNewListing } = useContext(AddListingContext);
+  const { currWipAddListing, updateCurrWipAddListing, addListingViewOpen, toggleAddListingViewOpen, updateAll } = useContext(AddListingContext);
 
   const [wipAddListing, setWipAddListing] = useState(currWipAddListing)
 
@@ -37,7 +37,7 @@ const AddListingView = () => {
                 &#10005;
               </div>
               <Content style={{ width: "94%", margin: "auto", paddingTop: "1%", paddingBottom: "2%" }}>
-                <Title>Filter</Title>
+                <Title>Add</Title>
                 <div style={{ width: "100%" }}>
 
                   <Input rounded style={{ width: "94%", marginRight: "2%" }} placeholder="Give me a name" onChange={(e) => { setWipAddListing({ ...wipAddListing, name: e.target.value }); }}></Input>
@@ -69,13 +69,11 @@ const AddListingView = () => {
                   <label for="from" style={{ width: "48%", marginRight: "2%" }}>Available from:</label>
                   <br /> <br />
                   <Input type="date" id="from" rounded style={{ width: "48%", marginRight: "2%" }} onChange={(e) => { setWipAddListing({ ...wipAddListing, fromDay: e.target.value }); }}></Input>
-                  <Input type="time" id="fromTIme" rounded style={{ width: "48%", marginRight: "2%" }} onChange={(e) => { setWipAddListing({ ...wipAddListing, fromTime: e.target.value }); }}></Input>
                   <br /> <br />
 
                   <label for="until" style={{ width: "48%", marginRight: "2%" }}>Available until:</label>
                   <br /> <br />
                   <Input type="date" id="until" rounded style={{ width: "48%", marginRight: "2%" }} onChange={(e) => { setWipAddListing({ ...wipAddListing, untilDay: e.target.value }); }}></Input>
-                  <Input type="time" id="untilTime" rounded style={{ width: "48%", marginRight: "2%" }} onChange={(e) => { setWipAddListing({ ...wipAddListing, untilTime: e.target.value }); }}></Input>
                   <br /> <br />
 
                   <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Price per day(usd)" onChange={(e) => { setWipAddListing({ ...wipAddListing, price: e.target.value }); }}></Input>
@@ -103,7 +101,7 @@ const AddListingView = () => {
                   <Button rounded style={{ width: "20%" }}
                     onClick={() => {if(wellFormedObject(wipAddListing)) {
                         wipAddListing.image = binaryImage;
-                        submitNewListing(buildListingObject(wipAddListing));
+                        updateAll(buildListingObject(wipAddListing));
                         updateCurrWipAddListing(defaultWipListing);
                         document.getElementById("addListingView").classList.remove("show");
                         setTimeout(function () { toggleAddListingViewOpen(false) }, 200); 
