@@ -37,46 +37,55 @@ const AddListingView = () => {
                 &#10005;
               </div>
               <Content style={{ width: "94%", margin: "auto", paddingTop: "1%", paddingBottom: "2%" }}>
-                <Title>Add</Title>
+                <Title>Add Listing</Title>
                 <div style={{ width: "100%" }}>
 
-                  <Input rounded style={{ width: "94%", marginRight: "2%" }} placeholder="Give me a name" onChange={(e) => { setWipAddListing({ ...wipAddListing, name: e.target.value }); }}></Input>
+                  <Input rounded style={{ width: "94%", marginRight: "2%" }} placeholder="Name of Listing" onChange={(e) => { setWipAddListing({ ...wipAddListing, name: e.target.value }); }}></Input>
                   <br /> <br />
 
-                  <Input rounded style={{ width: "94%", marginRight: "2%" }} placeholder="Describe me" onChange={(e) => { setWipAddListing({ ...wipAddListing, description: e.target.value }); }}></Input>
+                  <Input rounded style={{ width: "94%", marginRight: "2%" }} placeholder="Description (3-5 sentences)" onChange={(e) => { setWipAddListing({ ...wipAddListing, description: e.target.value }); }}></Input>
                   <br /> <br />
 
-                  <Input rounded style={{ width: "94%", marginRight: "2%" }} placeholder="What's my address?" onChange={(e) => { setWipAddListing({ ...wipAddListing, street: e.target.value }); }}></Input>
+                  <Input rounded style={{ width: "94%", marginRight: "2%" }} placeholder="Street" onChange={(e) => { setWipAddListing({ ...wipAddListing, street: e.target.value }); }}></Input>
                   <br /> <br />
 
-                  <Input rounded style={{ width: "94%", marginRight: "2%" }} placeholder="City?" onChange={(e) => { setWipAddListing({ ...wipAddListing, city: e.target.value }); }}></Input>
+                  <Input rounded style={{ width: "94%", marginRight: "2%" }} placeholder="City" onChange={(e) => { setWipAddListing({ ...wipAddListing, city: e.target.value }); }}></Input>
                   <br /> <br />
 
-                  <Input rounded style={{ width: "94%", marginRight: "2%" }} placeholder="State?" onChange={(e) => { setWipAddListing({ ...wipAddListing, state: e.target.value }); }}></Input>
+                  <Input rounded style={{ width: "94%", marginRight: "2%" }} placeholder="State" onChange={(e) => { setWipAddListing({ ...wipAddListing, state: e.target.value }); }}></Input>
                   <br /> <br />
 
-                  <Input rounded style={{ width: "94%", marginRight: "2%" }} placeholder="Country?" onChange={(e) => { setWipAddListing({ ...wipAddListing, country: e.target.value }); }}></Input>
+                  <Input rounded style={{ width: "94%", marginRight: "2%" }} placeholder="Country" onChange={(e) => { setWipAddListing({ ...wipAddListing, country: e.target.value }); }}></Input>
                   <br /> <br />
 
-                  <Input rounded style={{ width: "94%", marginRight: "2%" }} placeholder="Zipcode?" onChange={(e) => { setWipAddListing({ ...wipAddListing, zip: e.target.value }); }}></Input>
+                  <Input rounded style={{ width: "94%", marginRight: "2%" }} placeholder="Zipcode" onChange={(e) => { setWipAddListing({ ...wipAddListing, zip: e.target.value }); }}></Input>
                   <br /> <br />
 
-                  <Input rounded style={{ width: "30%", marginRight: "2%" }} placeholder="Width(ft)" onChange={(e) => { setWipAddListing({ ...wipAddListing, width: e.target.value }); }}></Input>
-                  <Input rounded style={{ width: "30%", marginRight: "2%" }} placeholder="Length(ft)" onChange={(e) => { setWipAddListing({ ...wipAddListing, length: e.target.value }); }}></Input>
-                  <Input rounded style={{ width: "30%", marginRight: "2%" }} placeholder="Height(ft)" onChange={(e) => { setWipAddListing({ ...wipAddListing, height: e.target.value }); }}></Input>
+                  Size of Space (ft)
+                  <br></br>
+                  <br></br>
+
+                  <Input rounded style={{ width: "30%", marginRight: "2%" }} placeholder="Width" onChange={(e) => { setWipAddListing({ ...wipAddListing, width: e.target.value }); }}></Input>
+                  <Input rounded style={{ width: "30%", marginRight: "2%" }} placeholder="Length" onChange={(e) => { setWipAddListing({ ...wipAddListing, length: e.target.value }); }}></Input>
+                  <Input rounded style={{ width: "30%", marginRight: "2%" }} placeholder="Height" onChange={(e) => { setWipAddListing({ ...wipAddListing, height: e.target.value }); }}></Input>
                   <br /> <br />
 
                   <label for="from" style={{ width: "48%", marginRight: "2%" }}>Available from:</label>
                   <br /> <br />
                   <Input type="date" id="from" rounded style={{ width: "48%", marginRight: "2%" }} onChange={(e) => { setWipAddListing({ ...wipAddListing, fromDay: e.target.value }); }}></Input>
+                  <Input type="time" id="fromTIme" value="08:30"rounded style={{ width: "48%", marginRight: "2%" }} onChange={(e) => { setWipAddListing({ ...wipAddListing, fromTime: e.target.value }); }}></Input>
                   <br /> <br />
 
                   <label for="until" style={{ width: "48%", marginRight: "2%" }}>Available until:</label>
                   <br /> <br />
                   <Input type="date" id="until" rounded style={{ width: "48%", marginRight: "2%" }} onChange={(e) => { setWipAddListing({ ...wipAddListing, untilDay: e.target.value }); }}></Input>
+                  <Input type="time" id="untilTime" value="22:30" rounded style={{ width: "48%", marginRight: "2%" }} onChange={(e) => { setWipAddListing({ ...wipAddListing, untilTime: e.target.value }); }}></Input>
                   <br /> <br />
 
-                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Price per day(usd)" onChange={(e) => { setWipAddListing({ ...wipAddListing, price: e.target.value }); }}></Input>
+                  Displayed Price
+                  <br></br><br></br>
+
+                  <Input rounded style={{ width: "94%", marginRight: "2%" }} placeholder="Price per day" onChange={(e) => { setWipAddListing({ ...wipAddListing, price: e.target.value }); }}></Input>
                   <br /> <br />
 
                   <FileBase64 multiple={false} onDone={getFile.bind(this)}/>
@@ -98,7 +107,7 @@ const AddListingView = () => {
 
                   <br /> <br />
 
-                  <Button rounded style={{ width: "20%" }}
+                  <Button rounded style={{ width: "70%", marginLeft:"15%", marginRight:"auto"}}
                     onClick={() => {if(wellFormedObject(wipAddListing)) {
                         wipAddListing.image = binaryImage;
                         updateAll(buildListingObject(wipAddListing));
@@ -111,7 +120,9 @@ const AddListingView = () => {
                         window.alert("Some required fields were not filled out."); 
                       }
                     }}>
-                    Submit
+                    <div>
+                      Submit for Review
+                    </div>
                   </Button>
                 </div>
               </Content>
