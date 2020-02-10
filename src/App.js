@@ -64,7 +64,6 @@ const App = () => {
     updateList([newListing].concat(listingList))
   }
 
-
   return (
     <React.Fragment>
       <LogoPage></LogoPage>
@@ -111,8 +110,9 @@ const TopSearch = () => {
   const { toggleAddListingViewOpen } = useContext(AddListingContext)
 
   return (
-    <div style={{height: "10px", width: "100%", border:"10px", position: "fixed", top: "5vh"}}>
-      <input placeholder="Anywhere" style={{width:"80%", height: "50px", border:"1px solid #888888", marginTop:"-10px", borderRadius:"5px"}}></input>
+    <div style={{height: "10px", width: "104%", border:"10px", position: "fixed", top: "5vh", marginLeft:"-2%"}}>
+      <input placeholder="Anywhere" style={{width:"80%", padding:"5px", height: "50px", border:"1px solid #888888", marginTop:"-10px", borderRadius:"5px"}}></input>
+      <br></br>
       <Button style={{width:"80px", height:"40px", borderRadius:"20px", marginTop:"10px"}} onClick={() => {
         toggleFilterViewOpen(true); setTimeout(function () { document.getElementById("filterView").classList.add("show") }, 0);
       }}> Filters
