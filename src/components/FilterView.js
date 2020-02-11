@@ -44,15 +44,15 @@ const FilterView = () => {
 
                   <Button.Group hasAddons>
                     <div style={{height:"30px"}}>
-                      <Button style={{ width: "33%", border:"none"}}>
+                      <Button style={{ width: "33%", border:"none"}} onClick={() => setMaybeFilter({... maybeFilter, maxSize: 125, minSize: 0})} >
                         <span id="smallButton" style={{ fontWeight: "500", border: "1px solid black", borderRadius: "4px", padding: '6px', paddingTop: '3px', paddingBottom: '2px'}}
                         onClick={() => {document.getElementById('smallButton').style.cssText = 'background-color: #041635; color: white; font-weight: 500; border: 1px solid black; border-radius: 4px; padding: 6px; padding-top:4px; padding-bottom:4px';}}>SMALL</span>
                       </Button>
-                      <Button style={{ width: "33%", border:"none"}}>
+                      <Button style={{ width: "33%", border:"none"}} onClick={() => setMaybeFilter({... maybeFilter, minSize: 126, maxSize: 1000})}>
                       <span id="mediumButton" style={{ fontWeight: "500", border: "1px solid black", borderRadius: "4px", padding: '6px', paddingTop: '3px', paddingBottom: '2px' }}
                       onClick={() => {document.getElementById('mediumButton').style.cssText = 'background-color: #041635; color: white; font-weight: 500; border: 1px solid black; border-radius: 4px; padding: 6px; padding-top:4px; padding-bottom:4px';}}>MEDIUM</span>
                       </Button>
-                      <Button style={{ width: "33%", border:"none" }}>
+                      <Button style={{ width: "33%", border:"none" }} onClick={() => setMaybeFilter({... maybeFilter, minSize: 1001, maxSize: 2147483646})}>
                       <span id="largeButton" style={{ fontWeight: "500", border: "1px solid black", borderRadius: "4px", padding: '6px', paddingTop: '3px', paddingBottom: '2px' }}
                         onClick={() => {document.getElementById('largeButton').style.cssText = 'background-color: #041635; color: white; font-weight: 500; border: 1px solid black; border-radius: 4px; padding: 6px; padding-top:4px; padding-bottom:4px';}}>LARGE</span>
                       </Button>
