@@ -79,7 +79,7 @@ const AddListingView = () => {
 
                   <label for="until" style={{ width: "48%", marginRight: "2%" }}>Available until:</label>
                   <br /> <br />
-                  <Input type="date" id="until" rounded style={{ width: "48%", marginRight: "2%" }} onChange={(e) => { setWipAddListing({ ...wipAddListing, untilDay: e.target.value }); }}></Input>
+                  <Input type="date" id="until" rounded style={{ width: "48%", marginRight: "2%" }} onChange={(e) => { setWipAddListing({ ...wipAddListing, untilDay: e.target.value });}}></Input>
                   <br /> <br />
 
                   Displayed Price
@@ -173,7 +173,8 @@ function wellFormedObject (wipListingObject) {
 
 function buildListingObject(wipListingObject) {
   //as-is, note that this just outright discards some stuff, like the "from when" data
-  var untilDate = new Date(wipListingObject.untilDate);
+  var untilDate = new Date(wipListingObject.untilDay);
+  console.log(untilDate)
   var outListingObject = {name: wipListingObject.name, host: "Charles Son", description: wipListingObject.description, location: {street: wipListingObject.street, city: wipListingObject.city, state: wipListingObject.state, country: wipListingObject.country, zip: parseInt(wipListingObject.zip), geodata: {type: "Point", coordinates: {longitude: parseFloat(wipListingObject.longitude), latitude: parseFloat(wipListingObject.latitude)}}}, size: {length: parseInt(wipListingObject.length), width: parseInt(wipListingObject.width), height: parseInt(wipListingObject.height)}, time: untilDate, attributes: {hasLock: wipListingObject.hasLock, hasParking: wipListingObject.hasParking, hasElevator: wipListingObject.hasElevator, hasRamp: wipListingObject.hasRamp}, image: wipListingObject.image, price: parseFloat(wipListingObject.price), rating: {score: 5, numRatings: 1}};
   return outListingObject;
 }
