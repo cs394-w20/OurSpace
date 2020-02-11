@@ -36,7 +36,7 @@ const App = () => {
   const [currWipAddListing, updateCurrWipAddListing] = useState({ name: null, description: null, street: null, city: null, state: null, country: null, zip: null, geodataType: "Point", latitude: null, longitude: null, length: null, width: null, height: null, from: null, until: null, hasLock: false, hasParking: false, hasElevator: false, hasRamp: false, image: null, price: null, score: null, numRatings: null});
   const [addListingViewOpen, toggleAddListingViewOpen] = useState(false);
 
-  const [listPerPage, setListPerPage] = useState(10);
+  const [listPerPage, setListPerPage] = useState(50);
   const [pageNum, setPageNum] = useState(1);
 
   useEffect(() => {

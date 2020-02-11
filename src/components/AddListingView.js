@@ -33,7 +33,7 @@ const AddListingView = () => {
 
           <Modal.Card style={{ width: "100%", height: "100%", bottom: "-3.5%", borderRadius: "10px", borderColor: "black" }}>
             <Modal.Card.Body>
-              <div style={{ fontSize: '24px', color: 'black', position: "fixed", top: "1%", left: "3%" }} onClick={() => { updateCurrWipAddListing(wipAddListing); document.getElementById("addListingView").classList.remove("show"); setTimeout(function () { toggleAddListingViewOpen(false) }, 200); }}>
+              <div style={{ fontSize: '24px', color: 'black', position: "fixed", top: "1%", left: "3%", zIndex:"3" }} onClick={() => { updateCurrWipAddListing(wipAddListing); document.getElementById("addListingView").classList.remove("show"); setTimeout(function () { toggleAddListingViewOpen(false) }, 200); }}>
                 &#10005;
               </div> 
               <Content style={{ width: "94%", margin: "auto", paddingTop: "1%", paddingBottom: "2%" }}>
