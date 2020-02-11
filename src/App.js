@@ -61,14 +61,14 @@ const App = () => {
   	/*
         BACKEND: ADD CODE HERE TO SET UP PUSHING NEW LISTINGS TO REMOTE DB
     */
-    fetch('https://rocky-savannah-43190.herokuapp.com/post_listing',
+    fetch('https://rocky-savannah-43190.herokuapp.com/post_listing',{
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({listingObject: newListing})
-    )
+    })
     updateList([newListing].concat(listingList))
   }
 
