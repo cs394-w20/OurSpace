@@ -4,6 +4,8 @@ import { DAY_LABELS, MONTH_LABELS } from "./helpers.js";
 
 import { ListingContext } from "./Contexts.js";
 
+import { BookingContext } from "./Contexts.js"
+
 import { Image, Modal } from "rbx";
 import ReactLightCalendar from '@lls/react-light-calendar';
 
@@ -16,6 +18,7 @@ class Calendar extends Component {
             endDate: props.endDate
         };
     }
+
 
     onChange = (startDate, endDate) => {
         this.setState({ startDate, endDate });
@@ -79,8 +82,9 @@ const ContactView = () => {
                                 <br />
                                 <div style={{ width: "100%", textAlign: "center", marginTop: "10%" }}>
                                     <span style={{ backgroundColor: "	#4E2A84", padding: "10px", color: "white", fontWeight: "bold", borderRadius: "3px" }}
-                                        onClick={() => { document.getElementById("ctExit").click(); document.getElementById("dtExit").click(); alert('Reservation Created'); }}
-                                    >Make Reservation</span>
+                                        onClick={() => { document.getElementById("ctExit").click(); document.getElementById("dtExit").click(); alert('Reservation Created'); }}>
+                                            Make Reservation</span>
+                                            <br></br><br></br>
                                 </div>
 
                             </Modal.Card.Body>

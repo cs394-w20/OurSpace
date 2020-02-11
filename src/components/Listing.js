@@ -18,7 +18,7 @@ const StorageCard = ({ listing }) => {
             <Card style={{ borderRadius: "8px" }}>
                 <Card.Image>
                     <Image.Container size="4by3">
-                        <Image alt="Picture of the storage space" src="https://i.pinimg.com/originals/6a/7c/fc/6a7cfc513ee281ac19ed5b25f17a9a5a.jpg" style={{ borderRadius: "8px" }} />
+                        <Image alt="Picture of the storage space" src={listing.image} style={{ borderRadius: "8px" }} />
                     </Image.Container>
                 </Card.Image>
 
@@ -77,7 +77,7 @@ const ListingList = () => {
         <div>
             <Column.Group multiline>
                 {columnIds.map(i => (
-                    <Column key={i} size="one-quarter">
+                    <Column key={i} size="one-quarter" style={{paddingRight:"0px"}}>
                         <StorageCard listing={listingList[i]} />
                     </Column>
                 ))}
