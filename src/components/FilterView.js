@@ -32,42 +32,70 @@ const FilterView = () => {
                 <Title>Filter</Title>
                 <div style={{ width: "100%" }}>
 
-                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="How near? (mi)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, minDistance: parseInt(e.target.value) }); }}></Input>
-                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="How far? (mi)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, maxDistance: parseInt(e.target.value) }); }}></Input>
+                  <span style={{fontWeight:"400"}}>Filter by Distance (mi)</span>
+                  <br />
+
+                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Min" onChange={(e) => { setMaybeFilter({ ...maybeFilter, minDistance: parseInt(e.target.value) }); }}></Input>
+                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Max" onChange={(e) => { setMaybeFilter({ ...maybeFilter, maxDistance: parseInt(e.target.value) }); }}></Input>
                   <br /> <br />
 
-                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Min. Size (ft)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, minSize: parseInt(e.target.value) }); }}></Input>
-                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Max. Size (ft)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, maxSize: parseInt(e.target.value) }); }}></Input>
+                  <span style={{fontWeight:"400"}}>Filter by Size</span>
+                  <br />
+
+                  <Button.Group hasAddons>
+                    <div style={{height:"30px"}}>
+                      <Button style={{ width: "33%", border:"none"}}>
+                        <span id="smallButton" style={{ fontWeight: "500", border: "1px solid black", borderRadius: "4px", padding: '6px', paddingTop: '3px', paddingBottom: '2px'}}
+                        onClick={() => {document.getElementById('smallButton').style.cssText = 'background-color: #041635; color: white; font-weight: 500; border: 1px solid black; border-radius: 4px; padding: 6px; padding-top:4px; padding-bottom:4px';}}>SMALL</span>
+                      </Button>
+                      <Button style={{ width: "33%", border:"none"}}>
+                      <span id="mediumButton" style={{ fontWeight: "500", border: "1px solid black", borderRadius: "4px", padding: '6px', paddingTop: '3px', paddingBottom: '2px' }}
+                      onClick={() => {document.getElementById('mediumButton').style.cssText = 'background-color: #041635; color: white; font-weight: 500; border: 1px solid black; border-radius: 4px; padding: 6px; padding-top:4px; padding-bottom:4px';}}>MEDIUM</span>
+                      </Button>
+                      <Button style={{ width: "33%", border:"none" }}>
+                      <span id="largeButton" style={{ fontWeight: "500", border: "1px solid black", borderRadius: "4px", padding: '6px', paddingTop: '3px', paddingBottom: '2px' }}
+                        onClick={() => {document.getElementById('largeButton').style.cssText = 'background-color: #041635; color: white; font-weight: 500; border: 1px solid black; border-radius: 4px; padding: 6px; padding-top:4px; padding-bottom:4px';}}>LARGE</span>
+                      </Button>
+                    </div>
+                  </Button.Group>
+
+                  <span style={{fontWeight:"400"}}>Filter by Price</span>
+                  <br />
+
+                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Min ($USD)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, minPrice: parseInt(e.target.value) }); }}></Input>
+                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Max ($USD)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, maxPrice: parseInt(e.target.value) }); }}></Input>
                   <br /> <br />
 
-                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Min. Price (usd)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, minPrice: parseInt(e.target.value) }); }}></Input>
-                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Max. Price (usd)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, maxPrice: parseInt(e.target.value) }); }}></Input>
+                  <span style={{fontWeight:"400"}}>Filter by Rating</span>
+                  <br />
+
+                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Min (&#9733;)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, minRating: parseInt(e.target.value) }); }}></Input>
+                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Max (&#9733;)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, maxRating: parseInt(e.target.value) }); }}></Input>
                   <br /> <br />
 
-                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Min. Rating (&#9733;)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, minRating: parseInt(e.target.value) }); }}></Input>
-                  <Input rounded style={{ width: "48%", marginRight: "2%" }} placeholder="Max. Rating (&#9733;)" onChange={(e) => { setMaybeFilter({ ...maybeFilter, maxRating: parseInt(e.target.value) }); }}></Input>
-                  <br /> <br />
+                  <span style={{fontWeight:"400"}}>Filter by Amenities</span>
+                  <br />
 
                   <Button.Group hasAddons>
                     <Button rounded color={maybeFilter.filterParking ? "info" : "white"} style={{ width: "25%" }} onClick={() => { setMaybeFilter({ ...maybeFilter, filterParking: !maybeFilter.filterParking }); }}>
-                      <img src={parking} style={{ width: "65%" }}></img>
+                      <img src={parking} style={{ width: "40%" }}></img>
                     </Button>
                     <Button rounded color={maybeFilter.filterRamp ? "info" : "white"} style={{ width: "25%" }} onClick={() => { setMaybeFilter({ ...maybeFilter, filterRamp: !maybeFilter.filterRamp }); }}>
-                      <img src={ramp} style={{ width: "65%" }}></img>
+                      <img src={ramp} style={{ width: "40%" }}></img>
                     </Button>
                     <Button rounded color={maybeFilter.filterElevator ? "info" : "white"} style={{ width: "25%" }} onClick={() => { setMaybeFilter({ ...maybeFilter, filterElevator: !maybeFilter.filterElevator }); }}>
-                      <img src={elevator} style={{ width: "45%" }}></img>
+                      <img src={elevator} style={{ width: "30%" }}></img>
                     </Button>
                     <Button rounded color={maybeFilter.filterLock ? "info" : "white"} style={{ width: "25%" }} onClick={() => { setMaybeFilter({ ...maybeFilter, filerLock: !maybeFilter.filterLock }); }}>
-                      <img src={lock} style={{ width: "65%" }}></img>
+                      <img src={lock} style={{ width: "40%" }}></img>
                     </Button>
                   </Button.Group>
 
                   <br /> <br />
 
-                  <Button rounded style={{ width: "20%" }}
+                  <Button rounded style={{ width: "36%", marginLeft:"32%", marginRight:"32%"}}
                     onClick={() => { updateFilter(maybeFilter); document.getElementById("filterView").classList.remove("show"); setTimeout(function () { toggleFilterViewOpen(false) }, 200); }}>
-                    Submit
+                    See Results
                   </Button>
                 </div>
               </Content>

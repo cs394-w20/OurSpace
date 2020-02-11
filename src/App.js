@@ -63,16 +63,6 @@ const App = () => {
     */
     updateList([newListing].concat(listingList))
   }
-  
-  // if(listingList.length === 0) return (<PageLoader active={true} color="light"></PageLoader>)
-  // if(listingList.length === 0) return (
-  //   <React.Fragment>
-    
-  //   {/* <PageLoader active={true} color="light"></PageLoader> */}
-  //   <LogoPage></LogoPage>
-  //   </React.Fragment>
-  //   )
-
 
   return (
     <React.Fragment>
@@ -106,10 +96,10 @@ const LogoPage = () => {
     <React.Fragment>
       <div id="foo" style={{position:"absolute", zIndex:"2"}} onLoad={() => {
           setTimeout(function () {document.getElementById('foo').style.display='none'}, 1300)}}>
-        <div style={{width:"388px", height:"260px", backgroundColor:"#041635", marginBottom:"-10px"}}></div>
-        <img src={logoimage} style={{width:"388px"}}></img>
+        <div style={{width:"415px", height:"230px", backgroundColor:"#041635", marginBottom:"-10px"}}></div>
+        <img src={logoimage} style={{width:"415px"}}></img>
         <div class="loading">Loading&#8230;</div>
-        <div style={{width:"388px", height:"315px", backgroundColor:"#041635", marginTop:"-10px"}}></div>
+        <div style={{width:"415px", height:"345px", backgroundColor:"#041635", marginTop:"-10px"}}></div>
       </div>
     </React.Fragment>
   )
@@ -120,8 +110,9 @@ const TopSearch = () => {
   const { toggleAddListingViewOpen } = useContext(AddListingContext)
 
   return (
-    <div style={{height: "10px", width: "100%", border:"10px", position: "fixed", top: "5vh"}}>
-      <input placeholder="Anywhere" style={{width:"80%", height: "50px", border:"1px solid #888888", marginTop:"-10px", borderRadius:"5px"}}></input>
+    <div style={{height: "10px", width: "104%", border:"10px", position: "fixed", top: "5vh", marginLeft:"-2%"}}>
+      <input placeholder="Anywhere" style={{width:"80%", padding:"5px", height: "50px", border:"1px solid #888888", marginTop:"-10px", borderRadius:"5px"}}></input>
+      <br></br>
       <Button style={{width:"80px", height:"40px", borderRadius:"20px", marginTop:"10px"}} onClick={() => {
         toggleFilterViewOpen(true); setTimeout(function () { document.getElementById("filterView").classList.add("show") }, 0);
       }}> Filters
@@ -135,10 +126,10 @@ const AddListingButton = () => {
   const { toggleAddListingViewOpen } = useContext(AddListingContext)
 
   return (
-    <div style={{position:"fixed" , top:"750px", left:"300px", opacity:"0.8"}}>
-        <img src={add} style={{width:"80%"}}onClick={() => {
-        toggleAddListingViewOpen(true); setTimeout(function () { document.getElementById("addListingView").classList.add("show") }, 0);
-      }}/>
+    <div style={{position:"fixed" , top:"700px", left:"300px", opacity:"0.8"}} onClick={() => {
+      toggleAddListingViewOpen(true); setTimeout(function () { document.getElementById("addListingView").classList.add("show") }, 0);
+    }}>
+        <img src={add} style={{width:"50%"}}/>
     </div>
   )
 }
