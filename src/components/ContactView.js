@@ -21,10 +21,7 @@ class Calendar extends Component {
 
 
     onChange = (startDate, endDate) => {
-        const { contextStartDate, setContextStartDate, contextEndDate, setContextEndDate } = useContext(BookingContext);
         this.setState({ startDate, endDate });
-        setContextStartDate(startDate);
-        setContextEndDate(endDate);
         var numOfDays = (endDate - startDate) / 86400000;
         // calculatePrice(numOfDays);
     }
