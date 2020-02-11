@@ -73,13 +73,11 @@ const AddListingView = () => {
                   <label for="from" style={{ width: "48%", marginRight: "2%" }}>Available from:</label>
                   <br /> <br />
                   <Input type="date" id="from" rounded style={{ width: "48%", marginRight: "2%" }} onChange={(e) => { setWipAddListing({ ...wipAddListing, fromDay: e.target.value }); }}></Input>
-                  <Input type="time" id="fromTIme" value="08:30"rounded style={{ width: "48%", marginRight: "2%" }} onChange={(e) => { setWipAddListing({ ...wipAddListing, fromTime: e.target.value }); }}></Input>
                   <br /> <br />
 
                   <label for="until" style={{ width: "48%", marginRight: "2%" }}>Available until:</label>
                   <br /> <br />
                   <Input type="date" id="until" rounded style={{ width: "48%", marginRight: "2%" }} onChange={(e) => { setWipAddListing({ ...wipAddListing, untilDay: e.target.value }); }}></Input>
-                  <Input type="time" id="untilTime" value="22:30" rounded style={{ width: "48%", marginRight: "2%" }} onChange={(e) => { setWipAddListing({ ...wipAddListing, untilTime: e.target.value }); }}></Input>
                   <br /> <br />
 
                   Displayed Price
@@ -173,9 +171,7 @@ function wellFormedObject (wipListingObject) {
 
 function buildListingObject(wipListingObject) {
   //as-is, note that this just outright discards some stuff, like the "from when" data
-  var datetime = wipListingObject.untilDay.concat("T");
-  datetime = datetime.concat(wipListingObject.untilTime);
-  var untilDate = new Date(datetime);
+  var untilDate = new Date(wipListingObject.untilDate);
   var outListingObject = {name: wipListingObject.name, host: "Charles Son", description: wipListingObject.description, location: {street: wipListingObject.street, city: wipListingObject.city, state: wipListingObject.state, country: wipListingObject.country, zip: wipListingObject.zip, geodata: {type: "Point", coordinates: {latitude: wipListingObject.latitude, longitude: wipListingObject.longitude}}}, size: {length: wipListingObject.length, width: wipListingObject.width, height: wipListingObject.height}, time: untilDate, attributes: {hasLock: wipListingObject.hasLock, hasParking: wipListingObject.hasParking, hasElevator: wipListingObject.hasElevator, hasRamp: wipListingObject.hasRamp}, image: wipListingObject.image, price: wipListingObject.price, rating: {score: null, numRatings: 0}};
   return outListingObject;
 }
