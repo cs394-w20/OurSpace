@@ -15,11 +15,13 @@ import lock from "../assets/icons/lock.png";
 
 const AddListingView = () => {
 
-  const defaultWipListing = { name: null, description: null, street: null, city: null, state: null, country: null, zip: null, geodataType: "Point", latitude: null, longitude: null, length: null, width: null, height: null, fromDay: null, fromTime: null, untilDay: null, untilTime: null, hasLock: false, hasParking: false, hasElevator: false, hasRamp: false, image: null, price: null, score: null, numRatings: null};
+  const defaultWipListing = { name: null, description: null, street: null, city: null, state: null, country: null, zip: null, geodataType: "Point", latitude: 42.048470, longitude: -87.684790, length: null, width: null, height: null, fromDay: null, fromTime: null, untilDay: null, untilTime: null, hasLock: false, hasParking: false, hasElevator: false, hasRamp: false, image: null, price: null, score: null, numRatings: null};
   const [binaryImage, setBinaryImage] = useState("");
   const { currWipAddListing, updateCurrWipAddListing, addListingViewOpen, toggleAddListingViewOpen, updateAll } = useContext(AddListingContext);
 
   const [wipAddListing, setWipAddListing] = useState(currWipAddListing)
+
+  
 
   const getFile = file => {
     setBinaryImage(file.base64);
@@ -172,7 +174,7 @@ function wellFormedObject (wipListingObject) {
 function buildListingObject(wipListingObject) {
   //as-is, note that this just outright discards some stuff, like the "from when" data
   var untilDate = new Date(wipListingObject.untilDate);
-  var outListingObject = {name: wipListingObject.name, host: "Charles Son", description: wipListingObject.description, location: {street: wipListingObject.street, city: wipListingObject.city, state: wipListingObject.state, country: wipListingObject.country, zip: wipListingObject.zip, geodata: {type: "Point", coordinates: {latitude: wipListingObject.latitude, longitude: wipListingObject.longitude}}}, size: {length: wipListingObject.length, width: wipListingObject.width, height: wipListingObject.height}, time: untilDate, attributes: {hasLock: wipListingObject.hasLock, hasParking: wipListingObject.hasParking, hasElevator: wipListingObject.hasElevator, hasRamp: wipListingObject.hasRamp}, image: wipListingObject.image, price: wipListingObject.price, rating: {score: null, numRatings: 0}};
+  var outListingObject = {name: wipListingObject.name, host: "Charles Son", description: wipListingObject.description, location: {street: wipListingObject.street, city: wipListingObject.city, state: wipListingObject.state, country: wipListingObject.country, zip: parseInt(wipListingObject.zip), geodata: {type: "Point", coordinates: {longitude: parseFloat(wipListingObject.longitude), latitude: parseFloat(wipListingObject.latitude)}}}, size: {length: parseInt(wipListingObject.length), width: parseInt(wipListingObject.width), height: parseInt(wipListingObject.height)}, time: untilDate, attributes: {hasLock: wipListingObject.hasLock, hasParking: wipListingObject.hasParking, hasElevator: wipListingObject.hasElevator, hasRamp: wipListingObject.hasRamp}, image: wipListingObject.image, price: parseFloat(wipListingObject.price), rating: {score: 5, numRatings: 1}};
   return outListingObject;
 }
 export default AddListingView;

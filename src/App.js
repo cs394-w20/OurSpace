@@ -33,7 +33,7 @@ const App = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   
-  const [currWipAddListing, updateCurrWipAddListing] = useState({ name: null, description: null, street: null, city: null, state: null, country: null, zip: null, geodataType: "Point", latitude: null, longitude: null, length: null, width: null, height: null, from: null, until: null, hasLock: false, hasParking: false, hasElevator: false, hasRamp: false, image: null, price: null, score: null, numRatings: null});
+  const [currWipAddListing, updateCurrWipAddListing] = useState({ name: null, description: null, street: null, city: null, state: null, country: null, zip: null, geodataType: "Point", latitude: 42.048470, longitude: -87.684790, length: null, width: null, height: null, from: null, until: null, hasLock: false, hasParking: false, hasElevator: false, hasRamp: false, image: null, price: null, score: null, numRatings: null});
   const [addListingViewOpen, toggleAddListingViewOpen] = useState(false);
 
   const [listPerPage, setListPerPage] = useState(50);
